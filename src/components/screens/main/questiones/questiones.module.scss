@@ -1,0 +1,15 @@
+@use '../../../../styles/_variables.module' as vars;
+@use '../../../../styles/_mixins.module' as mixins;
+
+.questiones {
+    text-align: center;
+
+    h1 {
+        margin-top: 240px;
+    }
+
+    h2 {
+        margin-top: 16px;
+        font-size: 22px;
+    }
+}

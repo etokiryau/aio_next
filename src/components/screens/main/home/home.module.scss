@@ -1,0 +1,192 @@
+@use '../../../../styles/_variables.module' as vars;
+@use '../../../../styles/_mixins.module' as mixins;
+
+.home {
+    section {
+        margin-top: 155px;
+        text-align: center;
+    }
+
+    .head {
+        @include mixins.flexCenter;
+        gap: 20px;
+        padding: 0 50px;
+        height: 420px;
+    
+        &__left {
+            @include mixins.flexCenter;
+            flex-direction: column;
+            flex: 1;
+            text-align: center;
+    
+            h1 {
+                font-size: 24px;
+                text-transform: uppercase;
+            }
+    
+            a {
+                margin-top: 30px;
+                padding: 8px 20px;
+                @include mixins.button;
+    
+                &:hover {
+                    @include mixins.hoveredButton;
+                }
+            }
+        }
+    
+        &__right {
+            @include mixins.flexCenter;
+            flex-direction: column;
+            height: 100%;
+            flex: 2;
+    
+    
+            span {
+                width: 100%;
+                height: 100%;
+                background-color: grey;
+                border-radius: 24px;
+            }
+        }
+    }
+
+    .indicators {
+        margin-top: 100px;
+        @include mixins.flexCenter;
+        flex-direction: column;
+        gap: 90px;
+
+        &__single {
+            @include mixins.flexCenter;
+            gap: 30px;
+            width: 70%;
+
+            &_name {
+                width: 199px;
+                font-size: 24px;
+                text-align: left;
+                text-transform: uppercase;
+            }
+
+            &_value {
+                @include mixins.flexCenter;
+                justify-content: flex-start;
+                flex: 1;
+
+                #circle {
+                    position: relative;
+                    min-width: 26px;
+                    min-height: 26px;
+                    border: vars.$primaryBorder;
+                    border-radius: 50%;
+
+                    &::after {
+                        @include mixins.absoluteCenter;
+                        content: '';
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        background-color: vars.$additionalColor;
+                    }
+                }
+
+                #line {
+                    position: relative;
+                    height: .4px;
+                    width: 70%;
+                    background-color: vars.$primaryColor;
+
+                    p {
+                        position: absolute;
+                        right: 0;
+                        font-weight: 500;
+                        font-size: 56px;
+                    }
+                }
+            }
+        }
+    }
+
+    .opportunities {
+        display: flex;
+        margin-top: 112px;
+        padding: 0 50px;
+        gap: 32px;
+
+        &__position {
+            margin-left: 10%;
+            width: 2px;
+            min-height: 100%;
+            background-color: vars.$dimmedColor;
+
+            div {
+                position: sticky;
+                top: calc((100% - 90px - 40px) / 2);
+                width: 100%;
+                height: 160px;
+                background-color: vars.$additionalColor;
+                z-index: 10;
+            }
+        }
+
+        &__list {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: 145px;
+
+            .active {
+                opacity: 1;
+            }
+
+            &_single {
+                text-align: left;
+                opacity: .4;
+                transition: .5s ease;
+
+                #name {
+                    font-size: 72px;
+                }
+
+                #description {
+                    margin-top: 40px;
+                }
+
+                a {
+                    margin-top: 80px;
+                    padding: 8px 20px;
+                    @include mixins.button;
+
+                    &:hover {
+                        @include mixins.hoveredButton;  
+                    }
+                }
+            }
+        }
+
+        &__media {
+            flex: 1;
+            min-height: 100%;
+
+            &_content {
+                position: sticky;
+                top: calc((100% - 90px - 150px) / 2);
+                width: 100%;
+                height: 300px;
+                border: 1px solid #000000;
+                border-radius: vars.$primaryBorderRadius;
+            }
+        }
+    }
+
+    .adaptation {
+        position: relative;
+        margin-top: 72px;
+        
+        img {
+            margin:  0 auto;
+        }
+    }
+}
+

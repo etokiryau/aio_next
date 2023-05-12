@@ -1,0 +1,9 @@
+.footer {
+    margin: auto;
+    width: min(95%, 1440px);
+
+    &__wrapper {
+        display: flex;
+        gap: 30px;
+    }
+}

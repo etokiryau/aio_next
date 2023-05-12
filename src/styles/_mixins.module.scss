@@ -1,0 +1,32 @@
+@use '../styles/variables.module' as vars;
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin absoluteCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin button {
+    color: vars.$primaryColor;
+    background-color: vars.$secondaryColor;
+    border: vars.$primaryBorder;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: .3s;
+    user-select: none;
+}
+
+@mixin hoveredButton {
+    color: vars.$secondaryColor;
+    background-color: vars.$primaryColor;
+    border: vars.$primaryBorder;
+    cursor: pointer;
+    user-select: none;
+}
