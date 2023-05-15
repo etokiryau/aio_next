@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import CopyingMessage from "@/components/ui/copyingMessage/CopyingMessage";
 
 export const useCopyLinkToClipboard = (): [ReactNode, (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void] => {
@@ -31,5 +31,5 @@ export const useCopyLinkToClipboard = (): [ReactNode, (e: React.MouseEvent<HTMLD
             });
     };
 
-    return [<CopyingMessage isActive={isVisibleCopyingMessage} />, copyLinkToClipboard];
+    return [<CopyingMessage key="copying-message" isActive={isVisibleCopyingMessage} />, copyLinkToClipboard];
 }
