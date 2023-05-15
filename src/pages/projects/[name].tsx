@@ -97,10 +97,23 @@ const projects: ISingleProject[] = [
 ];
 
 const SingleProjectPage: NextPage<IProjectProps> = ({ response }) => {
-    // const project = response instanceof ISingleProject ? response : {}
+    const project: ISingleProject = {
+        id: '',
+        previewSrc: '',
+        name: '',
+        totalArea: 0,
+        height: 0,
+        houseDimensions: [0, 0],
+        cost: 0,
+        currency: '',
+        locations: [''],
+        floorNumber: 1,
+        roofType: '',
+        landDimensions: [0, 0]
+    };
 
 
-    return <SingleProject response={response} />
+    return <SingleProject project={response || project} />
 }
 
 export const getStaticPaths: GetStaticPaths<IParams> = async () => {
@@ -120,7 +133,7 @@ export const getStaticProps: GetServerSideProps<IProjectProps, IParams> = async 
         return { notFound: true };
     }
 
-    const project = projects.find(item => item.name === params.name)
+    const project = projects.find(item => item.name === params.name);
 
     return {
         props: { response: project }

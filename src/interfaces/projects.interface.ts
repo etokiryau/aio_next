@@ -17,6 +17,10 @@ export interface IProjectsProps {
     projects: ISingleProject[]
 }
 
+export interface IProjectPageProps {
+    project: ISingleProject
+}
+
 export interface IProjectProps {
-    response: ISingleProject | undefined | string
+    response: ISingleProject | undefined
 }
