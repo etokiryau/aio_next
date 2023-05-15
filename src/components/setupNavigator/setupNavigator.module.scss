@@ -1,0 +1,104 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.setup {
+    display: flex;
+    gap: 32px;
+    height: calc(100vh - 250px);
+
+    &__layout {
+        overflow: hidden;
+        position: relative;
+        flex: 2;
+        background: #D9D9D9;
+        border-radius: 24px;
+
+        &_title {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 20px;
+            border-radius: 40px;
+            background-color: rgba($color: vars.$secondaryColor, $alpha: .8);
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        &_scale {
+            position: absolute;
+            bottom: 24px;
+            right: 24px;
+            @include mixins.flexCenter;
+            gap: 15px;
+            z-index: 10;
+
+            p {
+                font-weight: 400;
+            }
+
+            input {
+                appearance: none;
+                -webkit-appearance: none;
+                width: 210px;
+                height: 1px;
+                background-color: vars.$primaryColor;
+                cursor: pointer;
+                outline: none;
+
+                &::-webkit-slider-thumb {
+                    appearance: none;
+                    -webkit-appearance: none;
+                    min-height: 12px;
+                    width: 12px;
+                    border-radius: 50%;
+                    background: vars.$additionalColor;
+                }
+            }
+        }
+
+        &_buttons {
+            position: absolute;
+            top: 50%;
+            right: 24px;
+            transform: translateY(-50%);
+            padding: 8px 10px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            width: 80px;
+            background-color: rgba($color: vars.$secondaryColor, $alpha: .8);
+            border-radius: 4px;
+            z-index: 10;
+
+            div {
+                @include mixins.flexCenter;
+            }
+
+            svg {
+                cursor: pointer;
+            }
+        }
+
+        &_rooms {
+            position: absolute;
+            top: 20px;
+            left: 100px;
+            width: 350px;
+            aspect-ratio: 1/1;
+            background-color: vars.$additionalColor;
+            transition: transform .3s ease, left .1s ease;
+            z-index: 5;
+            cursor: move;
+        }
+    }
+
+    &__navigation {
+        flex: 1;
+        background-color: vars.$primaryColor;
+        border-radius: 24px;
+
+        
+    }
+}

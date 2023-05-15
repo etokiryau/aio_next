@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ShareIcon from "../ShareIcon";
 import LikeIcon from "../LikeIcon";
-import ArrowSmall from "@/components/ui/ArrowSmall";
+import ArrowSmall from "@/components/ui/ArrowSmallIcon";
 
 import styles from "./projectTile.module.scss";
 
@@ -43,10 +43,7 @@ const ProjectTile: FC<IProjectTile> = ({
 		<div className={styles.projectTile}>
 			<Image src={previewSrc} alt="project" width={780} height={300} />
 			<div className={styles.projectTile_buttons}>
-				<div
-					data-link={`${baseUrl}/projects/${name}`}
-					onClick={handleShare}
-				>
+				<div data-link={`/projects/${name}`} onClick={handleShare}>
 					<ShareIcon />
 				</div>
 

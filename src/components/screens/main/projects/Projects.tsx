@@ -11,18 +11,17 @@ import {
 import MainLayout from "@/components/layouts/mainLayout/MainLayout";
 import Triangle from "@/components/ui/TriangleIcon";
 import Cross from "@/components/ui/CrossIcon";
-import CopyingMessage from "@/components/ui/copyingMessage/CopyingMessage";
 import ProjectTile from "@/components/ui/projectTile/ProjectTile";
 import ProjectListItem from "@/components/ui/projectListItem/ProjectListItem";
+import { useCopyLinkToClipboard } from "@/hooks/useCopylinkToClipBoard";
 
 import styles from "./projects.module.scss";
 
 const Projects: NextPage = () => {
 	const [listMode, setListMode] = useState(false);
-	const [isVisibleCopyingMessage, setIsVisibleCopyingMessage] =
-		useState(false);
-	const dispatch = useTypedDispatch();
+	const [CopyingMessage, copyLinkToClipboard] = useCopyLinkToClipboard();
 
+	const dispatch = useTypedDispatch();
 	const { favourites, filters } = useTypedSelector(selectProjects);
 	const filteredProjects = useTypedSelector(selectFilteredProjects);
 
@@ -36,32 +35,6 @@ const Projects: NextPage = () => {
 
 	const isFavourite = (id: string): boolean => {
 		return favourites.some(item => item === id);
-	};
-
-	const copyLinkToClipboard = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
-		let target = e.target as HTMLElement;
-		if (target && target.tagName !== "svg") {
-			target = target.parentElement as HTMLElement;
-		}
-		if (!target) {
-			console.error("Could not find parent svg element");
-			return;
-		}
-		const svg =
-			target.tagName === "svg"
-				? target
-				: (target.querySelector("svg") as SVGElement);
-		const parentDiv = svg.parentNode as HTMLElement;
-		const link = String(parentDiv.getAttribute("data-link")).replace(" ", "%20");
-		navigator.clipboard
-			.writeText(link)
-			.then(() => {
-				setIsVisibleCopyingMessage(true);
-				setTimeout(() => setIsVisibleCopyingMessage(false), 2000);
-			})
-			.catch(error => {
-				console.error("Failed to copy link: ", error);
-			});
 	};
 
 	const projectsListContent: JSX.Element[] = filteredProjects.map(
@@ -82,7 +55,7 @@ const Projects: NextPage = () => {
 					info={info}
 					handleShare={e => copyLinkToClipboard(e)}
 					handleLike={() => dispatch(toggleFavourite(item.id))}
-					likeFill={isFavourite(item.id) ? true : false}
+					likeFill={isFavourite(item.id)}
 				/>
 			);
 		}
@@ -352,7 +325,7 @@ const Projects: NextPage = () => {
 						</div>
 					</div>
 				</section>
-				<CopyingMessage isActive={isVisibleCopyingMessage} />
+				{CopyingMessage}
 			</div>
 		</MainLayout>
 	);

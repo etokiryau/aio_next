@@ -11,18 +11,15 @@
         z-index: 100;
 
         &_right {
-            svg {
+            div {
                 fill: vars.$primaryColor;
                 stroke: vars.$primaryColor;
-            }
-            div {
                 transition: .3s ease;
 
                 &:hover {
                     transform: scale(1.1);
                 }
             }
-            
         }
 
         div {
@@ -117,5 +114,40 @@
 
     &__renders {
         margin-top: 40px;
+    }
+
+    h2 {
+        margin-bottom: 56px;
+        font-size: 32px;
+    }
+
+    &__indicators {
+        margin-top: 180px;
+        text-align: center;
+    }
+
+    &__models {
+        margin-top: 180px;
+        padding: 0 2.5%;
+        text-align: center;
+
+        &_wrapper {
+            margin-top: 72px;
+            display: flex;
+            gap: 60px;
+        }
+
+        &_single {
+            flex: 1;
+            border: solid thin;
+            aspect-ratio: 5 / 3;
+            border-radius: 24px;
+        }
+    }
+
+    &__setup {
+        margin-top: 180px;
+        padding: 0 2.5%;
+        text-align: center;
     }
 }

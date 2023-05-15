@@ -1,21 +1,40 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useRouter } from "next/router";
-
-import MainLayout from "@/components/layouts/mainLayout/MainLayout";
-import { IProjectProps, IProjectPageProps } from "@/interfaces/projects.interface";
 import { useTypedDispatch, useTypedSelector } from "@/hooks/useReduxHooks";
 
-import ArrowLarge from "@/components/ui/ArrowLarge";
+import MainLayout from "@/components/layouts/mainLayout/MainLayout";
+import { IProjectPageProps } from "@/interfaces/projects.interface";
+import { useCopyLinkToClipboard } from "@/hooks/useCopylinkToClipBoard";
+import { selectProjects, toggleFavourite } from "../projects/projectsSlice";
+
+import ArrowLarge from "@/components/ui/ArrowLargeIcon";
 import LikeIcon from "@/components/ui/LikeIcon";
 import ShareIcon from "@/components/ui/ShareIcon";
 import EditIcon from "@/components/ui/EditIcon";
 import CarouselSlider from "@/components/carouselSlider/CarouselSlider";
+import TechnicalIndicators from "@/components/ui/technicalIndicators/TechnicalIndicators";
+import SetupNavigator from "@/components/setupNavigator/SetupNavigator";
 
 import styles from "./singleProject.module.scss";
 
 const SingleProject: FC<IProjectPageProps> = ({ project }) => {
-	const { name, cost, currency } = project;
+	const { id, name, cost, currency, totalArea, height, houseDimensions } = project;
 	const router = useRouter();
+	const dispatch = useTypedDispatch();
+	const [copyingMessage, copyLinkToClipboard] = useCopyLinkToClipboard();
+	const { favourites } = useTypedSelector(selectProjects);
+
+	useEffect(() => {
+		if (favourites.length > 0) return;
+		const favouriteProjects: string[] = JSON.parse(
+			localStorage.getItem("favouriteProjects") || "[]"
+		);
+		dispatch(toggleFavourite(favouriteProjects));
+	}, []);
+
+	const isFavourite = (id: string): boolean => {
+		return favourites.some(item => item === id);
+	};
 
 	const goBack = (): void => {
 		router.asPath === "/projects"
@@ -32,10 +51,10 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 						<p>Back to catalog</p>
 					</div>
 					<div className={styles.project__sticky_right}>
-						<div>
-							<LikeIcon fill={true} />
+						<div onClick={() => dispatch(toggleFavourite(id))}>
+							<LikeIcon fill={isFavourite(id)} />
 						</div>
-						<div>
+						<div data-link={`/projects/${name}`} onClick={copyLinkToClipboard}>
 							<ShareIcon />
 						</div>
 					</div>
@@ -71,6 +90,30 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 				<section className={styles.project__renders}>
 					<CarouselSlider />
 				</section>
+
+				<section className={styles.project__indicators}>
+					<h2>Main technical indicators</h2>
+					<TechnicalIndicators totalArea={totalArea} height={height} houseDimensions={houseDimensions} />
+				</section>
+
+				<section className={styles.project__models}>
+					<h2>Try 3D model and Virtual tour</h2>
+					<div className={styles.project__models_wrapper}>
+						<div className={styles.project__models_single}>
+
+						</div>
+						<div className={styles.project__models_single}>
+							
+						</div>
+					</div>
+				</section>
+
+				<section className={styles.project__setup}>
+					<h2>Try 3D model and Virtual tour</h2>
+					<SetupNavigator />
+				</section>
+
+				{copyingMessage}
 			</div>
 		</MainLayout>
 	);
