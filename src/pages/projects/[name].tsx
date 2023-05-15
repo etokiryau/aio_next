@@ -135,8 +135,12 @@ export const getStaticProps: GetServerSideProps<IProjectProps, IParams> = async 
 
     const project = projects.find(item => item.name === params.name);
 
+    if (!project) {
+        return { notFound: true };
+    }
+
     return {
-        props: { response: project }
+        props: { response: project || null }
     }
 }
 
