@@ -9,8 +9,9 @@
     display: flex;
     justify-content: space-between;
     width: min(95%, 1440px);
-    background-color: rgba($color: vars.$secondaryColor, $alpha: .9);
-    border: vars.$primaryBorder;
+    background-color: rgba($color: vars.$secondaryColor, $alpha: .5);
+    box-shadow: 0 10px 40px #0000001a;
+    backdrop-filter: blur(5px);
     border-radius: 64px;
     transform: translateX(-50%);
     z-index: 1000;
@@ -20,21 +21,32 @@
         gap: 48px;        
 
         ul {
-            display: flex;
-            justify-content: center;
+            @include mixins.flexCenter;
+            padding-top: 2px;
             list-style: none;
             gap: 32px;
 
             a {
+                position: relative;
                 transition: .4s ease;
                 text-align: center;
 
+                &:after {
+                    @include mixins.hoveredText;
+                }
+
                 &:hover {
-                    text-decoration: underline;
+                    &:after {
+                        transform: scaleX(1);
+                    }
                 }
         
                 &.active  {
                     font-weight: 500;
+
+                    &:after {
+                        transform: scaleX(1);
+                    }
                 }
             }
         }

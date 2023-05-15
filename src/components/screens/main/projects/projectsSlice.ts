@@ -22,7 +22,7 @@ const initialState: IProjectsState = {
         favourites: false,
         floorNumber: null,
         totalArea: null,
-        cost: [100, 500],
+        cost: null,
         roofType: null
     }
 };
@@ -34,14 +34,20 @@ const projectsSlice = createSlice({
         setProjects: (state, action: PayloadAction<ISingleProject[]>) => {
             state.projects = action.payload;
         },
-        toggleFavourite: (state, action: PayloadAction<string>) => {
-            const isAdded = state.favourites.some(item => item === action.payload);
+        toggleFavourite: (state, action: PayloadAction<string | string[]>) => {
+            if (!Array.isArray(action.payload)) {
+                const isAdded = state.favourites.some(item => item === action.payload);
 
-            isAdded 
-            ? state.favourites = state.favourites.filter(item => item !== action.payload)
-            : state.favourites.push(action.payload);
+                isAdded 
+                ? state.favourites = state.favourites.filter(item => item !== action.payload)
+                : state.favourites.push(action.payload);
+            } else {
+                state.favourites = action.payload
+            }
+            
+            localStorage.setItem('favouriteProjects', JSON.stringify([...state.favourites]));
         },
-        togglePropertyFilter: (state, action: PayloadAction<{[key: string]: number | boolean | null}>) => {
+        togglePropertyFilter: (state, action: PayloadAction<{[key: string]: number | boolean | string | null}>) => {
             state.filters = {...state.filters, ...action.payload}
         }
     },

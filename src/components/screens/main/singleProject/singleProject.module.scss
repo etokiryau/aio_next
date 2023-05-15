@@ -1,0 +1,121 @@
+@use '../../../../styles/_variables.module' as vars;
+@use '../../../../styles/_mixins.module' as mixins;
+
+.project {
+    &__sticky {
+        position: sticky;
+        top: 105px;
+        padding: 0 2.5%;
+        display: flex;
+        justify-content: space-between;
+        z-index: 100;
+
+        &_right {
+            svg {
+                fill: vars.$primaryColor;
+                stroke: vars.$primaryColor;
+            }
+            div {
+                transition: .3s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+            
+        }
+
+        div {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            cursor: pointer;  
+        }
+    }
+
+    &__header {
+        margin: 38px auto 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 62.5%;
+
+        &_left {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 24px;
+
+            p:nth-child(2) {
+                font-size: 18px;
+                font-weight: 200;
+            }
+
+            p:last-child {
+                font-size: vars.$primaryFontSize;
+                color: vars.$additionalColor;
+            }
+        }
+
+        &_right {
+            @include mixins.flexCenter;
+            position: relative;
+            gap: 24px;
+
+            &_cost {
+                @include mixins.flexCenter;
+                gap: 8px;
+                font-size: 24px;
+
+                p:first-child {
+                    text-decoration: line-through;
+                }
+                
+                p:last-child {
+                    font-weight: 400;
+                }
+            }
+
+            &_explore {
+                @include mixins.flexCenter;
+                @include mixins.button;
+                padding: 8px 20px;
+
+                &:hover {
+                    @include mixins.hoveredButton;
+                }
+            }
+
+            &_customise {
+                @include mixins.button;
+                overflow-x: hidden;
+                position: absolute;
+                top: 50%;
+                left: calc(100% + 24px);
+                display: flex;
+                align-items: center;
+                padding: 8px 20px 8px 10px;
+                gap: 12px;
+                max-width: 40px;
+                transform: translateY(-50%);
+                transition: .5s ease;
+                
+                p {
+                    min-width: max-content;
+                }
+
+                svg {
+                    min-width: 19px;
+                }
+
+                &:hover {
+                    max-width: 203px;
+                }
+            }
+        }
+    }
+
+    &__renders {
+        margin-top: 40px;
+    }
+}

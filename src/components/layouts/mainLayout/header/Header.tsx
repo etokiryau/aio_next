@@ -3,7 +3,7 @@ import { FC, ReactNode, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import styles from "./header.module.scss";
-import Triangle from "@/components/ui/triangleIcon/TriangleIcon";
+import Triangle from "@/components/ui/TriangleIcon";
 
 interface IPath {
 	name: string;
@@ -31,7 +31,7 @@ const Header: FC = () => {
 		{ name: "Advantages", path: "/advantages", width: 95 },
 		{ name: "Services", path: "/services", width: 68 },
 		{ name: "FAQ", path: "/questiones", width: 33 },
-		{ name: "Career", path: "/career", width: 53 },
+		// { name: "Career", path: "/career", width: 53 },
 		{ name: "Contacts", path: "/contacts", width: 73 }
 	];
 
@@ -81,7 +81,14 @@ const Header: FC = () => {
 		<>
 			<header className={styles.header}>
 				<div className={styles.header__links}>
-					<Image src="/logo.svg" alt="logo" width={40} height={40} />
+					<Link href="/">
+						<Image
+							src="/logo.svg"
+							alt="logo"
+							width={40}
+							height={40}
+						/>
+					</Link>
 					<ul>
 						{pathes.map((item, i) => {
 							return (
@@ -111,8 +118,8 @@ const Header: FC = () => {
 							<Image
 								src={languages[language].src}
 								alt="flag"
-								width={40}
-								height={40}
+								width={21}
+								height={15}
 							/>
 							<p>{language}</p>
 							<Triangle isActive={languagePopup} />

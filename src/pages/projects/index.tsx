@@ -14,7 +14,7 @@ const ProjectsPage: NextPage<IProjectsProps> = ({ projects }) => {
 }
 
 export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () => {
-    const project: ISingleProject[] = [
+    const projects: ISingleProject[] = [
         {
             id: '1',
             previewSrc: '/projectPreview.jpg',
@@ -103,7 +103,7 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
     ]
 
     return {
-        props: { projects: project }
+        props: { projects: projects }
     }
 }
 

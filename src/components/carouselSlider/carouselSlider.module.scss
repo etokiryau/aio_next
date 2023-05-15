@@ -1,0 +1,68 @@
+@use '../../styles/_variables.module' as vars;
+@use '../../styles/_mixins.module' as mixins;
+
+.slider {
+    position: relative;
+    height: calc(100vh - 280px);
+    overflow-x: hidden;
+
+    &__slide {
+        position: absolute;
+        top: 0;
+        // aspect-ratio: 16/9;
+        width: 62.5%;
+        height: calc(100vh - 280px);
+        transition: left .9s, transform 1s, visibility 0s , opacity .9s;
+
+        img {
+            object-fit: cover;
+            height: 100%;
+            border-radius: 24px;
+        } 
+    }
+
+    .active {
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+    }
+
+    .inActive {
+        opacity: .1;
+        z-index: 5;
+    }
+
+    &__rightChange {
+        @include mixins.flexCenter;
+        position: absolute;
+        top: 50%;
+        left: 85.5%;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: vars.$primaryColor;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+        z-index: 15;
+    }
+
+    &__leftChange {
+        @include mixins.flexCenter;
+        position: absolute;
+        top: 50%;
+        right: 85.5%;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: vars.$primaryColor;
+        transform: translate(50%, -50%) rotate(180deg);
+        cursor: pointer;
+        z-index: 15;
+    }
+
+    svg {
+        stroke: vars.$secondaryColor;
+        fill: vars.$secondaryColor;
+        transform: scale(.8);
+    }
+}
