@@ -97,9 +97,10 @@ const projects: ISingleProject[] = [
 ];
 
 const SingleProjectPage: NextPage<IProjectProps> = ({ response }) => {
+    // const project = response instanceof ISingleProject ? response : {}
 
 
-    return <SingleProject project={response} />
+    return <SingleProject response={response} />
 }
 
 export const getStaticPaths: GetStaticPaths<IParams> = async () => {

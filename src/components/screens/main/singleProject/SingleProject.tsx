@@ -2,18 +2,19 @@ import { FC } from "react";
 import { useRouter } from "next/router";
 
 import MainLayout from "@/components/layouts/mainLayout/MainLayout";
-import { IProjectProps } from "@/interfaces/projectProps.interface";
+import { IProjectProps } from "@/interfaces/projects.interface";
 import { useTypedDispatch, useTypedSelector } from "@/hooks/useReduxHooks";
 
-import styles from "./singleProject.module.scss";
 import ArrowLarge from "@/components/ui/ArrowLarge";
 import LikeIcon from "@/components/ui/LikeIcon";
 import ShareIcon from "@/components/ui/ShareIcon";
 import EditIcon from "@/components/ui/EditIcon";
 import CarouselSlider from "@/components/carouselSlider/CarouselSlider";
 
-const SingleProject: FC<IProjectProps> = ({ project }) => {
-	const { name, cost, currency } = project;
+import styles from "./singleProject.module.scss";
+
+const SingleProject: FC<IProjectProps> = ({ response }) => {
+	const { name, cost, currency } = response;
 	const router = useRouter();
 
 	const goBack = (): void => {
