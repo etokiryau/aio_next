@@ -192,7 +192,7 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 						<AccordionItem header="3D model">
 							<ul>
 								<li>Instructions for working with a 3D model</li>
-								<li>3D model for all simulated sections exe file "Enscape" for a virtual tour of the object</li>
+								<li>3D model for all simulated sections exe file &quot;Enscape&quot; for a virtual tour of the object</li>
 								<li>Link to the browser version of the project with the ability to view all the documentation, walk around the facility and clarify the volumes from any device from anywhere in the world</li>
 							</ul>
 						</AccordionItem>
