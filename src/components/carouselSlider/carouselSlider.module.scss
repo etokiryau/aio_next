@@ -6,14 +6,18 @@
     height: calc(100vh - 280px);
     overflow-x: hidden;
 
-    &__slide {
+    img {
+        cursor: zoom-in;
+    }
+
+    &__slideLarge {
         position: absolute;
         top: 0;
         // aspect-ratio: 16/9;
         width: 62.5%;
         height: calc(100vh - 280px);
         transition: left .9s, transform 1s, visibility 0s , opacity .9s;
-
+        
         img {
             object-fit: cover;
             height: 100%;
@@ -21,15 +25,29 @@
         } 
     }
 
+    &__slideSmall {
+        position: absolute;
+        top: 0;
+        width: 26%;
+        height: 290px;
+        transition: left .9s, transform 1s, visibility 0s , opacity .9s;
+        text-align: left;
+
+        img {
+            object-fit: cover;
+            height: calc(100% - 42px);
+            border-radius: 24px;
+        }
+
+        p {
+            margin: 18px 0 0 10px;
+        }
+    }
+
     .active {
         left: 50%;
         transform: translateX(-50%);
         z-index: 10;
-    }
-
-    .inActive {
-        opacity: .1;
-        z-index: 5;
     }
 
     &__rightChange {
@@ -64,5 +82,14 @@
         stroke: vars.$secondaryColor;
         fill: vars.$secondaryColor;
         transform: scale(.8);
+    }
+
+    &__mask {
+        position: absolute;
+        inset: 0;
+        z-index: 9;
+        background: radial-gradient(60% 1422.22% at 50% 50%, rgba(255, 255, 255, 0) 20%, #FFFFFF 100%);
+        // background: radial-gradient(50% 1422.22% at 50% 50%, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%);
+        pointer-events: none;
     }
 }

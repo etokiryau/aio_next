@@ -1,23 +1,28 @@
-import { FC, useState, useRef } from "react";
+import { FC, useState } from "react";
 
 import BackRotationIcon from "../ui/BackRotationIcon";
 import ForwardRotationIcon from "../ui/ForwardRotationIcon";
 import ResetIcon from "../ui/ResetIcon";
 import MoveIcon from "../ui/MoveIcon";
+import ZoomInIcon from "../ui/ZoomInIcon";
+import ZoomOutIcon from "../ui/ZoomOutIcon";
+import SearchIcon from "../ui/SearchIcon";
 
 import styles from "./setupNavigator.module.scss";
-
 interface IRoomsStyle {
     transform: string,
     top: string,
     left: string
-}
+};
 
 const SetupNavigator: FC = () => {
     const [rotation, setRotation] = useState(0);
     const [scale, setScale] = useState(1);
     const [position, setPosition] = useState<{x: number, y: number}>({ x: 100, y: 20 });
-    const zoomRange = {min: 0.5, max: 1.5, step: 0.1};
+    const zoomRange = {min: 0.5, max: 2.5, step: 0.1};
+    const [term, setTerm] = useState('');
+    const [currentRoom, setCurrentRoom] = useState<number | null>(null);
+    const [currentFloor, setCurrentFloor] = useState(1);
 
     const style: IRoomsStyle = {
         top: `${position.y}px`,
@@ -27,6 +32,12 @@ const SetupNavigator: FC = () => {
 
     const changeRotation = (degree: number): void => {
         setRotation((prev) => prev + degree);
+    };
+
+    const changeScale = (step: number): void => {
+        if (step > 0 && scale <= zoomRange.max || step < 0 && scale >= zoomRange.min) {
+            setScale((prev) => prev + step)
+        }
     };
 
     const setDefaultState = (): void => {
@@ -54,6 +65,7 @@ const SetupNavigator: FC = () => {
             document.body.style.userSelect = '';
         });
     };
+
     const handleWheel = (event: WheelEvent): void => {
         event.preventDefault();
 
@@ -74,15 +86,10 @@ const SetupNavigator: FC = () => {
     };
 
     const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
-        
-
-        
-        
         document.addEventListener('wheel', handleWheel, { passive: false });
         document.addEventListener('mouseleave', handleMouseLeave);
     };
     
-
     // const handleMouseEnter = (): void => {
     //     document.addEventListener('wheel', handleWheel);
     // };
@@ -105,6 +112,20 @@ const SetupNavigator: FC = () => {
     //     }
     // };
 
+    const roomsData = ['1. Room name', '1. Room name', '1. Room name','1. Room name' ,'1. Room name' ,'1. Room name', '1. Room name', '1. Room name', '1. Room name', '1. Room name']
+
+    const searchRooms = (items: string[], term: string): string[] => {
+        if (term.length === 0) {
+            return items;
+        }
+
+        return items.filter(item => {
+            return item.toLowerCase().indexOf(term.toLowerCase()) > -1;
+        })
+    };
+
+    const filteredRooms: string[] = searchRooms(roomsData, term);
+
     return (
         <div className={styles.setup}>
             <div className={styles.setup__layout}>
@@ -116,6 +137,8 @@ const SetupNavigator: FC = () => {
                 <div className={styles.setup__layout_buttons}>
                     <div onClick={setDefaultState}><ResetIcon /></div>
                     <div><MoveIcon /></div>
+                    <div onClick={() => changeScale(+zoomRange.step)}><ZoomInIcon /></div>
+                    <div onClick={() => changeScale(-zoomRange.step)}><ZoomOutIcon /></div>
                     <div onClick={() => changeRotation(-90)}><BackRotationIcon /></div>
                     <div onClick={() => changeRotation(90)}><ForwardRotationIcon /></div>
                 </div>
@@ -126,12 +149,29 @@ const SetupNavigator: FC = () => {
                     // onMouseEnter={handleMouseEnter}
                     // onMouseLeave={handleMouseLeave}
                 >
-
+                    <p>Layouts</p>
                 </div>
             </div>
             <div className={styles.setup__navigation}>
-                
-
+                <p>Choose floor:</p>
+                <div className={styles.setup__navigation_floors}>
+                    <p>1st floor</p>
+                    <p>2nd floor</p>
+                    <p>3rd floor</p>
+                </div>
+                <div className={styles.setup__navigation_input}>
+                    <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="Search number or room" />
+                    <div><SearchIcon /></div>
+                </div>
+                <div className={styles.setup__navigation_rooms}>
+                    {filteredRooms.map((item, i) => {
+                        return <p 
+                                    key={i}
+                                    onClick={() => setCurrentRoom(i)}
+                                    className={currentRoom === i ? styles.active : ''}
+                                >{item}</p>
+                    })}
+                </div>
             </div>
         </div>
     )

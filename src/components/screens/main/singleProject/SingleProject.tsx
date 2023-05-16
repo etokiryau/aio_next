@@ -16,6 +16,7 @@ import TechnicalIndicators from "@/components/ui/technicalIndicators/TechnicalIn
 import SetupNavigator from "@/components/setupNavigator/SetupNavigator";
 
 import styles from "./singleProject.module.scss";
+import AccordionItem from "@/components/ui/accordionItem/AccordionItem";
 
 const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 	const { id, name, cost, currency, totalArea, height, houseDimensions } = project;
@@ -88,7 +89,7 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 				</section>
 
 				<section className={styles.project__renders}>
-					<CarouselSlider />
+					<CarouselSlider size="large" />
 				</section>
 
 				<section className={styles.project__indicators}>
@@ -109,8 +110,98 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 				</section>
 
 				<section className={styles.project__setup}>
-					<h2>Try 3D model and Virtual tour</h2>
+					<h2>Set-up of the house</h2>
 					<SetupNavigator />
+				</section>
+
+				<section className={styles.project__views}>
+					<h2>Additional views</h2>
+					<CarouselSlider size="small" />
+				</section>
+
+				<section className={styles.project__structure}>
+					<h2>Project structure</h2>
+					<div className={styles.project__structure_list}>
+						<AccordionItem header="Architecture">
+							<ul>
+								<li>General information. Spaces area</li>
+								<li>List of sheets</li>
+								<li>Facades</li>
+								<li>The color scheme of the facades</li>
+								<li>Floor plans of buildings and structures with spaces explication</li>
+								<li>Roofing plan</li>
+								<li>Sections</li>
+								<li>Window and door list</li>
+								<li>Principal junctions</li>
+								<li>Bill of quantities</li>
+							</ul>
+						</AccordionItem>
+
+						<AccordionItem header="Structural engineering">
+							<ul>
+								<li>Load-bearing wall plan</li>
+								<li>Plan of the foundation bottom reinforcement</li>
+								<li>The plan of the foundation upper reinforcement</li>
+								<li>Plans of the slabs lower reinforcement</li>
+								<li>Plans of the slabs upper reinforcement</li>
+								<li>Sections</li>
+								<li>Reinforcement junctions sections</li>
+								<li>Reinforcement of columns and walls</li>
+								<li>List of details</li>
+								<li>Bill of quantities</li>
+							</ul>
+						</AccordionItem>
+
+						<AccordionItem header="Mechanical, electrical and plumbing">
+							<div >
+                                <p>Power supply system:</p>
+                                <ul>
+                                    <li>Schematic diagrams of power supply of power receivers from the main, additional and backup power supply sources</li>
+                                    <li>Lightning plans</li>
+                                    <li>Power supply network plan</li>
+                                    <li>Socket placement layout</li>
+                                    <li>Schematic single-line diagram of the power supply</li>
+                                    <li>Bill of quantities</li>
+                                </ul>
+                            </div>
+
+                            <div >
+                                <p>Water supply system:</p>
+                                <ul>
+                                    <li>General information</li>
+                                    <li>Water supply plan</li>
+                                    <li>Collector connection scheme</li>
+                                    <li>Plumbing fixture connection scheme</li>
+                                    <li>Water system isometry</li>
+                                    <li>House water inlet scheme</li>
+                                    <li>Bill of quantities</li>
+                                </ul>
+                            </div>
+
+                            <div >
+                                <p>Water disposal system:</p>
+                                <ul>
+                                    <li>Sewerage systems plans</li>
+                                    <li>Plumbing fixture connection scheme</li>
+                                    <li>Sewerage system isometry</li>
+                                    <li>Bill of quantities</li>
+                                </ul>
+                            </div>
+						</AccordionItem>
+
+						<AccordionItem header="3D model">
+							<ul>
+								<li>Instructions for working with a 3D model</li>
+								<li>3D model for all simulated sections exe file "Enscape" for a virtual tour of the object</li>
+								<li>Link to the browser version of the project with the ability to view all the documentation, walk around the facility and clarify the volumes from any device from anywhere in the world</li>
+							</ul>
+						</AccordionItem>
+					</div>
+				</section>
+
+				<section className={styles.project__services}>
+					<h2>Additional services</h2>
+					
 				</section>
 
 				{copyingMessage}
