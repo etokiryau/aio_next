@@ -1,0 +1,108 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.contacts {
+    text-align: center;
+
+    h1 {
+        margin-top: 172px;
+    }
+
+    &__wrapper {
+        margin-top: 160px;
+        padding: 0 5%;
+
+        h2 {
+            font-size: vars.$primaryFontSize;
+            text-align: left;
+        }
+    }
+
+    &__content {
+        margin-top: 28px;
+        display: flex;
+
+        &_left {
+            flex: 1;
+            font-size: 20px;
+
+            &_single {
+                padding: 12px 8px;
+                display: flex;
+                justify-content: space-between;
+                width: 80%;
+                border-bottom: solid .4px rgba($color: vars.$primaryColor, $alpha: .4);
+
+                &_left {
+                    display: flex;
+                    align-items: center;
+                    gap: 30px;
+
+                    div {
+                        min-width: fit-content;
+                    }
+                }
+
+                &_right {
+                    display: flex;
+                    align-items: center;
+                    gap: 40px;
+                    color: rgba($color: vars.$primaryColor, $alpha: .4);
+
+                    svg {
+                        transform: rotate(135deg);
+                    }
+                }
+            }
+        }
+
+        &_right {
+            text-align: left;
+            flex: 1;
+
+            &_wrapper {
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 60%;
+                height: 100%;
+            }
+
+            &_address {
+                padding-top: 12px;
+                font-size: 24px;
+            }
+
+            &_links {
+                width: 60%;
+
+                svg {
+                    transform: rotate(180deg);
+                }
+
+                a {
+                    padding-right: 5px;
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 20px;
+
+                    &:first-child {
+                        padding-bottom: 18px;
+                        border-bottom: solid .4px rgba($color: vars.$primaryColor, $alpha: .4);
+                    }
+
+                    &:last-child {
+                        padding-top: 18px;
+                    }
+                }
+            }
+        }
+    }
+
+    &__form {
+        margin: 140px auto 0;
+        width: 62.5%;
+        text-align: left;
+    }
+}

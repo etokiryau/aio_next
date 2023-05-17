@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FC, ReactNode, useState } from "react";
+import { FC, ReactNode, useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import styles from "./header.module.scss";
@@ -16,14 +16,11 @@ interface ILanguage {
 	alt: string;
 }
 
-interface ILanguages {
-	[key: string]: ILanguage;
-}
-
 const Header: FC = () => {
 	const { pathname } = useRouter();
 	const [language, setLanguage] = useState("En");
 	const [languagePopup, setLanguagePopup] = useState(false);
+	const popupRef = useRef<HTMLDivElement | null>(null);
 
 	const pathes: IPath[] = [
 		{ name: "Home", path: "/", width: 49 },
@@ -35,7 +32,7 @@ const Header: FC = () => {
 		{ name: "Contacts", path: "/contacts", width: 73 }
 	];
 
-	const languages: ILanguages = {
+	const languages: {[key: string]: ILanguage} = {
 		En: { src: "/americanFlag.svg", alt: "English" },
 		Es: { src: "/spainFlag.svg", alt: "Spanish" },
 		Fr: { src: "/franceFlag.svg", alt: "French" }
@@ -68,7 +65,7 @@ const Header: FC = () => {
 		return result;
 	};
 
-	const togglePopup = () => {
+	const togglePopup = (): void => {
 		setLanguagePopup(prev => !prev);
 	};
 
@@ -77,66 +74,83 @@ const Header: FC = () => {
 		togglePopup();
 	};
 
-	return (
-		<>
-			<header className={styles.header}>
-				<div className={styles.header__links}>
-					<Link href="/">
-						<Image
-							src="/logo.svg"
-							alt="logo"
-							width={40}
-							height={40}
-						/>
-					</Link>
-					<ul>
-						{pathes.map((item, i) => {
-							return (
-								<li key={i}>
-									<Link
-										href={item.path}
-										style={{ width: `${item.width}px` }}
-										className={
-											pathname === item.path
-												? styles.active
-												: ""
-										}
-									>
-										{item.name}
-									</Link>
-								</li>
-							);
-						})}
-					</ul>
-				</div>
-				<div className={styles.header__user}>
-					<div className={styles.header__user_language}>
-						<div
-							className={styles.header__user_language_wrapper}
-							onClick={togglePopup}
-						>
-							<Image
-								src={languages[language].src}
-								alt="flag"
-								width={21}
-								height={15}
-							/>
-							<p>{language}</p>
-							<Triangle isActive={languagePopup} />
-						</div>
+	useEffect(() => {
+		const handleOutsideClick = (event: MouseEvent) => {
+			if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+				togglePopup();
+			}
+		};
+	
+		if (languagePopup) {
+		  	document.addEventListener('mousedown', handleOutsideClick);
+		} else {
+		  	document.removeEventListener('mousedown', handleOutsideClick);
+		}
+	
+		return () => {
+		  	document.removeEventListener('mousedown', handleOutsideClick);
+		};
+	}, [languagePopup]);
 
-						<div
-							className={`${styles.header__user_language_popup} ${
-								languagePopup ? styles.active : ""
-							}`}
-						>
-							{popupContent()}
-						</div>
+	return (
+		<header className={styles.header}>
+			<div className={styles.header__links}>
+				<Link href="/">
+					<Image
+						src="/logo.svg"
+						alt="logo"
+						width={40}
+						height={40}
+					/>
+				</Link>
+				<ul>
+					{pathes.map((item, i) => {
+						return (
+							<li key={i}>
+								<Link
+									href={item.path}
+									style={{ width: `${item.width}px` }}
+									className={
+										pathname === item.path
+											? styles.active
+											: ""
+									}
+								>
+									{item.name}
+								</Link>
+							</li>
+						);
+					})}
+				</ul>
+			</div>
+			<div className={styles.header__user}>
+				<div ref={popupRef} className={styles.header__user_language}>
+					<div
+						className={styles.header__user_language_wrapper}
+						onClick={togglePopup}
+					>
+						<Image
+							src={languages[language].src}
+							alt="flag"
+							width={21}
+							height={15}
+						/>
+						<p>{language}</p>
+						<Triangle isActive={languagePopup} />
 					</div>
-					<Link href="/login">Sign up</Link>
+
+					<div
+						
+						className={`${styles.header__user_language_popup} ${
+							languagePopup ? styles.active : ""
+						}`}
+					>
+						{popupContent()}
+					</div>
 				</div>
-			</header>
-		</>
+				<Link href="/login">Sign up</Link>
+			</div>
+		</header>
 	);
 };
 

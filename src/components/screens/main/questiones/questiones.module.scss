@@ -1,15 +1,74 @@
-@use '../../../../styles/_variables.module' as vars;
-@use '../../../../styles/_mixins.module' as mixins;
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
 
 .questiones {
     text-align: center;
-
-    h1 {
-        margin-top: 240px;
+   
+    &__header {
+        @include mixins.flexCenter;
+        height: calc(100vh - 105px);
+        div {
+            margin-bottom: 100px;
+        }
+        h2 {
+            margin-top: 16px;
+            font-size: 22px;
+        }
     }
 
-    h2 {
-        margin-top: 16px;
-        font-size: 22px;
+
+    .top {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: vars.$secondaryColor;
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+
+    &__navigation {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        padding-top: 105px;
+        padding-bottom: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 30px;
+        width: 100%;
+        transition: box-shadow .5s ease;
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        div {
+            @include mixins.button;
+            padding: 8px 16px;
+
+            &:hover {
+                @include mixins.hoveredButton;
+            }
+        }
+    }
+
+    &__block {
+        margin: 48px auto 0;
+        width: 62.5%;
+        text-align: left;
+
+        h2 {
+            font-size: 40px;
+        }
+
+        &_content {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
     }
 }

@@ -27,7 +27,9 @@
     color: vars.$secondaryColor;
     background-color: vars.$primaryColor;
     border: vars.$primaryBorder;
+    border-radius: 40px;
     cursor: pointer;
+    transition: .3s;
     user-select: none;
 }
 

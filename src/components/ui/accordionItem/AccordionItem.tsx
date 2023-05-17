@@ -11,7 +11,6 @@ const AccordionItem: FC<PropsWithChildren<IAccordionProps>> = ({ header, childre
     const [isOpen, setIsOpen] = useState(false);
     const contentRef = useRef<HTMLDivElement | null>(null);
     const contentHeight: number | undefined = contentRef.current ? contentRef.current.clientHeight : 0;
-    console.log(contentRef)
 
     const toggle = (): void => {
         setIsOpen((prev) => !prev)
@@ -22,13 +21,16 @@ const AccordionItem: FC<PropsWithChildren<IAccordionProps>> = ({ header, childre
     };
 
     return (
-        <div className={styles.accordion}>
+        <div className={`${styles.accordion} ${isOpen ? styles.active : ''}`}>
             <div onClick={toggle} className={styles.accordion__header}>
                 {header}
-                <TriangleIcon isActive={isOpen} />
+                <div>
+                    <TriangleIcon isActive={isOpen} />
+                </div>
             </div>
             <div className={styles.accordion__content} style={containerStyle}>
                 <div ref={contentRef} className={styles.accordion__content_wrapper}>
+                    <span className={styles.accordion__content_line} />
                     {children}
                 </div>
             </div>

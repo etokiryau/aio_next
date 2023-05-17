@@ -1,5 +1,6 @@
 import { FC, useEffect } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { useTypedDispatch, useTypedSelector } from "@/hooks/useReduxHooks";
 
 import MainLayout from "@/components/layouts/mainLayout/MainLayout";
@@ -14,9 +15,9 @@ import EditIcon from "@/components/ui/EditIcon";
 import CarouselSlider from "@/components/carouselSlider/CarouselSlider";
 import TechnicalIndicators from "@/components/ui/technicalIndicators/TechnicalIndicators";
 import SetupNavigator from "@/components/setupNavigator/SetupNavigator";
+import AccordionItem from "@/components/ui/accordionItem/AccordionItem";
 
 import styles from "./singleProject.module.scss";
-import AccordionItem from "@/components/ui/accordionItem/AccordionItem";
 
 const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 	const { id, name, cost, currency, totalArea, height, houseDimensions } = project;
@@ -153,40 +154,42 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 						</AccordionItem>
 
 						<AccordionItem header="Mechanical, electrical and plumbing">
-							<div >
-                                <p>Power supply system:</p>
-                                <ul>
-                                    <li>Schematic diagrams of power supply of power receivers from the main, additional and backup power supply sources</li>
-                                    <li>Lightning plans</li>
-                                    <li>Power supply network plan</li>
-                                    <li>Socket placement layout</li>
-                                    <li>Schematic single-line diagram of the power supply</li>
-                                    <li>Bill of quantities</li>
-                                </ul>
-                            </div>
+							<div className={styles.container}>
+								<div >
+									<p>Power supply system:</p>
+									<ul>
+										<li>Schematic diagrams of power supply of power receivers from the main, additional and backup power supply sources</li>
+										<li>Lightning plans</li>
+										<li>Power supply network plan</li>
+										<li>Socket placement layout</li>
+										<li>Schematic single-line diagram of the power supply</li>
+										<li>Bill of quantities</li>
+									</ul>
+								</div>
 
-                            <div >
-                                <p>Water supply system:</p>
-                                <ul>
-                                    <li>General information</li>
-                                    <li>Water supply plan</li>
-                                    <li>Collector connection scheme</li>
-                                    <li>Plumbing fixture connection scheme</li>
-                                    <li>Water system isometry</li>
-                                    <li>House water inlet scheme</li>
-                                    <li>Bill of quantities</li>
-                                </ul>
-                            </div>
+								<div >
+									<p>Water supply system:</p>
+									<ul>
+										<li>General information</li>
+										<li>Water supply plan</li>
+										<li>Collector connection scheme</li>
+										<li>Plumbing fixture connection scheme</li>
+										<li>Water system isometry</li>
+										<li>House water inlet scheme</li>
+										<li>Bill of quantities</li>
+									</ul>
+								</div>
 
-                            <div >
-                                <p>Water disposal system:</p>
-                                <ul>
-                                    <li>Sewerage systems plans</li>
-                                    <li>Plumbing fixture connection scheme</li>
-                                    <li>Sewerage system isometry</li>
-                                    <li>Bill of quantities</li>
-                                </ul>
-                            </div>
+								<div >
+									<p>Water disposal system:</p>
+									<ul>
+										<li>Sewerage systems plans</li>
+										<li>Plumbing fixture connection scheme</li>
+										<li>Sewerage system isometry</li>
+										<li>Bill of quantities</li>
+									</ul>
+								</div>
+							</div>
 						</AccordionItem>
 
 						<AccordionItem header="3D model">
@@ -201,7 +204,8 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 
 				<section className={styles.project__services}>
 					<h2>Additional services</h2>
-					
+					<h3>If you like the project but want to change it a little, we can customise it for you</h3>
+					<Link href="/services">Learn more</Link>
 				</section>
 
 				{copyingMessage}

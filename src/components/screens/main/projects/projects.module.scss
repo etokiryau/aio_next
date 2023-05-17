@@ -24,6 +24,10 @@
             display: flex;
             gap: 24px;
 
+            svg {
+                fill: vars.$primaryColor;
+            }
+
             &_button {
                 position: relative;
                 padding: 8px 16px;

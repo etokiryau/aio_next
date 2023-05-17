@@ -2,19 +2,40 @@
 @use '@/styles/_mixins.module' as mixins;
 
 .accordion {
-    padding-bottom: 18px;
-    border-bottom: solid .4px rgba($color: vars.$primaryColor, $alpha: .6);
+    padding: 22px 18px;
+    background: rgba(61, 61, 61, 0.1);
+    border-radius: 24px;
+    transition: .3s ease;
+
+    &:hover {
+        svg {
+            fill: vars.$additionalColor;
+        }
+    }
 
     &__header {
-        padding: 18px 0 0;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         font-size: 22px;
         cursor: pointer;
+        user-select: none;
+
+        svg {
+            transition: .3s ease;
+            fill: vars.$primaryColor;
+        }
+
+        div {
+            min-width: 32px;
+            min-height: 32px;
+            background-color: vars.$secondaryColor;
+            border-radius: 50%;
+        }
     }
 
     ul {
-        margin-left: 20px;
+        margin-left: 0px;
         display: flex;
         flex-direction: column;
         gap: 8px;
@@ -23,25 +44,40 @@
 
     &__content {
         overflow: hidden;
-        transition: max-height .5s ease;
+        transition: max-height .5s ease, transform .5s ease;
         text-align: left;
+        transform: translateY(-10px);
+
+        &_line {
+            background-color: vars.$secondaryColor;
+            width: 1px;
+        }
 
         &_wrapper {
             margin-top: 28px;
             display: flex;
-            flex-direction: column;
             gap: 28px;
+            max-width: calc(100% - 32px);
 
             div {
-            
                 ul {
                     margin-top: 10px;
                 }
             }
         }
 
-        
+    }
+}
+
+.active {
+    background-color: vars.$primaryColor;
+    color: vars.$secondaryColor;
+
+    svg {
+        fill: vars.$additionalColor;
     }
 
-
+    .accordion__content {
+        transform: none;
+    }
 }

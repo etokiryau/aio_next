@@ -59,6 +59,10 @@
         &_language {
             position: relative;
 
+            svg {
+                fill: vars.$primaryColor;
+            }
+
             &_wrapper {
                 @include mixins.flexCenter;
                 gap: 12px;
