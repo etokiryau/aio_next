@@ -45,3 +45,8 @@
     transform: scaleX(0);
     transition: .3s ease;
 }
+
+@mixin flexColumn {
+    display: flex;
+    flex-direction: column;
+}

@@ -99,8 +99,8 @@ const Contacts: FC = () => {
 
                 <section className={styles.contacts__form}>
                     <p>Want us to contact you? Fill the form below</p>
-                    <div>
-                    <Formik
+                    
+                        <Formik
                             initialValues={{
                                 email: '',
                                 name: '',
@@ -121,36 +121,30 @@ const Contacts: FC = () => {
                             // }}
                             onSubmit={() => {}}
                         >
-                            <Form className="contacts__form-wrapper">   
-                                <Field 
-                                    className="contacts__form-input" 
+                            <Form>   
+                                <Field
                                     type="email" 
                                     id="email" 
                                     name="email" 
-                                    placeholder="Your email" />
+                                    placeholder="Email" />
                             
                                 <Field
-                                    className="contacts__form-input"
                                     id="name"
                                     name="name"
-                                    placeholder="Your name"
+                                    placeholder="Name"
                                     type="text"
                                 />        
 
                                 <Field
-                                    className="contacts__form-input"
                                     id="telephone"
                                     name="telephone"
-                                    placeholder="Your telephone"
+                                    placeholder="Phone number"
                                     type="tel"
                                 />
-                            
-                                <div className="contacts__form-button">
-                                    <button type="submit" disabled={false}>Send</button>
-                                </div>
+
+                                <button type="submit" disabled={false}>Submit</button>
                             </Form>
                         </Formik>
-                    </div>
                 </section>
             </div>
         </MainLayout>

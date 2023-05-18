@@ -104,5 +104,33 @@
         margin: 140px auto 0;
         width: 62.5%;
         text-align: left;
+
+        form {
+            margin-top: 24px;
+            display: flex;
+            gap: 20px;
+
+            input {
+                padding: 8px 16px;
+                border: solid .4px rgba($color: vars.$primaryColor, $alpha: .4);
+                border-radius: 10px;
+                outline: none;
+                transition: .5s ease;
+
+                &:focus  {
+                    background-color: rgba($color: vars.$primaryColor, $alpha: .1);
+                    box-shadow: inset 0 0 0 2px rgba($color: vars.$primaryColor, $alpha: .4);
+                }
+            }
+
+            button {
+                @include mixins.button;
+                padding: 8px 16px;
+
+                &:hover {
+                    @include mixins.hoveredButton;
+                }
+            }
+        }
     }
 }

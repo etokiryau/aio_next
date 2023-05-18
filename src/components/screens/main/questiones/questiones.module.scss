@@ -7,15 +7,16 @@
     &__header {
         @include mixins.flexCenter;
         height: calc(100vh - 105px);
+
         div {
             margin-bottom: 100px;
         }
+        
         h2 {
             margin-top: 16px;
             font-size: 22px;
         }
     }
-
 
     .top {
         position: fixed;

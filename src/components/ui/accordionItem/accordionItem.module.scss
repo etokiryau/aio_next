@@ -2,7 +2,7 @@
 @use '@/styles/_mixins.module' as mixins;
 
 .accordion {
-    padding: 22px 18px;
+    
     background: rgba(61, 61, 61, 0.1);
     border-radius: 24px;
     transition: .3s ease;
@@ -14,6 +14,7 @@
     }
 
     &__header {
+        padding: 22px 18px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -54,10 +55,11 @@
         }
 
         &_wrapper {
-            margin-top: 28px;
+            padding-left: 18px;
+            padding-bottom: 22px;
             display: flex;
             gap: 28px;
-            max-width: calc(100% - 32px);
+            max-width: calc(100% - 48px);
 
             div {
                 ul {

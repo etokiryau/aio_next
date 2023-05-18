@@ -17,7 +17,7 @@ const AccordionItem: FC<PropsWithChildren<IAccordionProps>> = ({ header, childre
     };
 
     const containerStyle = {
-        maxHeight: isOpen ? `${contentHeight + 40}px` : 0
+        maxHeight: isOpen ? `${contentHeight + 20}px` : 0
     };
 
     return (
