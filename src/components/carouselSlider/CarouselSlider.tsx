@@ -16,6 +16,36 @@ interface ISlideStyle {
 }
 
 const CarouselSlider: FC<ISliderProps> = ({ size }) => {
+	const [currentSlide, setCurrentSlide] = useState(0);
+	const [direction, setDirection] = useState("+");
+	const [mousePositionStartX, setMousePositionStartX] = useState<number | null>(null);
+
+	const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>): void => {
+		setMousePositionStartX(event.clientX);
+	};
+
+	const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>): void => {
+		setMousePositionStartX(event.touches[0].clientX);
+	};
+	
+	const handleMouseUp = (event: React.MouseEvent<HTMLDivElement>): void => {
+		if (mousePositionStartX !== null) {
+			const endX = event.clientX;
+			const deltaX = endX - mousePositionStartX;
+			if (deltaX > 0) changeSlide('previous')
+			if (deltaX < 0) changeSlide('next');
+		}
+	};
+
+	const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>): void => {
+		if (mousePositionStartX !== null) {
+			const endX = event.changedTouches[0].clientX;
+			const deltaX = endX - mousePositionStartX;
+			if (deltaX > 0) changeSlide('previous')
+			if (deltaX < 0)changeSlide('next');
+		}
+	};
+
 	const slidesData = [
 		"/projectPreview.jpg",
 		"/project23.jpg",
@@ -25,8 +55,6 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 		"/project61.jpg",
 		// "/project91.jpg"
 	];
-	const [currentSlide, setCurrentSlide] = useState(0);
-	const [direction, setDirection] = useState("+");
 
 	const slideNumber = slidesData.length;
 
@@ -79,7 +107,7 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 		};
 	};
 
-	const changeSlide = (direction: string): void => {
+	const changeSlide = (direction: "next" | "previous"): void => {
 		switch (direction) {
 			case "next":
 				setDirection("+");
@@ -102,6 +130,7 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 			<div
 				key={i}
 				style={slideStyle}
+				onClick={() => {}}
 				className={`${size === 'large' ? styles.slider__slideLarge : styles.slider__slideSmall} 
 					${currentSlide === i ? styles.active : styles.inActive}`
 				}
@@ -113,7 +142,13 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 	});
 
 	return (
-		<div className={styles.slider} style={{height: size === 'large' ? 'calc(100vh - 280px)' : '290px'}}>
+		<div 
+			onMouseDown={handleMouseDown} 
+			onMouseUp={handleMouseUp} 
+			onTouchStart={handleTouchStart} 
+			onTouchEnd={handleTouchEnd} 
+			className={styles.slider} style={{height: size === 'large' ? 'calc(100vh - 280px)' : '290px'}}
+		>
 			{slides}
 			<div
 				className={styles.slider__rightChange}

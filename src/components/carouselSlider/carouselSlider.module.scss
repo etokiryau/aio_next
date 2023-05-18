@@ -8,6 +8,8 @@
 
     img {
         cursor: zoom-in;
+        -webkit-user-drag: none;
+        user-select: none;
     }
 
     &__slideLarge {

@@ -46,6 +46,12 @@ const SetupNavigator: FC = () => {
         setPosition({x: 100, y: 20});
     };
 
+    const changeCurrentRoom = (order: number): void => {
+        setCurrentRoom((prev) => {
+            return prev === order ? null : order
+        })
+    };
+
     const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>): void => {
         const initialX = event.clientX - position.x;
         const initialY = event.clientY - position.y;
@@ -167,7 +173,7 @@ const SetupNavigator: FC = () => {
                     {filteredRooms.map((item, i) => {
                         return <p 
                                     key={i}
-                                    onClick={() => setCurrentRoom(i)}
+                                    onClick={() => changeCurrentRoom(i)}
                                     className={currentRoom === i ? styles.active : ''}
                                 >{item}</p>
                     })}
