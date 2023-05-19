@@ -151,14 +151,14 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 		>
 			{slides}
 			<div
-				className={styles.slider__rightChange}
+				className={`${styles.slider__rightChange} ${size === 'small' ? styles.shiftedButton : ''}`}
 				onClick={() => changeSlide("next")}
 			>
 				<ArrowSmall />
 			</div>
 
 			<div
-				className={styles.slider__leftChange}
+				className={`${styles.slider__leftChange} ${size === 'small' ? styles.shiftedButton : ''}`}
 				onClick={() => changeSlide("previous")}
 			>
 				<ArrowSmall />

@@ -81,6 +81,10 @@
         z-index: 15;
     }
 
+    .shiftedButton {
+        top: calc((100% - 22px) / 2)
+    }
+
     svg {
         stroke: vars.$secondaryColor;
         fill: vars.$secondaryColor;

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Formik, Field, Form, useFormik } from 'formik';
 
 import MainLayout from "@/components/layouts/mainLayout/MainLayout";
@@ -20,6 +20,8 @@ interface ISendingData extends IForm {
 }
 
 const Services: FC = () => {
+    const [areaValue, setAreaValue] = useState('500')
+
     const formik = useFormik({
         initialValues: {
             service: 'individual',
@@ -123,6 +125,37 @@ const Services: FC = () => {
         // }
     };
 
+    const handleAreaWindowBlur = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        const value: number = Number(event.target.value);
+        if (value < 100 || value > 3000) {
+            setAreaValue(String(value + 1550));
+            return;
+        };
+
+        formik.setFieldValue('area', value - 1550);
+    };
+
+    const handleAreaWindowChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setAreaValue(event.target.value);
+    };
+
+    const handleAreaRangeChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        formik.setFieldValue('area', Number(event.target.value));
+        setAreaValue(String(Number(event.target.value) + 1550))
+    };
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+        if (event.key === 'Enter') {
+            const value: number = Number(areaValue);
+            if (value < 100 || value > 3000) {
+                setAreaValue(String(formik.values.area + 1550));
+                return;
+            }
+        
+            formik.setFieldValue('area', value - 1550);
+        }
+    };
+
     return (
         <MainLayout title="Services">
             <div className={styles.services}>
@@ -199,10 +232,18 @@ const Services: FC = () => {
                                 <div className={styles.services__content_calculation_area}>
                                     <p>House area</p>
                                     <label htmlFor="area">
-                                        <div style={areaRangeHelperStyle}>{formik.values.area + 1550} m</div>
+                                        <div style={areaRangeHelperStyle}>
+                                        <Field type="number"
+                                            value={areaValue}
+                                            onChange={handleAreaWindowChange}
+                                            onBlur={handleAreaWindowBlur}
+                                            onKeyDown={handleKeyDown}
+                                        />
+                                            m
+                                        </div>
                                         <Field type="range" name="area" id="area" min="-1450" max="1450" step="25" 
                                             value={formik.values.area} 
-                                            onChange={formik.handleChange}
+                                            onChange={handleAreaRangeChange}
                                             style={{backgroundSize: `${(formik.values.area + 1450 ) * 100 / 2900}% 100%`}} />
                                     </label>
                                     <datalist id="area">

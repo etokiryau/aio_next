@@ -21,12 +21,7 @@ interface IProjectListItem {
 	handleShare: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-const ProjectListItem: FC<IProjectListItem> = ({
-	info,
-	likeFill,
-	handleLike,
-	handleShare
-}) => {
+const ProjectListItem: FC<IProjectListItem> = ({ info, likeFill,handleLike,handleShare }) => {
 	const {
 		name,
 		totalArea,
@@ -36,7 +31,6 @@ const ProjectListItem: FC<IProjectListItem> = ({
 		cost,
 		currency
 	} = info;
-	const baseUrl = "https://aio.house";
 
 	return (
 		<div className={styles.listItem__wrapper}>
@@ -66,10 +60,10 @@ const ProjectListItem: FC<IProjectListItem> = ({
 			</Link>
 			<div className={styles.listItem__buttons}>
 				<div onClick={handleLike}>
-					<LikeIcon fill={likeFill ? true : false} />
+					<LikeIcon isActive={likeFill ? true : false} />
 				</div>
 				<div
-					data-link={`${baseUrl}/projects/${name}`}
+					data-link={`/projects/${name}`}
 					onClick={handleShare}
 				>
 					<ShareIcon />

@@ -10,3 +10,9 @@ $buttonsFontSize: 18px;
 
 $primaryBorder: 0.4px solid $primaryColor;
 $primaryBorderRadius: 24px;
+
+:export {
+    primaryColor: $primaryColor;
+    additionalColor: $additionalColor;
+    secondaryColor: $secondaryColor
+}

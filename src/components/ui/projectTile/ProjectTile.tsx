@@ -48,7 +48,7 @@ const ProjectTile: FC<IProjectTile> = ({
 				</div>
 
 				<div onClick={handleLike}>
-					<LikeIcon fill={likeFill ? true : false} />
+					<LikeIcon isActive={likeFill ? true : false} />
 				</div>
 			</div>
 			<Link

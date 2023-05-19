@@ -14,14 +14,17 @@
     }
 
     &__content {
-        margin-top: 80px;
-        padding: 0 5%;
+        margin: 80px 2.5% 0;
 
         &_calculation {
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 30px;
+            background-color: vars.$primaryColor;
+            color: vars.$secondaryColor;
+            border-radius: 24px 24px 0 0;
 
             p {
                 margin-bottom: 12px;
@@ -49,19 +52,19 @@
                     min-height: 20px;
                     min-width: 20px;
                     border-radius: 50%;
-                    border: solid .4px rgba($color: vars.$primaryColor, $alpha: .4);
+                    border: solid .4px rgba($color: vars.$secondaryColor, $alpha: .4);
                     transition: .2s ease;
                     cursor: pointer;
 
-                    &::before {
-                        @include mixins.absoluteCenter;
-                        content: "";
-                        min-width: 10px;
-                        min-height: 10px;
-                        border: solid .4px rgba($color: vars.$primaryColor, $alpha: .4);
-                        border-radius: 50%;
-                        transition: .2s ease;
-                    }
+                    // &::before {
+                    //     @include mixins.absoluteCenter;
+                    //     content: "";
+                    //     min-width: 10px;
+                    //     min-height: 10px;
+                    //     border: solid .4px rgba($color: vars.$secondaryColor, $alpha: .4);
+                    //     border-radius: 50%;
+                    //     transition: .2s ease;
+                    // }
 
                     &::after {
                         @include mixins.absoluteCenter;
@@ -70,17 +73,17 @@
                         min-height: 10px;
                         transform: translate(-50%, -50%) scale(0);
                         border-radius: 50%;
-                        background-color: vars.$primaryColor;
-                        border: solid .4px rgba($color: vars.$primaryColor, $alpha: 1);
+                        background-color: vars.$secondaryColor;
+                        border: solid .4px rgba($color: vars.$secondaryColor, $alpha: 1);
                         transition: .2s ease;
                     }
     
                     &:checked {
-                        border: solid .4px rgba($color: vars.$primaryColor, $alpha: 1);
+                        border: solid .4px rgba($color: vars.$secondaryColor, $alpha: 1);
     
-                        &::before {
-                            border: solid .4px rgba($color: vars.$primaryColor, $alpha: 1);
-                        }
+                        // &::before {
+                        //     border: solid .4px rgba($color: vars.$primaryColor, $alpha: 1);
+                        // }
 
                         &::after {
                             transform: translate(-50%, -50%) scale(1);
@@ -110,7 +113,7 @@
                     place-content: center;
                     min-width: 20px;
                     min-height: 20px;
-                    border: solid .4px rgba($color: vars.$primaryColor, $alpha: .4);
+                    border: solid .4px rgba($color: vars.$secondaryColor, $alpha: .4);
                     border-radius: 4px;
                     cursor: pointer;
 
@@ -120,13 +123,13 @@
                         min-height: 14px;
                         transform: scale(0);
                         transition: .2s ease;
-                        background: vars.$primaryColor;
-                        background-color: CanvasText;
+                        background: vars.$secondaryColor;
+                        background-color: vars.$secondaryColor;
                         clip-path: polygon(21% 43%, 8% 52%, 35% 88%, 93% 13%, 81% 4%, 36% 62%);
                     }
 
                     &:checked {
-                        border: solid .4px rgba($color: vars.$primaryColor, $alpha: 1);
+                        border: solid .4px rgba($color: vars.$secondaryColor, $alpha: 1);
 
                         &::before {
                             transform: scale(1);
@@ -146,17 +149,17 @@
                     width: 100%;
                 }
 
-                input {
+                input[type="range"] {
                     margin-top: 50px;
                     appearance: none;
                     -webkit-appearance: none;
                     width: 100%;
                     height: 1px;
-                    background-color:rgba($color: vars.$primaryColor, $alpha: .4);
+                    background-color:rgba($color: vars.$secondaryColor, $alpha: .4);
                     border-radius: 5px;
                     cursor: pointer;
                     outline: none;
-                    background-image: linear-gradient(vars.$primaryColor, vars.$primaryColor);
+                    background-image: linear-gradient(vars.$secondaryColor, vars.$secondaryColor);
                     background-size: 50% 100%;
                     background-repeat: no-repeat;
 
@@ -165,7 +168,12 @@
                         height: 15px;
                         width: 15px;
                         border-radius: 50%;
-                        background: vars.$primaryColor;
+                        background: vars.$secondaryColor;
+                        transition: .3s ease;
+
+                        &:active {
+                            transform: scale(1.3);
+                        }
                     }
                 }
 
@@ -179,6 +187,25 @@
                     border-radius: 8px;
                     font-size: 16px;
                     transform: translateX(-50%);
+                    color: vars.$primaryColor;
+                    transition: box-shadow .3s ease;
+
+                    &:focus-within {
+                        box-shadow: 0px 0px 8px 2px rgba($color: vars.$secondaryColor, $alpha: .4);
+                    }
+
+                    input {
+                        appearance: none;
+                        -webkit-appearance: none;
+                        border: none;
+                        max-width: 40px;
+
+                        &::-webkit-outer-spin-button,
+                        &::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+                    }
 
                     &::after {
                         content: '\00B2'
@@ -204,8 +231,11 @@
         }
 
         &_total {
-            margin-top: 60px;
+            padding: 60px 20px 20px;
             text-align: right;
+            background-color: vars.$primaryColor;
+            color: vars.$secondaryColor;
+            border-radius: 0 0 24px 24px;
 
             p {
                 font-size: 16px;

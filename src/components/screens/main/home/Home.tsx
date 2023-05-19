@@ -4,6 +4,8 @@ import Link from "next/link";
 import styles from './home.module.scss';
 import MainLayout from "@/components/layouts/mainLayout/MainLayout";
 import projectAdaptation from "../../../../../public/adaptationMap.png";
+import AdvantageIndicator from "@/components/advantageIndicator/AdvantageIndicator";
+import VideoWrapper from "@/components/videoWrapper/VideoWrapper";
 
 interface IOpportunity {
     name: string,
@@ -12,8 +14,9 @@ interface IOpportunity {
 }
 
 const Home: FC = () => {
-    const [currentOpportunity, setCurrentOpportunity] = useState(0);
+    const [currentOpportunity, setCurrentOpportunity] = useState<number>(0);
     const opportunityRefs = useRef<HTMLDivElement[] | null[]>([]);
+    const videoRefs = useRef<HTMLVideoElement[] | null[]>([]);
 
     const opportunities: IOpportunity[] = [
         {
@@ -59,11 +62,39 @@ const Home: FC = () => {
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        const options: IntersectionObserverInit = {
+            root: document.querySelector('main'),
+            rootMargin: '0px',
+            threshold: 1
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.target.hasAttribute('data-autoplay')) {
+                    (entry.target as HTMLVideoElement).play();
+                } else {
+                    (entry.target as HTMLVideoElement).pause();
+                }
+            });
+        }, options);
+    
+        videoRefs.current.forEach(videoRef => {
+            if (videoRef) observer.observe(videoRef);
+        });
+    
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
 
     const opportunitiesContent: JSX.Element[] = opportunities.map((item, i) => {
         return (
-            <div ref={ref => opportunityRefs.current[i] = ref} key={i} className={`${styles.opportunities__list_single} ${i === currentOpportunity ? styles.active : ''}`}>
+            <div ref={ref => opportunityRefs.current[i] = ref} key={i} 
+                className={`${styles.opportunities__list_single} ${i === currentOpportunity ? styles.active : ''}`}
+            >
                 <p id={styles.name}>{item.name}</p>
                 <p id={styles.description}>{item.description}</p>
                 <Link href={item.path}>Explore</Link>
@@ -80,42 +111,16 @@ const Home: FC = () => {
                         <Link href="/projects">Explore projects</Link>
                     </div>
                     <div className={styles.head__right}>
-                        <span></span>
+                        <VideoWrapper src={["/mainVideo.mp4"]} />
                     </div>
                 </section>
 
                 <section>
                     <h2>AIO private construction ecosystem</h2>
                     <div className={styles.indicators}>
-                        <div className={styles.indicators__single}>
-                            <p className={styles.indicators__single_name}>Money save</p>
-                            <div className={styles.indicators__single_value}>
-                                <span id={styles.circle} />
-                                <span id={styles.line} style={{width: `${17}%`}}>
-                                    <p>17%</p>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className={styles.indicators__single}>
-                            <p className={styles.indicators__single_name}>Time reduce</p>
-                            <div className={styles.indicators__single_value}>
-                                <span id={styles.circle} />
-                                <span id={styles.line} style={{width: `${32}%`}}>
-                                    <p>32%</p>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className={styles.indicators__single}>
-                            <p className={styles.indicators__single_name}>Quality provide</p>
-                            <div className={styles.indicators__single_value}>
-                                <span id={styles.circle} />
-                                <span id={styles.line} style={{width: `${100}%`}}>
-                                    <p>100%</p>
-                                </span>
-                            </div>
-                        </div>
+                        <AdvantageIndicator title="Money save" target={17} duration={2000} multiplier={1.4} />
+                        <AdvantageIndicator title="Time reduce" target={32} duration={2000} multiplier={1.3} />
+                        <AdvantageIndicator title="Quality provide" target={100} duration={2000} />
                     </div>
                 </section>
 

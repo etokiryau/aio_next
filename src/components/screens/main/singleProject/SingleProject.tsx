@@ -54,7 +54,7 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 					</div>
 					<div className={styles.project__sticky_right}>
 						<div onClick={() => dispatch(toggleFavourite(id))}>
-							<LikeIcon fill={isFavourite(id)} />
+							<LikeIcon isActive={isFavourite(id)} />
 						</div>
 						<div data-link={`/projects/${name}`} onClick={copyLinkToClipboard}>
 							<ShareIcon />
