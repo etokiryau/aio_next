@@ -85,8 +85,12 @@
         &_down {
             padding: 16px 24px;
             display: flex;
-            justify-content: space-between;
+            // justify-content: space-between;
             transition: .3s ease;
+
+            p {
+                transition: flex .7s ease;
+            }
             
             svg {
                 stroke: vars.$primaryColor;
@@ -127,6 +131,7 @@
                 
                 p {
                     color: vars.$primaryColor;
+                    flex-grow: 1;
                 }
 
                 svg {

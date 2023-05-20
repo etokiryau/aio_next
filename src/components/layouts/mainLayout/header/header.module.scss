@@ -127,7 +127,7 @@
         a {
             padding: 0 16px;
             @include mixins.flexCenter;
-            @include mixins.button;
+            @include mixins.whiteButton;
             height: 100%;
             border-radius: 30px;
 

@@ -12,7 +12,14 @@ interface IProjectsState {
         totalArea: [number, number] | null,
         cost: [number, number] | null,
         roofType: string | null
-    }
+    },
+    sorting: {type: string, direction: 'ascending' | 'descending'} | null
+};
+
+interface ISortingProperties {
+    totalArea: number,
+    cost: number,
+    floorNumber: number,
 };
 
 const initialState: IProjectsState = {
@@ -24,7 +31,8 @@ const initialState: IProjectsState = {
         totalArea: null,
         cost: null,
         roofType: null
-    }
+    },
+    sorting: null
 };
 
 const projectsSlice = createSlice({
@@ -36,7 +44,7 @@ const projectsSlice = createSlice({
         },
         toggleFavourite: (state, action: PayloadAction<string | string[]>) => {
             if (!Array.isArray(action.payload)) {
-                const isAdded = state.favourites.some(item => item === action.payload);
+                const isAdded: boolean = state.favourites.some(item => item === action.payload);
 
                 isAdded 
                 ? state.favourites = state.favourites.filter(item => item !== action.payload)
@@ -48,7 +56,10 @@ const projectsSlice = createSlice({
             localStorage.setItem('favouriteProjects', JSON.stringify([...state.favourites]));
         },
         togglePropertyFilter: (state, action: PayloadAction<{[key: string]: number | boolean | string | null}>) => {
-            state.filters = {...state.filters, ...action.payload}
+            state.filters = {...state.filters, ...action.payload};
+        },
+        setSorting: (state, action: PayloadAction<{type: string, direction: 'ascending' | 'descending'} | null>) => {
+            state.sorting = action.payload;
         }
     },
 });
@@ -70,6 +81,36 @@ export const selectFilteredProjects = (state: RootState) => {
         if (roofType && item.roofType !== roofType) return false;
         return true;
     });
+};
+
+export const selectSortedProjects = (state: RootState) => {
+    const sorting = state.projects.sorting;
+    const filteredProjects = selectFilteredProjects(state);
+  
+    let sortedProjects = [...filteredProjects];
+    const sortingType = sorting?.type as keyof ISortingProperties;
+  
+    // if (sorting?.direction === "ascending") {
+    //     sortedProjects.sort((a, b) => {
+    //         if (a[sortingType]< b[sortingType]) return -1;
+    //         if (a[sortingType] > b[sortingType]) return 1;
+    //         return 0;
+    //     });
+    // } else if (sorting?.direction === "descending") {
+    //     sortedProjects.sort((a, b) => {
+    //         if (a[sortingType] > b[sortingType]) return -1;
+    //         if (a[sortingType] < b[sortingType]) return 1;
+    //         return 0;
+    //     });
+    // }
+
+    if (sorting?.direction === "ascending") {
+        sortedProjects.sort((a, b) => a[sortingType] - b[sortingType]);
+    } else if (sorting?.direction === "descending") {
+        sortedProjects.sort((a, b) => b[sortingType] - a[sortingType]);
+    }
+  
+    return sortedProjects;
 };
 
 export default projectsSlice.reducer;

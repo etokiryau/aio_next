@@ -40,15 +40,8 @@
                 stroke-linecap: round;
                 stroke-dasharray: 100;
                 transition: .5s ease;
-            
-                &:nth-child(2) {
-                    stroke: #3D3D3D;
-                    stroke-dasharray: 377;
-                }
             }
         }
-
-        
     }
 
     .triangle {

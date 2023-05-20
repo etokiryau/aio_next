@@ -37,7 +37,6 @@ const ProjectTile: FC<IProjectTile> = ({
 		cost,
 		currency
 	} = info;
-	const baseUrl = "https://aio.house";
 
 	return (
 		<div className={styles.projectTile}>

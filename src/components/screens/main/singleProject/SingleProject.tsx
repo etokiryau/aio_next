@@ -8,7 +8,7 @@ import { IProjectPageProps } from "@/interfaces/projects.interface";
 import { useCopyLinkToClipboard } from "@/hooks/useCopylinkToClipBoard";
 import { selectProjects, toggleFavourite } from "../projects/projectsSlice";
 
-import ArrowLarge from "@/components/ui/ArrowLargeIcon";
+import ArrowLargeIcon from "@/components/ui/ArrowLargeIcon";
 import LikeIcon from "@/components/ui/LikeIcon";
 import ShareIcon from "@/components/ui/ShareIcon";
 import EditIcon from "@/components/ui/EditIcon";
@@ -49,9 +49,10 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 			<div className={styles.project}>
 				<section className={styles.project__sticky}>
 					<div onClick={goBack}>
-						<ArrowLarge />
+						<ArrowLargeIcon />
 						<p>Back to catalog</p>
 					</div>
+					
 					<div className={styles.project__sticky_right}>
 						<div onClick={() => dispatch(toggleFavourite(id))}>
 							<LikeIcon isActive={isFavourite(id)} />
@@ -61,7 +62,7 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 						</div>
 					</div>
 				</section>
-
+				
 				<section className={styles.project__header}>
 					<div className={styles.project__header_left}>
 						<p>{name}</p>

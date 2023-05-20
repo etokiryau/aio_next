@@ -84,7 +84,7 @@
             }
 
             &_customise {
-                @include mixins.button;
+                @include mixins.whiteButton;
                 overflow-x: hidden;
                 position: absolute;
                 top: 50%;
@@ -184,12 +184,12 @@
         }
 
         a {
-            @include mixins.hoveredButton;
+            @include mixins.button;
             margin-top: 40px;
             padding: 8px 20px;
 
             &:hover {
-                @include mixins.button;
+                @include mixins.hoveredButton;
             }
         }
     }

@@ -4,6 +4,7 @@ import { useTypedDispatch, useTypedSelector } from "@/hooks/useReduxHooks";
 import {
 	selectProjects,
 	selectFilteredProjects,
+	selectSortedProjects,
 	toggleFavourite,
 	togglePropertyFilter
 } from "./projectsSlice";
@@ -24,6 +25,7 @@ const Projects: NextPage = () => {
 	const dispatch = useTypedDispatch();
 	const { favourites, filters } = useTypedSelector(selectProjects);
 	const filteredProjects = useTypedSelector(selectFilteredProjects);
+	const sortedProjects = useTypedSelector(selectSortedProjects);
 
 	useEffect(() => {
 		if (favourites.length > 0) return;
@@ -37,7 +39,7 @@ const Projects: NextPage = () => {
 		return favourites.some(item => item === id);
 	};
 
-	const projectsListContent: JSX.Element[] = filteredProjects.map(
+	const projectsListContent: JSX.Element[] = sortedProjects.map(
 		(item, i) => {
 			const info = {
 				name: item.name,

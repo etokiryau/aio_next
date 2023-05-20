@@ -1,7 +1,8 @@
 import { FC, useState } from "react";
+import Image from "next/image";
 
 import styles from "./carouselSlider.module.scss";
-import Image from "next/image";
+
 import ArrowSmall from "../ui/ArrowSmallIcon";
 
 interface ISliderProps {
@@ -32,8 +33,8 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 		if (mousePositionStartX !== null) {
 			const endX = event.clientX;
 			const deltaX = endX - mousePositionStartX;
-			if (deltaX > 0) changeSlide('previous')
-			if (deltaX < 0) changeSlide('next');
+			if (deltaX > 30) changeSlide('previous')
+			if (deltaX < -30) changeSlide('next');
 		}
 	};
 
@@ -41,8 +42,8 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 		if (mousePositionStartX !== null) {
 			const endX = event.changedTouches[0].clientX;
 			const deltaX = endX - mousePositionStartX;
-			if (deltaX > 0) changeSlide('previous')
-			if (deltaX < 0)changeSlide('next');
+			if (deltaX > 30) changeSlide('previous')
+			if (deltaX < -30)changeSlide('next');
 		}
 	};
 

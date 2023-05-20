@@ -14,6 +14,16 @@
 }
 
 @mixin button {
+    color: vars.$secondaryColor;
+    background-color: vars.$primaryColor;
+    border: vars.$primaryBorder;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: .3s;
+    user-select: none;
+}
+
+@mixin whiteButton {
     color: vars.$primaryColor;
     background-color: vars.$secondaryColor;
     border: vars.$primaryBorder;
@@ -24,13 +34,7 @@
 }
 
 @mixin hoveredButton {
-    color: vars.$secondaryColor;
-    background-color: vars.$primaryColor;
-    border: vars.$primaryBorder;
-    border-radius: 40px;
-    cursor: pointer;
-    transition: .3s;
-    user-select: none;
+    transform: scale(.95);
 }
 
 @mixin hoveredText {

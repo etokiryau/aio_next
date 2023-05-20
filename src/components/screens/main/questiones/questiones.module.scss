@@ -47,7 +47,7 @@
         }
 
         div {
-            @include mixins.button;
+            @include mixins.whiteButton;
             padding: 8px 16px;
 
             &:hover {

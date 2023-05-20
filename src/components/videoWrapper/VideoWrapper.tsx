@@ -26,9 +26,8 @@ const VideoWrapper: FC<{ src: string[] }> = ({ src }) => {
 
 	useEffect(() => {
 		const options: IntersectionObserverInit = {
-			root: document.querySelector("main"),
-			rootMargin: "0px",
-			threshold: 1
+			rootMargin: "50px",
+			threshold: .4
 		};
 
 		const observer = new IntersectionObserver(entries => {
@@ -38,8 +37,10 @@ const VideoWrapper: FC<{ src: string[] }> = ({ src }) => {
 					entry.target.hasAttribute("data-autoplay")
 				) {
 					(entry.target as HTMLVideoElement).play();
+					setIsPlaying(true);
 				} else {
 					(entry.target as HTMLVideoElement).pause();
+					setIsPlaying(false);
 				}
 			});
 		}, options);
@@ -70,8 +71,6 @@ const VideoWrapper: FC<{ src: string[] }> = ({ src }) => {
 			<div className={styles.video__control} onClick={togglePlay}>
                 <svg>
                     <circle cx="50%" cy="50%" r="16" strokeDashoffset={100 - (100 * (100 - Number(progress))) / 100}/>
-                    {/* <circle cx="50%" cy="50%" r="20"
-                        strokeDashoffset={377 - (377 * 50) / 100}/> */}
                 </svg>
                 {!isPlaying && <div className={styles.triangle}></div>}
                 {isPlaying && 
@@ -80,7 +79,6 @@ const VideoWrapper: FC<{ src: string[] }> = ({ src }) => {
                     <span></span>
                 </div>}
 			</div>
-            
 		</div>
 	);
 };
