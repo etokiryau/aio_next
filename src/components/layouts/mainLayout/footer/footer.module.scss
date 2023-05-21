@@ -1,9 +1,43 @@
-.footer {
-    margin: auto;
-    width: min(95%, 1440px);
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
 
-    &__wrapper {
-        display: flex;
-        gap: 30px;
+.footer {
+    margin: 0 auto 24px;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    width: min(95%, 1440px);
+    min-height: 212px;
+    background-color: rgba($color: vars.$primaryColor, $alpha: .1);
+    border-radius: vars.$primaryBorderRadius;
+
+    &__left {
+        align-self: self-end;
     }
+
+    &__right {
+        display: flex;
+        gap: 150px;
+
+        &_block {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            p {
+                margin-bottom: 16px;
+                font-weight: 400;
+            }
+
+            div {
+                display: flex;
+                gap: 20px;
+            }
+        }
+
+        
+    }
+        
+    
 }

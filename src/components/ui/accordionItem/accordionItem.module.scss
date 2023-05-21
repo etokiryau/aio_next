@@ -2,8 +2,7 @@
 @use '@/styles/_mixins.module' as mixins;
 
 .accordion {
-    
-    background: rgba(61, 61, 61, 0.1);
+    background: rgba($color: vars.$primaryColor, $alpha: .1);
     border-radius: 24px;
     transition: .3s ease;
 

@@ -10,7 +10,7 @@ const MainLayout: FC<PropsWithChildren<IMeta>> = ({ children, title, description
     return (
         <Meta title={title} description={description} >
             <Header />
-            <main style={{margin: '105px auto 50px', width: 'min(100%, 1440px)'}}>
+            <main style={{margin: '105px auto 36px', width: 'min(100%, 1440px)'}}>
                 {children}
             </main>
             <Footer />

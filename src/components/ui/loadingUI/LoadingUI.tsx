@@ -8,7 +8,7 @@ interface ILoadingProps {
     progress: number
 };
 
-const Loading: FC<ILoadingProps> = ({ isLoading, progress }) => {
+const LoadingUI: FC<ILoadingProps> = ({ isLoading, progress }) => {
 
     return (
         <div className={`${styles.loading} ${isLoading ? styles.active : ''}`}>
@@ -21,4 +21,4 @@ const Loading: FC<ILoadingProps> = ({ isLoading, progress }) => {
     )
 }
 
-export default Loading;
+export default LoadingUI;

@@ -253,53 +253,53 @@ const Services: FC = () => {
                                 </div>
                             </div>
                             
-                            <div className={styles.services__content_total}>
-                                <p>Project cost</p>
-                                <div>Total: {cost} USD</div>
-                            </div>
+                            <h3>Submit application</h3>
 
                             <div className={styles.services__content_submit}>
-                                <h3>Submit application</h3>
-                                <div className={styles.services__content_submit_wrapper}>
-                                    <div className={styles.services__content_submit_inputs}>
-                                        <div className={styles.services__content_submit_info}>
-                                            <Field
-                                                value={formik.values.email}
-                                                onChange={formik.handleChange}
-                                                type="email" 
-                                                id="email" 
-                                                name="email" 
-                                                placeholder="Email" 
-                                            />
-                    
-                                            <Field
-                                                value={formik.values.name}
-                                                onChange={formik.handleChange}
-                                                id="name"
-                                                name="name"
-                                                placeholder="Name"
-                                                type="text"
-                                            />
-                                        
-                                            <Field
-                                                value={formik.values.telephone}
-                                                onChange={formik.handleChange}
-                                                id="telephone"
-                                                name="telephone"
-                                                placeholder="Phone number"
-                                                type="tel"
-                                            />
-                                        
-                                        </div>
-                                        <Field
-                                            value={formik.values.comment}
-                                            onChange={formik.handleChange}
-                                            id="comment"
-                                            name="comment"
-                                            placeholder="Comment"
-                                            as="textarea"
-                                        />
+                                <div className={styles.services__content_submit_info}>
+                                    <Field
+                                        value={formik.values.email}
+                                        onChange={formik.handleChange}
+                                        type="email" 
+                                        id="email" 
+                                        name="email" 
+                                        placeholder="Email" 
+                                    />
+            
+                                    <Field
+                                        value={formik.values.name}
+                                        onChange={formik.handleChange}
+                                        id="name"
+                                        name="name"
+                                        placeholder="Name"
+                                        type="text"
+                                    />
+                                
+                                    <Field
+                                        value={formik.values.telephone}
+                                        onChange={formik.handleChange}
+                                        id="telephone"
+                                        name="telephone"
+                                        placeholder="Phone number"
+                                        type="tel"
+                                    />
+
+                                    <Field
+                                        value={formik.values.comment}
+                                        onChange={formik.handleChange}
+                                        id="comment"
+                                        name="comment"
+                                        placeholder="Comment"
+                                        as="textarea"
+                                    />
+                                </div>
+
+                                <div className={styles.services__content_submit_total}>
+                                    <div>
+                                        <p>Project cost</p>
+                                        <div className={styles.services__content_submit_total_cost}>Total: {cost} USD</div>
                                     </div>
+                                    
                                     <button type="submit" disabled={false}>Submit</button>
                                 </div>
                             </div>
