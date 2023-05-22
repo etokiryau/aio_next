@@ -1,9 +1,10 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState, useRef } from "react";
 import Image from "next/image";
 
 import styles from "./carouselSlider.module.scss";
 
 import ArrowSmall from "../ui/ArrowSmallIcon";
+import CrossIcon from "../ui/CrossIcon";
 
 interface ISliderProps {
 	slides?: string[],
@@ -17,9 +18,17 @@ interface ISlideStyle {
 }
 
 const CarouselSlider: FC<ISliderProps> = ({ size }) => {
-	const [currentSlide, setCurrentSlide] = useState(0);
-	const [direction, setDirection] = useState("+");
+	const [currentSlide, setCurrentSlide] = useState<number>(0);
+	const [currentPopupSlide, setCurrentPopupSlide] = useState<number>(0);
+	const [direction, setDirection] = useState<'+' | '-'>("+");
 	const [mousePositionStartX, setMousePositionStartX] = useState<number | null>(null);
+	const [deltaX, setDeltaX] = useState<number>(0);
+	const [popup, setPopup] = useState(false);
+	const popupRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		document.body.style.overflow = popup ? 'hidden' : "";
+	}, [popup])
 
 	const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>): void => {
 		setMousePositionStartX(event.clientX);
@@ -33,7 +42,8 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 		if (mousePositionStartX !== null) {
 			const endX = event.clientX;
 			const deltaX = endX - mousePositionStartX;
-			if (deltaX > 30) changeSlide('previous')
+			setDeltaX(deltaX);
+			if (deltaX > 30) changeSlide('previous');
 			if (deltaX < -30) changeSlide('next');
 		}
 	};
@@ -42,8 +52,10 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 		if (mousePositionStartX !== null) {
 			const endX = event.changedTouches[0].clientX;
 			const deltaX = endX - mousePositionStartX;
+			setDeltaX(deltaX);
 			if (deltaX > 30) changeSlide('previous')
 			if (deltaX < -30)changeSlide('next');
+			// if (Math.abs(deltaX) < 5) setPopup(true);
 		}
 	};
 
@@ -123,6 +135,31 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 				});
 				break;
 		}
+		changePopupSlide(direction)
+	};
+
+	const changePopupSlide = (direction: "next" | "previous"): void => {
+		switch (direction) {
+			case "next":
+				setCurrentPopupSlide(prev => {
+					return prev === slideNumber - 1 ? 0 : prev + 1;
+				});
+				break;
+			case "previous":
+				setCurrentPopupSlide(prev => {
+					return prev === 0 ? slideNumber - 1 : prev - 1;
+				});
+				break;
+		}
+	};
+
+	const togglePopup = (i: number): void => {
+		setCurrentPopupSlide(i);
+		setPopup(true);
+	};
+
+	const closePopup = (event: React.MouseEvent<HTMLDivElement>): void => {
+		event?.target === popupRef.current ? setPopup(false) : null;
 	};
 
 	const slides = slidesData.map((item, i) => {
@@ -131,7 +168,7 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 			<div
 				key={i}
 				style={slideStyle}
-				onClick={() => {}}
+				onClick={() => !deltaX && togglePopup(i)}
 				className={`${size === 'large' ? styles.slider__slideLarge : styles.slider__slideSmall} 
 					${currentSlide === i ? styles.active : styles.inActive}`
 				}
@@ -142,30 +179,67 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 		);
 	});
 
-	return (
-		<div 
-			onMouseDown={handleMouseDown} 
-			onMouseUp={handleMouseUp} 
-			onTouchStart={handleTouchStart} 
-			onTouchEnd={handleTouchEnd} 
-			className={styles.slider} style={{height: size === 'large' ? 'calc(100vh - 280px)' : '290px'}}
-		>
-			{slides}
+	const popupSlides = slidesData.map((item, i) => {
+		return (
 			<div
-				className={`${styles.slider__rightChange} ${size === 'small' ? styles.shiftedButton : ''}`}
-				onClick={() => changeSlide("next")}
+				key={i}
+				className={`${currentPopupSlide === i ? styles.activePopupSlide : ''} ${styles.popup__content_slide}`}
 			>
-				<ArrowSmall />
+				<Image src={item} width={900} height={280} alt="render" />
 			</div>
+		);
+	});
 
-			<div
-				className={`${styles.slider__leftChange} ${size === 'small' ? styles.shiftedButton : ''}`}
-				onClick={() => changeSlide("previous")}
+	return (
+		<>
+			<div 
+				onMouseDown={handleMouseDown} 
+				onMouseUp={handleMouseUp} 
+				onTouchStart={handleTouchStart} 
+				onTouchEnd={handleTouchEnd} 
+				className={styles.slider} style={{height: size === 'large' ? 'calc(100vh - 280px)' : '290px'}}
 			>
-				<ArrowSmall />
+				{slides}
+				<div
+					className={`${styles.slider__rightChange} ${size === 'small' ? styles.shiftedButton : ''}`}
+					onClick={() => changeSlide("next")}
+					onMouseUp={(e) => e.stopPropagation()}
+				>
+					<ArrowSmall />
+				</div>
+
+				<div
+					className={`${styles.slider__leftChange} ${size === 'small' ? styles.shiftedButton : ''}`}
+					onClick={() => changeSlide("previous")}
+					onMouseUp={(e) => e.stopPropagation()}
+				>
+					<ArrowSmall />
+				</div>
+				{size === 'small' && <div className={styles.slider__mask} />}
 			</div>
-			{size === 'small' && <div className={styles.slider__mask} />}
-		</div>
+			<div ref={popupRef} onClick={closePopup} className={`${styles.popup} ${popup ? styles.activePopup : ''}`}>
+				<div className={styles.popup__content}>
+					{popupSlides}
+					<div
+						className={`${styles.slider__rightChange}`}
+						onClick={() => changePopupSlide("next")}
+					>
+						<ArrowSmall />
+					</div>
+
+					<div
+						className={`${styles.slider__leftChange}`}
+						onClick={() => changePopupSlide("previous")}
+					>
+						<ArrowSmall />
+					</div>
+
+					<div className={styles.popup__content_close} onClick={() => setPopup(false)}>
+						<CrossIcon />
+					</div>
+				</div>
+			</div>
+		</>
 	);
 };
 

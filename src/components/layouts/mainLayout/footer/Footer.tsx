@@ -26,10 +26,10 @@ const Footer: FC = () => {
                 <div className={styles.footer__right_block}>
                     <p>Contacts</p>
                     <div>
-                        <a href="#"><InstagramIcon /></a>
-                        <a href="#"><LinkedInIcon /></a>
-                        <a href="#"><MailIcon /></a>
-                        <a href="#"><TelegramIcon /></a>
+                        <a href="#"><InstagramIcon width={20} height={20} /></a>
+                        <a href="#"><LinkedInIcon width={20} height={18} /></a>
+                        <a href="#"><MailIcon width={20} height={16} /></a>
+                        <a href="#"><TelegramIcon width={20} height={20} /></a>
                     </div>
                 </div>
             </div>

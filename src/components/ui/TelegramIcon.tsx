@@ -1,12 +1,17 @@
 import { FC } from "react";
 
-const TelegramIcon: FC = () => {
+interface IProps {
+    width?: number,
+    height?: number
+}
+
+const TelegramIcon: FC<IProps> = ({ width = 14, height = 14 }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0,0,256,256"
-			width="14px"
-			height="14px"
+			width={width}
+			height={height}
 			fillRule="nonzero"
 		>
 			<g

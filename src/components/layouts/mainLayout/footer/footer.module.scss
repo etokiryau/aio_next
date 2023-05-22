@@ -2,15 +2,16 @@
 @use '@/styles/_mixins.module' as mixins;
 
 .footer {
-    margin: 0 auto 24px;
+    margin: 0 auto 50px;
     padding: 40px;
     display: flex;
     justify-content: space-between;
     gap: 30px;
-    width: min(95%, 1440px);
+    width: min(calc(100% - 100px), 1340px);
     min-height: 212px;
-    background-color: rgba($color: vars.$primaryColor, $alpha: .1);
-    border-radius: vars.$primaryBorderRadius;
+    // background-color: rgba($color: vars.$primaryColor, $alpha: .1);
+    // border-radius: vars.$primaryBorderRadius;
+    border-top: solid .4px vars.$primaryColor;
 
     &__left {
         align-self: self-end;
@@ -32,12 +33,28 @@
 
             div {
                 display: flex;
+                align-items: center;
+                flex-wrap: wrap;
                 gap: 20px;
             }
-        }
 
-        
-    }
-        
+            &:first-child, &:nth-child(2) {
+                a {
+                    position: relative;
+                    width: fit-content;
     
+                    &::after {
+                        @include mixins.hoveredText;
+                    }
+
+                    &:hover {
+                        &::after  {
+                            transform: scaleX(1);
+                        }
+                    } 
+                }
+                
+            }
+        }
+    } 
 }
