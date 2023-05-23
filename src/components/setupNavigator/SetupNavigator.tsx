@@ -1,4 +1,5 @@
-import { FC, useState } from "react";
+import { FC, useState, useRef, useEffect } from "react";
+import Image from "next/image";
 
 import BackRotationIcon from "../ui/BackRotationIcon";
 import ForwardRotationIcon from "../ui/ForwardRotationIcon";
@@ -19,7 +20,7 @@ const SetupNavigator: FC = () => {
     const [rotation, setRotation] = useState(0);
     const [scale, setScale] = useState(1);
     const [position, setPosition] = useState<{x: number, y: number}>({ x: 100, y: 20 });
-    const zoomRange = {min: 0.5, max: 2.5, step: 0.1};
+    const zoomRange = {min: 0.5, max: 5.5, step: 0.1};
     const [term, setTerm] = useState('');
     const [currentRoom, setCurrentRoom] = useState<number | null>(null);
     const [currentFloor, setCurrentFloor] = useState(1);
@@ -72,29 +73,29 @@ const SetupNavigator: FC = () => {
         });
     };
 
-    const handleWheel = (event: WheelEvent): void => {
-        event.preventDefault();
+    // const handleWheel = (event: WheelEvent): void => {
+    //     event.preventDefault();
 
-        const delta = event.deltaY;
-        const isScrollingUp = delta < 0;
+    //     const delta = event.deltaY;
+    //     const isScrollingUp = delta < 0;
 
-        if (isScrollingUp && scale < zoomRange.max) {
-            setScale((prev) => prev + zoomRange.step);
-        }
-        if (!isScrollingUp && scale > zoomRange.min) {
-            setScale((prev) => prev - zoomRange.step);
-        }
-    };
+    //     if (isScrollingUp && scale < zoomRange.max) {
+    //         setScale((prev) => prev + zoomRange.step);
+    //     }
+    //     if (!isScrollingUp && scale > zoomRange.min) {
+    //         setScale((prev) => prev - zoomRange.step);
+    //     }
+    // };
 
-    const handleMouseLeave = (): void => {
-        document.removeEventListener('wheel', handleWheel);
-        document.removeEventListener('mouseleave', handleMouseLeave);
-    };
+    // const handleMouseLeave = (): void => {
+    //     document.removeEventListener('wheel', handleWheel);
+    //     document.removeEventListener('mouseleave', handleMouseLeave);
+    // };
 
-    const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
-        document.addEventListener('wheel', handleWheel, { passive: false });
-        document.addEventListener('mouseleave', handleMouseLeave);
-    };
+    // const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
+    //     document.addEventListener('wheel', handleWheel, { passive: false });
+    //     document.addEventListener('mouseleave', handleMouseLeave);
+    // };
     
     // const handleMouseEnter = (): void => {
     //     document.addEventListener('wheel', handleWheel);
@@ -133,53 +134,62 @@ const SetupNavigator: FC = () => {
     const filteredRooms: string[] = searchRooms(roomsData, term);
 
     return (
-        <div className={styles.setup}>
-            <div className={styles.setup__layout}>
-                <div className={styles.setup__layout_title}>1st floor</div>
-                <div className={styles.setup__layout_scale}>
-                    <p>Scale</p>
-                    <input value={scale} onChange={(e) => setScale(Number(e.target.value))} type="range" min={zoomRange.min} max={zoomRange.max} step={zoomRange.step} />
+        <>
+            <div className={styles.setup__floor}>1st floor</div>
+            <div className={styles.setup}>
+                <div className={styles.setup__layout}>
+                    
+
+                    <div className={styles.setup__layout_scale}>
+                        <p>Scale</p>
+                        <input value={scale} onChange={(e) => setScale(Number(e.target.value))} type="range" min={zoomRange.min} max={zoomRange.max} step={zoomRange.step} />
+                    </div>
+
+                    <div className={styles.setup__layout_buttons}>
+                        <div onClick={setDefaultState}><ResetIcon /></div>
+                        <div><MoveIcon /></div>
+                        <div onClick={() => changeScale(+zoomRange.step)}><ZoomInIcon /></div>
+                        <div onClick={() => changeScale(-zoomRange.step)}><ZoomOutIcon /></div>
+                        <div onClick={() => changeRotation(-90)}><BackRotationIcon /></div>
+                        <div onClick={() => changeRotation(90)}><ForwardRotationIcon /></div>
+                    </div>
+
+                    <div
+                        style={style} 
+                        className={styles.setup__layout_rooms}
+                        onMouseDown={handleMouseDown}
+                        // onMouseEnter={handleMouseEnter}
+                        // onMouseLeave={handleMouseLeave}
+                    >
+                        <div className={styles.setup__layout_rooms_wrapper}>
+                            <Image src="/drawing51.png" alt="layout" width={900} height={900} quality={100} />
+                        </div>
+                    </div>
+
                 </div>
-                <div className={styles.setup__layout_buttons}>
-                    <div onClick={setDefaultState}><ResetIcon /></div>
-                    <div><MoveIcon /></div>
-                    <div onClick={() => changeScale(+zoomRange.step)}><ZoomInIcon /></div>
-                    <div onClick={() => changeScale(-zoomRange.step)}><ZoomOutIcon /></div>
-                    <div onClick={() => changeRotation(-90)}><BackRotationIcon /></div>
-                    <div onClick={() => changeRotation(90)}><ForwardRotationIcon /></div>
-                </div>
-                <div 
-                    style={style} 
-                    className={styles.setup__layout_rooms}
-                    onMouseDown={handleMouseDown}
-                    // onMouseEnter={handleMouseEnter}
-                    // onMouseLeave={handleMouseLeave}
-                >
-                    <p>Layouts</p>
+                <div className={styles.setup__navigation}>
+                    <p>Choose floor:</p>
+                    <div className={styles.setup__navigation_floors}>
+                        <p>1st floor</p>
+                        <p>2nd floor</p>
+                        <p>3rd floor</p>
+                    </div>
+                    <div className={styles.setup__navigation_input}>
+                        <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="Search number or room" />
+                        <div><SearchIcon /></div>
+                    </div>
+                    <div className={styles.setup__navigation_rooms}>
+                        {filteredRooms.map((item, i) => {
+                            return <p 
+                                        key={i}
+                                        onClick={() => changeCurrentRoom(i)}
+                                        className={currentRoom === i ? styles.active : ''}
+                                    >{item}</p>
+                        })}
+                    </div>
                 </div>
             </div>
-            <div className={styles.setup__navigation}>
-                <p>Choose floor:</p>
-                <div className={styles.setup__navigation_floors}>
-                    <p>1st floor</p>
-                    <p>2nd floor</p>
-                    <p>3rd floor</p>
-                </div>
-                <div className={styles.setup__navigation_input}>
-                    <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="Search number or room" />
-                    <div><SearchIcon /></div>
-                </div>
-                <div className={styles.setup__navigation_rooms}>
-                    {filteredRooms.map((item, i) => {
-                        return <p 
-                                    key={i}
-                                    onClick={() => changeCurrentRoom(i)}
-                                    className={currentRoom === i ? styles.active : ''}
-                                >{item}</p>
-                    })}
-                </div>
-            </div>
-        </div>
+        </>
     )
 }
 

@@ -61,6 +61,7 @@
 
             svg {
                 fill: vars.$primaryColor;
+                transition: .3s ease;
             }
 
             &_wrapper {
@@ -73,6 +74,12 @@
                     width: 23px;
                     font-size: 20px;
                     text-align: center;
+                }
+
+                &:hover {
+                    svg {
+                        fill: vars.$additionalColor;
+                    }
                 }
             }
 
@@ -121,6 +128,12 @@
                 transform: translateY(0);
                 opacity: 1;
                 visibility: visible;
+            }
+        }
+
+        .activeLanguage {
+            svg {
+                fill: vars.$additionalColor;
             }
         }
 

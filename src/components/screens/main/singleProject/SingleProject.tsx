@@ -18,6 +18,7 @@ import SetupNavigator from "@/components/setupNavigator/SetupNavigator";
 import AccordionItem from "@/components/ui/accordionItem/AccordionItem";
 
 import styles from "./singleProject.module.scss";
+import ModelTile from "@/components/modelTile/ModelTile";
 
 const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 	const { id, name, cost, currency, totalArea, height, houseDimensions } = project;
@@ -103,10 +104,10 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 					<h2>Try 3D model and Virtual tour</h2>
 					<div className={styles.project__models_wrapper}>
 						<div className={styles.project__models_single}>
-
+							<ModelTile type="model" preview="/project23.jpg" src="" />
 						</div>
 						<div className={styles.project__models_single}>
-							
+							<ModelTile type="tour" preview="/projectPreview.jpg" src="" />
 						</div>
 					</div>
 				</section>

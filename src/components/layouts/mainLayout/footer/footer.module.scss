@@ -2,16 +2,14 @@
 @use '@/styles/_mixins.module' as mixins;
 
 .footer {
-    margin: 0 auto 50px;
+    margin: 0 auto;
     padding: 40px;
     display: flex;
     justify-content: space-between;
     gap: 30px;
-    width: min(calc(100% - 100px), 1340px);
+    width: min(95%, 1340px);
     min-height: 212px;
-    // background-color: rgba($color: vars.$primaryColor, $alpha: .1);
-    // border-radius: vars.$primaryBorderRadius;
-    border-top: solid .4px vars.$primaryColor;
+    border-top: solid .4px rgba($color: vars.$primaryColor, $alpha: .3);
 
     &__left {
         align-self: self-end;

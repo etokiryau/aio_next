@@ -4,26 +4,23 @@
 .setup {
     display: flex;
     gap: 32px;
-    height: calc(100vh - 220px);
+    height: 100%;
+    user-select: none;
+    
+    &__floor {
+        padding-left: 20px;
+        font-weight: 400;
+        text-align: left;
+        cursor: pointer;
+    }
 
     &__layout {
         overflow: hidden;
         position: relative;
+        margin-top: 10px;
         flex: 2;
         background: #D9D9D9;
         border-radius: 24px;
-
-        &_title {
-            position: absolute;
-            top: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 8px 20px;
-            border-radius: 40px;
-            background-color: rgba($color: vars.$secondaryColor, $alpha: .8);
-            cursor: pointer;
-            z-index: 10;
-        }
 
         &_scale {
             position: absolute;
@@ -53,6 +50,11 @@
                     width: 12px;
                     border-radius: 50%;
                     background: vars.$additionalColor;
+                    transition: .3s ease;
+
+                    &:active {
+                        transform: scale(1.2);
+                    }
                 }
             }
         }
@@ -88,12 +90,27 @@
             position: absolute;
             top: 20px;
             left: 100px;
-            width: 350px;
-            aspect-ratio: 1/1;
-            background-color: vars.$additionalColor;
-            transition: transform .3s ease, left .1s ease;
+            width: max-content;
+            min-height: max-content;
+            transition: transform .3s ease, left .05s ease;
             z-index: 5;
             cursor: move;
+
+            &_wrapper {
+                position: relative;
+                width: 500px;
+                height: 500px;
+                min-height: max-content;
+            }
+
+            img {
+                position: absolute;
+                top: 0;
+                pointer-events: none;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
         }
     }
 

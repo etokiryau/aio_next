@@ -100,9 +100,8 @@
                     background: #F8F8F8;
                     visibility: hidden;
                     opacity: 0;
-                    transition: .3s ease;
+                    transition: .1s ease;
                     z-index: 2;
-
                 }
 
                 &:hover {
@@ -150,10 +149,10 @@
         padding: 0 2.5%;
         display: flex;
         gap: 30px;
-        cursor: pointer;
 
         p {
             position: relative;
+            cursor: pointer;
 
             &:first-child {
                 width: 91px;

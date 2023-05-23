@@ -124,7 +124,7 @@ const Header: FC = () => {
 				</ul>
 			</div>
 			<div className={styles.header__user}>
-				<div ref={popupRef} className={styles.header__user_language}>
+				<div ref={popupRef} className={`${styles.header__user_language} ${languagePopup ? styles.activeLanguage : ''}`}>
 					<div
 						className={styles.header__user_language_wrapper}
 						onClick={togglePopup}
@@ -139,16 +139,14 @@ const Header: FC = () => {
 						<Triangle isActive={languagePopup} />
 					</div>
 
-					<div
-						
-						className={`${styles.header__user_language_popup} ${
+					<div className={`${styles.header__user_language_popup} ${
 							languagePopup ? styles.active : ""
 						}`}
 					>
 						{popupContent()}
 					</div>
 				</div>
-				<Link href="/login">Sign up</Link>
+				<Link href="/signin">Sign up</Link>
 			</div>
 		</header>
 	);
