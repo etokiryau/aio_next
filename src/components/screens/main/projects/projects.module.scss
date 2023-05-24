@@ -37,7 +37,6 @@
                 min-width: 120px;
                 background: #F8F8F8;
                 border-radius: 20px;
-                cursor: pointer;
                 transition: .2s ease;
                 user-select: none;
 
@@ -80,6 +79,19 @@
                                 margin: 0; 
                             }
                         }
+
+                        button {
+                            @include mixins.button;
+                            margin-top: 16px;
+                            padding: 8px;
+                            width: fit-content;
+                            height: fit-content;
+                            font-size: 16px;
+
+                            &:hover {
+                                @include mixins.hoveredButton;
+                            }
+                        }
                     }
                 }
 
@@ -89,6 +101,7 @@
 
                 &_close {
                     @include mixins.flexCenter;
+                    cursor: pointer;
                 }
 
                 &_popup {
@@ -116,6 +129,7 @@
                 #filterOption {
                     padding: 8px 16px;
                     opacity: 1;
+                    cursor: pointer;
 
                     &:last-child { 
                         border-radius: 0 0 20px 20px;

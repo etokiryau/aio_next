@@ -119,7 +119,7 @@
 
                 &:focus  {
                     background-color: rgba($color: vars.$primaryColor, $alpha: .1);
-                    box-shadow: inset 0 0 0 2px rgba($color: vars.$primaryColor, $alpha: .4);
+                    border: solid .4px rgba($color: vars.$primaryColor, $alpha: .6);
                 }
             }
 

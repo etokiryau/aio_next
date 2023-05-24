@@ -173,6 +173,7 @@ const Projects: NextPage = () => {
 											<p>m2</p>
 										</div>
 									</div>
+									<button type="button">Apply</button>
 								</div>
 							</div>
 
@@ -247,6 +248,7 @@ const Projects: NextPage = () => {
 											<p>$</p>
 										</div>
 									</div>
+									<button type="button">Apply</button>
 								</div>
 							</div>
 						</div>

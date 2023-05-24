@@ -1,4 +1,6 @@
 import { GetServerSideProps, NextPage } from "next";
+import { useEffect } from "react";
+import { fetchData, postData } from "@/utillis/api";
 
 import { useTypedDispatch } from "@/hooks/useReduxHooks";
 import { setProjects } from "@/components/screens/main/projects/projectsSlice";
@@ -9,6 +11,20 @@ const ProjectsPage: NextPage<IProjectsProps> = ({ projects }) => {
     const dispatch = useTypedDispatch();
 
     dispatch(setProjects(projects));
+
+    // useEffect(() => {
+    //     const data = {
+    //         area: 1212,
+    //         cost: 345345,
+    //         floorNumber: 12,
+    //         height: 100,
+    //         name: "eto novyi proekt",
+    //         roofType: 'bez kryshi'
+    //     }
+    //     postData('projects', data)
+    //     // const data = fetchData('projects');
+    //     // console.log(data)
+    // }, [])
     
     return <Projects />
 }

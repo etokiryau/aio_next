@@ -56,6 +56,11 @@
         }
     }
 
+    .activeBlock {
+        background-color: vars.$primaryColor;
+        color: vars.$secondaryColor;
+    }
+
     &__block {
         margin: 48px auto 0;
         width: 62.5%;
