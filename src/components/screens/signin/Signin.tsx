@@ -22,6 +22,13 @@ const Signin: FC = () => {
     const router = useRouter();
     const [signin, setSignin] = useState(true);
 
+    const changeForm = (): void => {
+        setSignin(prev => !prev);
+        setTimeout(() => {
+            formik.validateForm();
+        }, 100)
+    };
+
     const validationSchema = Yup.object({
         email: Yup.string().email('Invalid email address').required('Email is required'),
         password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
@@ -53,6 +60,10 @@ const Signin: FC = () => {
         : {email: values.email, password: values.password, name: values.name}
 
         console.log(data)
+    };
+
+    const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+        e.preventDefault();
     };
 
     {/* Signin
@@ -125,6 +136,7 @@ const Signin: FC = () => {
                                     value={formik.values.confirmedPassword}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
+                                    onPaste={handlePaste}
                                     className={formik.touched.confirmedPassword && formik.errors.confirmedPassword ? styles.inputError : ''}
                                     type="password" 
                                     id="confirmedPassword" 
@@ -146,8 +158,8 @@ const Signin: FC = () => {
                 </div>
                 <div className={styles.signin__underneath}>
                     <div className={!signin ? styles.bottomUnderneath : ''}>
-                        <p onClick={() => setSignin(false)}>Don’t have an account? <span>Sign up</span></p>
-                        <p onClick={() => setSignin(true)}>Already have account? <span>Sign in</span></p>
+                        <p onClick={changeForm}>Don’t have an account? <span>Sign up</span></p>
+                        <p onClick={changeForm}>Already have account? <span>Sign in</span></p>
                     </div>
                 </div>
             </div>
