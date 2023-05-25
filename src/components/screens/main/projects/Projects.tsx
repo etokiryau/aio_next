@@ -6,7 +6,8 @@ import {
 	selectFilteredProjects,
 	selectSortedProjects,
 	toggleFavourite,
-	togglePropertyFilter
+	togglePropertyFilter,
+	resetFilters
 } from "./projectsSlice";
 
 import MainLayout from "@/components/layouts/mainLayout/MainLayout";
@@ -253,7 +254,8 @@ const Projects: NextPage = () => {
 							</div>
 						</div>
 						<div className={styles.filters__right}>
-							<p>Filter</p>
+							<p onClick={() => dispatch(resetFilters())}>Reset filters</p>
+							<div>Filter</div>
 						</div>
 					</div>
 				</section>

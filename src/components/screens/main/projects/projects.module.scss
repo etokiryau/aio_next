@@ -149,12 +149,25 @@
         }
 
         &__right {
-            @include mixins.button;
-            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
 
-            &:hover {
-                @include mixins.hoveredButton;
+            p {
+                font-size: 20px;
+                font-weight: 600;
+                cursor: pointer;
             }
+
+            div {
+                @include mixins.button;
+                padding: 8px 20px;
+    
+                &:hover {
+                    @include mixins.hoveredButton;
+                }
+            }
+            
         }
     }
 

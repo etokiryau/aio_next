@@ -1,8 +1,8 @@
-import { FC, useState, useRef, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
-import { Formik, Field, Form, useFormik, useFormikContext } from "formik";
+import { useFormik } from "formik";
 import * as Yup from 'yup';
 
 import { useAuth } from "@/hooks/useAuth";
@@ -21,48 +21,17 @@ const Signin: FC = () => {
     const { login, logout } = useAuth();
     const router = useRouter();
     const [signin, setSignin] = useState(true);
-    // const [validationSchema, setValidationSchema] = useState()
-    const headerRef = useRef<HTMLDivElement>(null);
 
-    // useEffect(() => {
-    //     setValidationSchema(() => {
-    //         return Yup.object({
-    //             email: Yup.string().email('Invalid email address').required('Email is required'),
-    //             password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
-    //             ...(!signin && {
-    //                 name: Yup.string().required('Name is required'),
-    //                 confirmedPassword: Yup.string()
-    //                 .oneOf([Yup.ref("password")], "Passwords do not match")
-    //                 .required("Please confirm your password")
-    //             })
-    //         });
-    //     })
-    // }, [signin])
-
-    // const validationSchema = Yup.object({
-    //     email: Yup.string().email('Invalid email address').required('Email is required'),
-    //     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
-    //     ...(!signin && {
-    //         name: Yup.string().required('Name is required'),
-    //         confirmedPassword: Yup.string()
-    //         .oneOf([Yup.ref("password")], "Passwords do not match")
-    //         .required("Please confirm your password")
-    //     })
-    // });
-
-    const validationSchema = !signin
-    ? Yup.object({
+    const validationSchema = Yup.object({
         email: Yup.string().email('Invalid email address').required('Email is required'),
         password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
-        name: Yup.string().required('Name is required'),
-        confirmedPassword: Yup.string()
-          .required('Please confirm your password')
-          .oneOf([Yup.ref('password')], 'Passwords must match'),
-      })
-    : Yup.object({
-        email: Yup.string().email('Invalid email address').required('Email is required'),
-        password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
-      });
+        ...(!signin && {
+            name: Yup.string().required('Name is required'),
+            confirmedPassword: Yup.string()
+            .oneOf([Yup.ref("password")], "Passwords do not match")
+            .required("Please confirm your password")
+        })
+    });
 
     const formik = useFormik({
         initialValues: {
@@ -73,14 +42,17 @@ const Signin: FC = () => {
         },
         validationSchema,
         validateOnMount: true,
-        onSubmit: values => {
+        onSubmit: (values: ISendingData) => {
             handleSubmit(values);
         }
     });
 
-
     const handleSubmit = (values: ISendingData): void => {
-        console.log(values)
+        const data: ISendingData = signin 
+        ? {email: values.email, password: values.password}
+        : {email: values.email, password: values.password, name: values.name}
+
+        console.log(data)
     };
 
     {/* Signin
@@ -99,7 +71,7 @@ const Signin: FC = () => {
             </Link>
             <div className={styles.signin}>
                 <div className={styles.signin__wrapper}>
-                    <div ref={headerRef} className={styles.signin__header}>
+                    <div className={styles.signin__header}>
                         <div className={!signin ? styles.bottomHeader : ''}>
                             <h1>Sign in</h1>
                             <h2>Sign up</h2>
@@ -118,29 +90,35 @@ const Signin: FC = () => {
                                     placeholder="Name"
                                     type="text"
                                 />
+                                {formik.errors.name && formik.touched.name && <p className={styles.errorMessage}>{formik.errors.name}</p>}
                             </div>
-
-                            <input
-                                value={formik.values.email}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                className={formik.touched.email && formik.errors.email ? styles.inputError : ''}
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                placeholder="Email" 
-                            />
+                            <div>
+                                <input
+                                    value={formik.values.email}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    className={formik.touched.email && formik.errors.email ? styles.inputError : ''}
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    placeholder="Email" 
+                                />
+                                {formik.errors.email && formik.touched.email && <p className={styles.errorMessage}>{formik.errors.email}</p>}
+                            </div>
                             
-                            <input
-                                value={formik.values.password}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                className={formik.touched.password && formik.errors.password ? styles.inputError : ''}
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                placeholder="Password" 
-                            />
+                            <div>
+                                <input
+                                    value={formik.values.password}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    className={formik.touched.password && formik.errors.password ? styles.inputError : ''}
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    placeholder="Password" 
+                                />
+                                {formik.errors.password && formik.touched.password && <p className={styles.errorMessage}>{formik.errors.password}</p>}
+                            </div>
 
                             <div className={signin ? styles.hidden : ''}>
                                 <input
@@ -153,6 +131,7 @@ const Signin: FC = () => {
                                     name="confirmedPassword" 
                                     placeholder="Confirm password" 
                                 />
+                                {formik.errors.confirmedPassword && formik.touched.confirmedPassword && <p className={styles.errorMessage}>{formik.errors.confirmedPassword}</p>}
                             </div>
                         </div>
                         <div className={`${styles.signin__forgot} ${!signin ? styles.hidden : ''}`}>

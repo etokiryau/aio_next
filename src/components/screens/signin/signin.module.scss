@@ -48,7 +48,14 @@
         div {
             overflow: hidden;
             transition: .3s ease;
-            max-height: 58px;
+            max-height: 78px;
+
+            .errorMessage {
+                margin: 8px 0 0 8px;
+                text-align: left;
+                color: vars.$additionalColor;
+                font-size: 12px;
+            }
         }
 
         input {
@@ -69,12 +76,6 @@
             &::placeholder {
                 color: rgba($color: vars.$primaryColor, $alpha: .4);
             }
-
-            // &:not(:focus) {
-            //     &:invalid {
-            //         border-color: vars.$additionalColor;
-            //     }
-            // }
         }
 
         .inputError {

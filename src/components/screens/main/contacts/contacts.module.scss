@@ -108,27 +108,60 @@
         form {
             margin-top: 24px;
             display: flex;
+            flex-wrap: wrap;
             gap: 20px;
+            
+            div {
+                flex: 1 0 200px;
+                min-height: 62px;
+
+                .errorMessage {
+                    margin: 8px 0 0 8px;
+                    text-align: left;
+                    color: vars.$additionalColor;
+                    font-size: 12px;
+                }
+            }
 
             input {
                 padding: 8px 16px;
                 border: solid .4px rgba($color: vars.$primaryColor, $alpha: .4);
+                background-color: vars.$secondaryColor;
                 border-radius: 10px;
                 outline: none;
                 transition: .5s ease;
-
+                width: 100%;
+                
                 &:focus  {
                     background-color: rgba($color: vars.$primaryColor, $alpha: .1);
                     border: solid .4px rgba($color: vars.$primaryColor, $alpha: .6);
                 }
+
+                &::placeholder {
+                    color: rgba($color: vars.$primaryColor, $alpha: .4);
+                }
+            }
+
+            .inputError {
+                border-color: vars.$additionalColor;
             }
 
             button {
                 @include mixins.button;
                 padding: 8px 16px;
+                height: fit-content;
 
                 &:hover {
                     @include mixins.hoveredButton;
+                }
+
+                &:disabled {
+                    opacity: .4;
+                    cursor: auto;
+
+                    &:hover {
+                        transform: none;
+                    }
                 }
             }
         }

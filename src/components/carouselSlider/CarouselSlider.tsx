@@ -235,7 +235,7 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 					</div>
 
 					<div className={styles.popup__content_close} onClick={() => setPopup(false)}>
-						<CrossIcon />
+						<CrossIcon width={16} height={16} />
 					</div>
 				</div>
 			</div>

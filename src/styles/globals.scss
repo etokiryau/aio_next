@@ -73,6 +73,29 @@ button:focus, button:active {
   outline: none;
 }
 
+// input:-webkit-autofill,
+// input:-moz-autofill,
+// input:-ms-autofill {
+//   background-color: white !important;
+// }
+
+// input:-webkit-autofill,
+// input:autofill,
+// input:-webkit-autofill:hover, 
+// input:-webkit-autofill:focus,
+// textarea:-webkit-autofill,
+// textarea:-webkit-autofill:hover,
+// textarea:-webkit-autofill:focus,
+// select:-webkit-autofill,
+// select:-webkit-autofill:hover,
+// select:-webkit-autofill:focus {
+//   border: solid .4px rgba($color: $primaryColor, $alpha: .4) !important;
+//   background-color: #ffffff !important;
+//   -webkit-text-fill-color: initial !important;
+//   -webkit-box-shadow: initial !important;
+//   transition: background-color 5000s ease-in-out 0s;
+// }
+
 button::-moz-focus-inner {
   padding: 0;
   border: 0;

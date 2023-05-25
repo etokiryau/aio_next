@@ -272,8 +272,12 @@
                         background-color: vars.$secondaryColor;
                     }
                 }
-            }
 
+                .inputError {
+                    background-color: vars.$additionalColor;
+                }
+            }
+            
             &_total {
                 display: flex;
                 flex-direction: column;
@@ -298,6 +302,15 @@
     
                     &:hover {
                         @include mixins.hoveredButton;
+                    }
+
+                    &:disabled {
+                        opacity: 0.1;
+                        cursor: auto;
+
+                        &:hover {
+                            transform: none;
+                        }
                     }
                 }
             }

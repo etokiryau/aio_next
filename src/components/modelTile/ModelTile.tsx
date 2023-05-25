@@ -75,7 +75,9 @@ const ModelTile: FC<IProps> = ({ type, preview, src }) => {
             </div>
             <div className={`${styles.model__popup} ${popup ? styles.activePopup : ''}`}>
                 <div className={styles.model__popup_content}>
-                    <div className={styles.model__popup_content_close} onClick={() => setPopup(false)}><CrossIcon /></div>
+                    <div className={styles.model__popup_content_close} onClick={() => setPopup(false)}>
+                        <CrossIcon width={16} height={16} />
+                    </div>
                     {
                         type === 'tour' && 
                         <iframe src={src} id="vagonFrame" allow="microphone  *; clipboard-read *; clipboard-write *; encrypted-media *;" />

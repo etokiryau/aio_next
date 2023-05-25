@@ -58,13 +58,22 @@ const projectsSlice = createSlice({
         togglePropertyFilter: (state, action: PayloadAction<{[key: string]: number | boolean | string | null}>) => {
             state.filters = {...state.filters, ...action.payload};
         },
+        resetFilters: (state) => {
+            state.filters = {
+                favourites: false,
+                floorNumber: null,
+                totalArea: null,
+                cost: null,
+                roofType: null
+            }
+        },
         setSorting: (state, action: PayloadAction<{type: string, direction: 'ascending' | 'descending'} | null>) => {
             state.sorting = action.payload;
         }
     },
 });
 
-export const { setProjects, toggleFavourite, togglePropertyFilter } = projectsSlice.actions;
+export const { setProjects, toggleFavourite, togglePropertyFilter, resetFilters } = projectsSlice.actions;
 
 export const selectProjects = (state: RootState) => state.projects;
 
