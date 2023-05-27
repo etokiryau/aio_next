@@ -78,6 +78,7 @@ const Signin: FC = () => {
 
     const { linkedInLogin } = useLinkedIn({
         clientId: '77rgjbnvxnaj4w',
+        scope: "r_emailaddress r_liteprofile",
         redirectUri: `${typeof window === 'object' && window.location.origin}/linkedin`,
         onSuccess: (code) => {
             console.log(code);
