@@ -185,7 +185,7 @@ const Signin: FC = () => {
                             }}
                             render={renderProps => (
                                 <div onClick={renderProps.onClick} className={styles.signin__outside_single}>
-                                    <FacebookIcon />
+                                    <FacebookIcon width={10} height={20} />
                                     <p>Continue with Facebook</p>
                                 </div>
                             )}

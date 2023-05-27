@@ -38,6 +38,10 @@
                     align-items: center;
                     gap: 30px;
 
+                    svg {
+                        fill: vars.$primaryColor;
+                    }
+
                     div {
                         min-width: fit-content;
                     }
