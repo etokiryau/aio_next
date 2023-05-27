@@ -1,15 +1,21 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Image from "next/image";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
+import { useGoogleLogin } from '@react-oauth/google';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { useLinkedIn } from 'react-linkedin-login-oauth2';
 
 import { useAuth } from "@/hooks/useAuth";
 import Meta from "@/components/seo/Meta";
+import ArrowLarge from "@/components/ui/ArrowLargeIcon";
+import GoogleIcon from "@/components/ui/GoogleIcon";
+import FacebookIcon from "@/components/ui/FacebookIcon";
+import TwitterIcon from "@/components/ui/TwitterIcon";
 
 import styles from "./signin.module.scss";
-
+import LinkedInIcon from "@/components/ui/LinkedInIcon";
 interface ISendingData {
     email: string,
     password: string,
@@ -66,21 +72,34 @@ const Signin: FC = () => {
         e.preventDefault();
     };
 
+    const googleLogin = useGoogleLogin({
+        onSuccess: tokenResponse => console.log(tokenResponse),
+    });
+
+    const { linkedInLogin } = useLinkedIn({
+        clientId: '77rgjbnvxnaj4w',
+        redirectUri: `${typeof window === 'object' && window.location.origin}/linkedin`,
+        onSuccess: (code) => {
+            console.log(code);
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
     {/* Signin
             <button onClick={() => login({name: 'Kirill', email: 'myEmail', token: 'sdf43', userId: 1})}>Sign in</button>
             <button onClick={logout}>Sign out</button> */}
 
     return (
         <Meta title="Sign in">
-            <Link href="/" className={styles.back}>
-                <Image
-                    src="/logo.svg"
-                    alt="logo"
-                    width={40}
-                    height={40}
-                />
-            </Link>
             <div className={styles.signin}>
+                <Link href="/" className={styles.signin__back}>
+                    <div>
+                        <ArrowLarge />
+                        <p>Back to main page</p>
+                    </div>
+                </Link>
                 <div className={styles.signin__wrapper}>
                     <div className={styles.signin__header}>
                         <div className={!signin ? styles.bottomHeader : ''}>
@@ -151,9 +170,30 @@ const Signin: FC = () => {
                         </div>
                         <button type="submit" disabled={!formik.isValid || formik.isSubmitting}>Submit</button>
                     </form>
-                    <div className={styles.signin__separation}></div>
+                    <div className={styles.signin__separation} />
                     <div className={styles.signin__outside}>
-                        tut google, potom facebook, eshe twitter i kogda-to apple
+                        <div onClick={() => googleLogin()} className={styles.signin__outside_single}>
+                            <GoogleIcon />
+                            <p>Continue with Google</p>
+                        </div>
+                        <FacebookLogin
+                            appId="928145885184315"
+                            autoLoad={false}
+                            fields="name,email,picture"
+                            callback={async (credentialResponse) => {
+                                console.log(credentialResponse)
+                            }}
+                            render={renderProps => (
+                                <div onClick={renderProps.onClick} className={styles.signin__outside_single}>
+                                    <FacebookIcon />
+                                    <p>Continue with Facebook</p>
+                                </div>
+                            )}
+                        />
+                        <div onClick={() => linkedInLogin()} className={styles.signin__outside_single}>
+                            <LinkedInIcon width={18} height={18} />
+                            <p>Continue with LinkedIn</p>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.signin__underneath}>
