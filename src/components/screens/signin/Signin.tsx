@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { useGoogleLogin } from '@react-oauth/google';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+// import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { useLinkedIn } from 'react-linkedin-login-oauth2';
 
 import { useAuth } from "@/hooks/useAuth";
@@ -176,7 +176,7 @@ const Signin: FC = () => {
                             <GoogleIcon />
                             <p>Continue with Google</p>
                         </div>
-                        <FacebookLogin
+                        {/* <FacebookLogin
                             appId="928145885184315"
                             autoLoad={false}
                             fields="name,email,picture"
@@ -189,7 +189,7 @@ const Signin: FC = () => {
                                     <p>Continue with Facebook</p>
                                 </div>
                             )}
-                        />
+                        /> */}
                         <div onClick={() => linkedInLogin()} className={styles.signin__outside_single}>
                             <LinkedInIcon width={18} height={18} />
                             <p>Continue with LinkedIn</p>
