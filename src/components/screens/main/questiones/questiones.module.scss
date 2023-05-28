@@ -78,3 +78,13 @@
         }
     }
 }
+
+
+@media (max-width: 991px) {
+    .questiones {
+        &__block {
+            width: 90%;
+            text-align: left;
+        }
+    }
+}

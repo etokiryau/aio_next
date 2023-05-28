@@ -138,8 +138,6 @@ const SetupNavigator: FC = () => {
             <div className={styles.setup__floor}>1st floor</div>
             <div className={styles.setup}>
                 <div className={styles.setup__layout}>
-                    
-
                     <div className={styles.setup__layout_scale}>
                         <p>Scale</p>
                         <input value={scale} onChange={(e) => setScale(Number(e.target.value))} type="range" min={zoomRange.min} max={zoomRange.max} step={zoomRange.step} />

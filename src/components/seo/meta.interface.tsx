@@ -1,4 +1,5 @@
 export interface IMeta {
     title: string
-    description?: string
+    description?: string,
+    autodesk?: boolean
 }

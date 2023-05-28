@@ -112,7 +112,6 @@
 
     &__content {
         position: relative;
-        // padding: 0 50px;
         display: flex;
         align-items: center;
         width: 92.5%;
@@ -176,4 +175,13 @@
 .activePopup {
     visibility: visible;
     opacity: 1;
+}
+
+@media (max-width: 578px) {
+    .popup {
+        &__content {
+            margin-top: 5vh;
+            height: 92vh;
+        }
+    }
 }

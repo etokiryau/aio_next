@@ -10,13 +10,18 @@
     width: min(95%, 1340px);
     border-top: solid .4px rgba($color: vars.$primaryColor, $alpha: .3);
 
+    svg {
+        fill: vars.$primaryColor;
+    }
+
     &__left {
         align-self: self-end;
+        min-width: fit-content;
     }
 
     &__right {
         display: flex;
-        gap: 150px;
+        gap: 30px 150px;
 
         &_block {
             display: flex;
@@ -36,6 +41,8 @@
             }
 
             &:first-child, &:nth-child(2) {
+                min-width: max-content;
+
                 a {
                     position: relative;
                     width: fit-content;
@@ -54,4 +61,47 @@
             }
         }
     } 
+}
+
+@media (max-width: 991px) {
+    .footer {
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        gap: 50px;
+    
+        &__left {
+            align-self: flex-start;
+            min-width: fit-content;
+        }
+
+        &__right {
+            flex-wrap: wrap;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 32px 10px;
+
+        &__right {
+            gap: 30px 100px;
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .footer {
+        &__right {
+    
+            &_block {
+    
+                p {
+                    margin-bottom: 0px;
+                    font-weight: 400;
+                }
+            }
+        }
+
+    }
 }

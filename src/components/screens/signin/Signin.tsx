@@ -13,9 +13,10 @@ import ArrowLarge from "@/components/ui/ArrowLargeIcon";
 import GoogleIcon from "@/components/ui/GoogleIcon";
 import FacebookIcon from "@/components/ui/FacebookIcon";
 import TwitterIcon from "@/components/ui/TwitterIcon";
+import LinkedInIcon from "@/components/ui/LinkedInIcon";
 
 import styles from "./signin.module.scss";
-import LinkedInIcon from "@/components/ui/LinkedInIcon";
+
 interface ISendingData {
     email: string,
     password: string,

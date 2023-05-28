@@ -193,3 +193,36 @@
         }
     }
 }
+
+@media (max-width: 991px) {
+    .project {
+        &__structure {
+            &_list {
+                width: 90%;
+            }
+        }
+
+        &__models {
+            &_wrapper {
+                gap: 30px;
+            }
+        }
+
+        &__setup {
+            margin-top: 180px;
+            padding: 0 2.5%;
+            text-align: center;
+            height: auto;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .project {
+        &__models {
+            &_wrapper {
+                flex-direction: column;
+            }
+        }
+    }
+}

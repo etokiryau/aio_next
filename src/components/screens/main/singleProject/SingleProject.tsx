@@ -46,7 +46,7 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 	};
 
 	return (
-		<MainLayout title={name}>
+		<MainLayout title={name} autodesk>
 			<div className={styles.project}>
 				<section className={styles.project__sticky}>
 					<div onClick={goBack}>
@@ -104,7 +104,7 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 					<h2>Try 3D model and Virtual tour</h2>
 					<div className={styles.project__models_wrapper}>
 						<div className={styles.project__models_single}>
-							<ModelTile type="model" preview="/project23.jpg" src="" />
+							<ModelTile type="model" preview="/project23.jpg" src="dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dHN3aWdsenZ5dWJtbTZwaG04d2Ria2IzZHhqbmZrcnYtcHJvamVjdF9hL3Byb2plY3RfYV9mcmVlLm53ZA" />
 						</div>
 						<div className={styles.project__models_single}>
 							<ModelTile type="tour" preview="/projectPreview.jpg" src="" />

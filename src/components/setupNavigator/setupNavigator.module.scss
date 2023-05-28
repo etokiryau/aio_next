@@ -2,6 +2,7 @@
 @use '@/styles/_mixins.module' as mixins;
 
 .setup {
+    margin-top: 10px;
     display: flex;
     gap: 32px;
     height: 100%;
@@ -17,7 +18,6 @@
     &__layout {
         overflow: hidden;
         position: relative;
-        margin-top: 10px;
         flex: 2;
         background: #D9D9D9;
         border-radius: 24px;
@@ -200,6 +200,63 @@
 
             &::-webkit-scrollbar:horizontal {
                 display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .setup {
+        &__navigation {
+            &_floors {
+                padding: 22px 0px;
+            }
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .setup {
+        flex-direction: column;
+        gap: 18px;
+        height: auto;
+
+        &__layout {
+            flex: none;
+            height: 400px;
+        }
+
+        &__navigation {
+            padding: 24px 16px;
+            flex: none;
+            height: 400px;
+
+            &_floors {
+                padding: 22px 18px;
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .setup {
+        &__layout {
+            &_buttons {
+                right: 8px;
+            }
+
+            &_scale {
+                right: 8px;
+            }
+
+            &_rooms {
+                left: 20px;
+            }
+        }
+
+        &__navigation {
+            &_floors {
+                padding: 22px 0px;
             }
         }
     }
