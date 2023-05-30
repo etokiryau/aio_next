@@ -9,21 +9,21 @@ const ContactsPage: NextPage = () => {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const { token } = nookies.get(ctx);
+// export const getServerSideProps: GetServerSideProps = async (ctx) => {
+//     const { token } = nookies.get(ctx);
 
-    if (token) {
-        return {
-            props: { }
-        }
-    } else {
-        return {
-            redirect: {
-                destination: '/login',
-                permanent: false
-            }
-        }
-    }
-}
+//     if (token) {
+//         return {
+//             props: { }
+//         }
+//     } else {
+//         return {
+//             redirect: {
+//                 destination: '/login',
+//                 permanent: false
+//             }
+//         }
+//     }
+// }
 
 export default ContactsPage;

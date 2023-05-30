@@ -1,0 +1,109 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.preferences {
+    padding: 32px 24px 40px;
+    display: flex;
+    flex-direction: column;
+    width: 420px;
+    background-color: vars.$secondaryColor;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    border-radius: vars.$primaryBorderRadius;
+    transition: .3s ease;
+
+    &__wrapper {
+        @include mixins.flexCenter;
+        position: fixed;
+        inset: 0;
+        background-color: rgba($color: vars.$primaryColor, $alpha: .7);
+        visibility: hidden;
+        opacity: 0;
+        transition: .3s ease;
+        z-index: 100000;
+    }
+
+    &__header {
+        padding-bottom: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 0.4px solid rgba($color: vars.$primaryColor, $alpha: .4);
+        font-size: 24px;
+        
+        div {
+            cursor: pointer;
+            transition: .5s ease;
+
+            &:hover {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    &__preferences {
+        &_single {
+            position: relative;
+            margin-top: 24px;
+
+            svg {
+                transition: .3s ease;
+                fill: vars.$primaryColor;
+            }
+
+            &_header {
+                margin-top: 8px;
+                padding: 12px 16px;
+                display: flex;
+                justify-content: space-between;
+                background: #F8F8F8;
+                border-radius: vars.$primaryBorderRadius;
+                cursor: pointer;
+
+                div {
+                    display: flex;
+                    gap: 8px;
+                }
+
+                &:hover {
+                    svg {
+                        fill: vars.$additionalColor;
+                    }
+                }
+            }
+
+            &_change {
+                position: absolute;
+                top: 70px;
+                visibility: hidden;
+                opacity: 0;
+                transition: .3s ease;
+                background-color: vars.$secondaryColor;
+                width: 100%;
+                z-index: 10;
+            }
+
+            .activeChange {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+
+    &__buttons {
+        margin-top: 40px;
+        
+        &_single {
+            padding: 8px 20px;
+            text-align: center;
+
+            &:first-child {
+                @include mixins.button;
+            }
+        }
+    }
+}
+
+.activePopup {
+    opacity: 1;
+    visibility: visible;
+}

@@ -6,6 +6,7 @@
 
     &__header {
         margin-top: 172px;
+        padding: 0 10px;
 
         h2 {
             margin-top: 32px;
@@ -24,7 +25,7 @@
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 30px 30px;
 
             p {
                 margin-bottom: 12px;
@@ -35,7 +36,7 @@
                 @include mixins.flexColumn;
                 align-items: flex-start;
                 gap: 12px;
-                width: 250px;
+                width: 218px;
 
                 label {
                     display: flex;
@@ -82,7 +83,12 @@
                 @include mixins.flexColumn;
                 align-items: flex-start;
                 gap: 12px;
-                width: 250px;
+                width: 218px;
+
+                .errorSections {
+                    color: vars.$additionalColor;
+                    transition: .3s ease;
+                }
 
                 label {
                     display: flex;
@@ -128,7 +134,7 @@
                 @include mixins.flexColumn;
                 align-items: flex-start;
                 gap: 12px;
-                width: 43%;
+                width: calc(45% - 10px);
 
                 label {
                     position: relative;
@@ -216,6 +222,12 @@
             }
         }
 
+        &_total {
+            display: none;
+            margin-top: 48px;
+            text-align: left;
+        }
+
         h3 {
             margin-top: 32px;
             font-size: vars.$primaryFontSize;
@@ -233,7 +245,7 @@
                 justify-content: space-between;
                 flex-wrap: wrap;
                 gap: 20px;
-                flex: 1;
+                flex-grow: 3;
 
                 input {
                     padding: 8px 16px;
@@ -284,7 +296,7 @@
                 justify-content: space-between;
                 align-items: flex-end;
                 text-align: right;
-                flex-basis: 170px;
+                flex: 1 0 170px;
     
                 p {
                     font-size: 16px;
@@ -295,25 +307,100 @@
                     font-size: 22px;
                     font-weight: 400;
                 }
-    
-                button {
-                    @include mixins.whiteButton;
-                    padding: 8px 16px;
-    
-                    &:hover {
-                        @include mixins.hoveredButton;
-                    }
+            }
+        }
 
-                    &:disabled {
-                        opacity: 0.1;
-                        cursor: auto;
+        #mobileSubmit {
+            display: none;
+            width: 100%;
+        }
+            
+        button {
+            @include mixins.whiteButton;
+            margin-top: 20px;
+            padding: 8px 16px;
 
-                        &:hover {
-                            transform: none;
-                        }
-                    }
+            &:hover {
+                @include mixins.hoveredButton;
+            }
+
+            &:disabled {
+                opacity: 0.1;
+                cursor: auto;
+
+                &:hover {
+                    transform: none;
                 }
             }
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .services {
+        &__content {
+            &_calculation {
+                &_section {
+                    order: 2;
+                }
+
+                &_area {
+                    width: 55%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .services {
+        h2 {
+            font-size: 22px;
+        }
+
+        &__content {
+            &_calculation {
+                &_section {
+                    order: 0;
+                }
+
+                &_area {
+                    width: 50%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .services {
+        &__content {
+            &_calculation {
+                &_area {
+                    width: 100%;
+                }
+            }
+
+            &_total {
+                display: block;
+            }
+
+            h3 {
+                margin-top: 64px;
+                text-align: center;
+            }
+
+            &_submit {
+                flex-direction: column-reverse;
+
+                &_total {
+                    display: none;
+                }
+            }
+        }
+
+        #mobileSubmit {
+            display: inline-block;
         }
     }
 }

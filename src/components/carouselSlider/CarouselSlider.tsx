@@ -159,7 +159,7 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 	};
 
 	const closePopup = (event: React.MouseEvent<HTMLDivElement>): void => {
-		event?.target === popupRef.current ? setPopup(false) : null;
+		event?.target === popupRef.current && setPopup(false);
 	};
 
 	const slides = slidesData.map((item, i) => {

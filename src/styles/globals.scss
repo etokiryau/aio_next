@@ -108,3 +108,9 @@ select {
 legend {
   display: block;
 }
+
+@media (max-width: 768px) {
+  h1, h2 {
+    font-size: $headerMobileFontSize;
+  }
+}

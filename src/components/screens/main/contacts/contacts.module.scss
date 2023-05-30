@@ -21,17 +21,31 @@
     &__content {
         margin-top: 28px;
         display: flex;
+        gap: 40px;
+        flex-wrap: wrap;
 
         &_left {
             flex: 1;
             font-size: 20px;
 
+
+            #separation {
+                height: 1px;
+                background-color: rgba($color: vars.$primaryColor, $alpha: .4);
+
+                div {
+                    background-color: vars.$additionalColor;
+                    width: 0;
+                    height: 100%;
+                    transition: .5s ease;
+                }
+            }
+
             &_single {
                 padding: 12px 8px;
                 display: flex;
                 justify-content: space-between;
-                width: 80%;
-                border-bottom: solid .4px rgba($color: vars.$primaryColor, $alpha: .4);
+                cursor: pointer;
 
                 &_left {
                     display: flex;
@@ -52,9 +66,38 @@
                     align-items: center;
                     gap: 40px;
                     color: rgba($color: vars.$primaryColor, $alpha: .4);
+                    transition: .3s ease;
+                }
 
-                    svg {
-                        transform: rotate(135deg);
+                &_wrapper {
+                    width: min(100%, 440px);
+                    &:nth-child(n+2) {
+                        .contacts__content_left_single_right {
+                            svg {
+                                transform: rotate(135deg);
+                                transition: .2s ease;
+                            }
+                        }
+                    }
+
+                    &:hover {
+                        #separation {
+                            div {
+                                width: 100%;
+                            }
+                        }
+
+                        .contacts__content_left_single_right {
+                            color: rgba($color: vars.$primaryColor, $alpha: 1);
+                        }
+
+                        &:nth-child(n+2) {
+                            .contacts__content_left_single_right {
+                                svg {
+                                    transform: rotate(180deg) translateX(-17px);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -69,7 +112,7 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                width: 60%;
+                max-width: 440px;
                 height: 100%;
             }
 
@@ -83,13 +126,20 @@
 
                 svg {
                     transform: rotate(180deg);
+                    transition: .7s ease;
                 }
 
                 a {
                     padding-right: 5px;
                     display: flex;
-                    justify-content: space-between;
+                    gap: 30px;
                     font-size: 20px;
+
+                    p {
+                        flex: 1;
+                        transition: .5s ease;
+                        min-width: fit-content;
+                    }
 
                     &:first-child {
                         padding-bottom: 18px;
@@ -98,6 +148,16 @@
 
                     &:last-child {
                         padding-top: 18px;
+                    }
+
+                    &:hover {
+                        p {
+                            flex: none;
+                        }
+
+                        svg {
+                            transform: rotate(0deg) translateX(-20px);
+                        }
                     }
                 }
             }
@@ -168,6 +228,52 @@
                     }
                 }
             }
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .contacts {
+        &__content {
+            flex-direction: column;
+    
+            &_left {
+                &_single {
+                    &_wrapper {
+                        margin: auto;
+                    }
+                    
+                    &_right {
+                        gap: 40px;
+                    }
+                }
+            }
+    
+            &_right {
+                text-align: left;
+                flex: 1;
+    
+                &_wrapper {
+                    margin: 0 auto;
+                    gap: 40px;
+                }
+    
+                &_links {
+                    width: 60%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .contacts {
+        &__wrapper {
+            padding: 0 10px;
+        }
+
+        &__form {
+            width: calc(100% - 20px);
         }
     }
 }

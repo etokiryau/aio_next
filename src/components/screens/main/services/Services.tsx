@@ -122,12 +122,15 @@ const Services: FC = () => {
 
     const handleAreaWindowBlur = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const value: number = Number(event.target.value);
-        if (value < 100 || value > 3000) {
-            setAreaValue(String(value + 1550));
-            return;
+        if (value > 3000) {
+            setAreaValue(String(3000));
+            formik.setFieldValue('area', 3000 - 1550);
+        } else if (value < 100) {
+            setAreaValue(String(100));
+            formik.setFieldValue('area', 100 - 1550);
+        } else {
+            formik.setFieldValue('area', value - 1550);
         };
-
-        formik.setFieldValue('area', value - 1550);
     };
 
     const handleAreaWindowChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -142,12 +145,15 @@ const Services: FC = () => {
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
         if (event.key === 'Enter') {
             const value: number = Number(areaValue);
-            if (value < 100 || value > 3000) {
-                setAreaValue(String(formik.values.area + 1550));
-                return;
-            }
-        
-            formik.setFieldValue('area', value - 1550);
+            if (value > 3000) {
+                setAreaValue(String(3000));
+                formik.setFieldValue('area', 3000 - 1550);
+            } else if (value < 100) {
+                setAreaValue(String(100));
+                formik.setFieldValue('area', 100 - 1550);
+            } else {
+                formik.setFieldValue('area', value - 1550);
+            };
         }
     };
 
@@ -188,7 +194,7 @@ const Services: FC = () => {
                             </div>
 
                             <div className={styles.services__content_calculation_section}>
-                                <p>Design sections</p>
+                                <p className={formik.errors.sections ? styles.errorSections : ''}>Design sections</p>
                                 <label htmlFor="section-individual">
                                     <input type="checkbox" name="sections" id="section-individual" value="architecture"
                                         data-value='0.4'
@@ -234,6 +240,11 @@ const Services: FC = () => {
                                     <option value="3000" label="3000 m"></option>
                                 </datalist>
                             </div>
+                        </div>
+
+                        <div className={styles.services__content_total}>
+                            <p>Project cost</p>
+                            <div className={styles.services__content_submit_total_cost}>Total: {cost} USD</div>
                         </div>
                         
                         <h3>Submit application</h3>
@@ -291,6 +302,7 @@ const Services: FC = () => {
                                 <button type="submit" disabled={!formik.isValid || formik.isSubmitting}>Submit</button>
                             </div>
                         </div>
+                        <button id={styles.mobileSubmit} type="submit" disabled={!formik.isValid || formik.isSubmitting}>Submit</button>
                     </form>
                 </section>
             </div>

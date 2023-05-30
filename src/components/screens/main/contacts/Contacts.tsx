@@ -1,4 +1,5 @@
 import { FC } from "react";
+import Link from "next/link";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -8,10 +9,10 @@ import ArrowLarge from "@/components/ui/ArrowLargeIcon";
 import FacebookIcon from "@/components/ui/FacebookIcon";
 import LinkedInIcon from "@/components/ui/LinkedInIcon";
 import InstagramIcon from "@/components/ui/InstangramIcon";
+import TelegramIcon from "@/components/ui/TelegramIcon";
+import ClipIcon from "@/components/ui/ClipIcon";
 
 import styles from "./contacts.module.scss";
-import TelegramIcon from "@/components/ui/TelegramIcon";
-import Link from "next/link";
 
 interface IForm {
     email: string,
@@ -52,60 +53,77 @@ const Contacts: FC = () => {
                     <h2>Learn more about AIO, visit our social media and feel free to contact us!</h2>
                     <div className={styles.contacts__content}>
                         <div className={styles.contacts__content_left}>
-                            <div className={styles.contacts__content_left_single}>
-                                <div className={styles.contacts__content_left_single_left}>
-                                    <div><MailIcon /></div>
-                                    <p>Email</p>
+
+                            <div className={styles.contacts__content_left_single_wrapper}>
+                                <div className={styles.contacts__content_left_single}>
+                                    <div className={styles.contacts__content_left_single_left}>
+                                        <div><MailIcon /></div>
+                                        <p>Email</p>
+                                    </div>
+                                    <div className={styles.contacts__content_left_single_right}>
+                                        <div><ClipIcon /></div>
+                                        <p>info@aio.house</p>
+                                    </div>
                                 </div>
-                                <div className={styles.contacts__content_left_single_right}>
-                                    <div><ArrowLarge /></div>
-                                    <p>info@aio.house</p>
+                                <div id={styles.separation}><div/></div>
+                            </div>
+                            
+                            <div className={styles.contacts__content_left_single_wrapper}>
+                                <div className={styles.contacts__content_left_single}>
+                                    <div className={styles.contacts__content_left_single_left}>
+                                        <div><FacebookIcon /></div>
+                                        <p>Facebook</p>
+                                    </div>
+                                    <div className={styles.contacts__content_left_single_right}>
+                                        <ArrowLarge />
+                                        <p>info@aio.house</p>
+                                    </div>
                                 </div>
+                                <div id={styles.separation}><div/></div>
                             </div>
 
-                            <div className={styles.contacts__content_left_single}>
-                                <div className={styles.contacts__content_left_single_left}>
-                                    <div><FacebookIcon /></div>
-                                    <p>Facebook</p>
+                            <div className={styles.contacts__content_left_single_wrapper}>
+                                <div className={styles.contacts__content_left_single}>
+                                    <div className={styles.contacts__content_left_single_left}>
+                                        <div><LinkedInIcon /></div>
+                                        <p>LinkedIn</p>
+                                    </div>
+                                    <div className={styles.contacts__content_left_single_right}>
+                                        <ArrowLarge />
+                                        <p>info@aio.house</p>
+                                    </div>
                                 </div>
-                                <div className={styles.contacts__content_left_single_right}>
-                                    <ArrowLarge />
-                                    <p>info@aio.house</p>
-                                </div>
+                                <div id={styles.separation}><div/></div>
                             </div>
 
-                            <div className={styles.contacts__content_left_single}>
-                                <div className={styles.contacts__content_left_single_left}>
-                                    <div><LinkedInIcon /></div>
-                                    <p>LinkedIn</p>
+                            <div className={styles.contacts__content_left_single_wrapper}>                            
+                                <div className={styles.contacts__content_left_single}>
+                                    <div className={styles.contacts__content_left_single_left}>
+                                        <div><InstagramIcon /></div>
+                                        <p>Instagram</p>
+                                    </div>
+                                    <div className={styles.contacts__content_left_single_right}>
+                                        <ArrowLarge />
+                                        <p>info@aio.house</p>
+                                    </div>
                                 </div>
-                                <div className={styles.contacts__content_left_single_right}>
-                                    <ArrowLarge />
-                                    <p>info@aio.house</p>
-                                </div>
+                                <div id={styles.separation}><div/></div>
                             </div>
-
-                            <div className={styles.contacts__content_left_single}>
-                                <div className={styles.contacts__content_left_single_left}>
-                                    <div><InstagramIcon /></div>
-                                    <p>Instagram</p>
+                                
+                            <div className={styles.contacts__content_left_single_wrapper}>
+                                <div className={styles.contacts__content_left_single}>
+                                    <div className={styles.contacts__content_left_single_left}>
+                                        <div><TelegramIcon /></div>
+                                        <p>Telegram</p>
+                                    </div>
+                                    <div className={styles.contacts__content_left_single_right}>
+                                        <ArrowLarge />
+                                        <p>info@aio.house</p>
+                                    </div>
                                 </div>
-                                <div className={styles.contacts__content_left_single_right}>
-                                    <ArrowLarge />
-                                    <p>info@aio.house</p>
-                                </div>
+                                <div id={styles.separation}><div/></div>
                             </div>
-
-                            <div className={styles.contacts__content_left_single}>
-                                <div className={styles.contacts__content_left_single_left}>
-                                    <div><TelegramIcon /></div>
-                                    <p>Telegram</p>
-                                </div>
-                                <div className={styles.contacts__content_left_single_right}>
-                                    <ArrowLarge />
-                                    <p>info@aio.house</p>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div className={styles.contacts__content_right}>
                             <div className={styles.contacts__content_right_wrapper}>
