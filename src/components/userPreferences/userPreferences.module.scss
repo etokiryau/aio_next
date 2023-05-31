@@ -2,6 +2,7 @@
 @use '@/styles/_mixins.module' as mixins;
 
 .preferences {
+    margin: 0 10px;
     padding: 32px 24px 40px;
     display: flex;
     flex-direction: column;
@@ -9,6 +10,7 @@
     background-color: vars.$secondaryColor;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
     border-radius: vars.$primaryBorderRadius;
+    transform: scale(.8);
     transition: .3s ease;
 
     &__wrapper {
@@ -44,19 +46,31 @@
         &_single {
             position: relative;
             margin-top: 24px;
+            height: 70px;
 
             svg {
                 transition: .3s ease;
                 fill: vars.$primaryColor;
             }
 
-            &_header {
-                margin-top: 8px;
+            &_wrapper {
+                overflow: hidden;
+                position: absolute;
+                top: 30px;
+                left:0;
+                width: 100%;
+                background: #F8F8F8;
+                border-radius: vars.$primaryBorderRadius;
+                max-height: 46px;
+                z-index: 10;
+                user-select: none;
+                transition: .3s ease;
+            }
+
+            &_preview {
                 padding: 12px 16px;
                 display: flex;
                 justify-content: space-between;
-                background: #F8F8F8;
-                border-radius: vars.$primaryBorderRadius;
                 cursor: pointer;
 
                 div {
@@ -69,22 +83,56 @@
                         fill: vars.$additionalColor;
                     }
                 }
+
+                p:first-child {
+                    font-weight: 400;
+                }
             }
 
-            &_change {
-                position: absolute;
-                top: 70px;
+            &_options {
                 visibility: hidden;
                 opacity: 0;
-                transition: .3s ease;
                 background-color: vars.$secondaryColor;
-                width: 100%;
-                z-index: 10;
+                border-radius: 0 0 vars.$primaryBorderRadius vars.$primaryBorderRadius;
+
+                .languageOption, .currencyOption {
+                    padding: 6px 16px;
+                    display: flex;
+                    gap: 16px;
+                    cursor: pointer;
+
+                    p:first-child {
+                        font-weight: 400;
+                    }
+
+                    &:first-child {
+                        padding: 12px 16px 6px;
+                    }
+
+                    &:last-child {
+                        padding: 6px 16px 12px;
+                        border-radius: 0 0 vars.$primaryBorderRadius vars.$primaryBorderRadius;
+                    }
+
+                    &:hover {
+                        background-color: rgba($color: vars.$primaryColor, $alpha: .2);
+                    }
+                }
             }
 
-            .activeChange {
-                visibility: visible;
-                opacity: 1;
+            .activeSection {
+                overflow: visible;
+                max-height: 200px;
+                box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+
+                svg {
+                    fill: vars.$additionalColor;
+                }
+
+                .preferences__preferences_single_options {
+                    visibility: visible;
+                    opacity: 1;
+                }
             }
         }
     }
@@ -106,4 +154,8 @@
 .activePopup {
     opacity: 1;
     visibility: visible;
+
+    .preferences {
+        transform: none;
+    }
 }

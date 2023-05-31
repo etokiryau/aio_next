@@ -2,7 +2,7 @@
 @use '@/styles/_mixins.module' as mixins;
 
 .preferences {
-    padding: 10px 32px;
+    padding: 8px 32px;
     display: flex;
     gap: 12px;
     background: rgba($color: vars.$primaryColor, $alpha: .1);
@@ -24,6 +24,17 @@
     &:hover {
         svg {
             fill: vars.$additionalColor;
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .preferences {
+        width: fit-content;
+        background: rgba($color: vars.$secondaryColor, $alpha: .1);
+
+        svg {
+            fill: vars.$secondaryColor;
         }
     }
 }

@@ -1,5 +1,5 @@
-@use '../../../styles/_variables.module' as vars;
-@use '../../../styles/_mixins.module' as mixins;
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
 
 .loading {
     position: fixed;
@@ -48,4 +48,21 @@
 .active {
     opacity: 1;
     visibility: visible;
-}   
+}
+
+@media (max-width: 576px) {
+    .loading {
+
+        section {
+            padding: 10px;
+
+            h2 {
+                font-size: 24px;
+            }
+        }
+
+        p {
+            font-size: vars.$primaryFontSize;
+        }
+    }
+}
