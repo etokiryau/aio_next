@@ -2,11 +2,16 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/redux/store";
 import { IUser } from "@/interfaces/user.interface";
 
-const initialState: IUser = {
+interface IState extends IUser {
+    isActiveWarning: boolean
+}
+
+const initialState: IState = {
     email: null,
     token: null,
     userId: null,
     name: null,
+    isActiveWarning: false
 };
 
 const userSlice = createSlice({
@@ -24,11 +29,14 @@ const userSlice = createSlice({
             state.token = null;
             state.userId = null;
             state.name = null;
+        },
+        toggleWarning: (state) => {
+            state.isActiveWarning = !state.isActiveWarning
         }
     }
 })
 
-export const { setUser, removeUser } = userSlice.actions;
+export const { setUser, removeUser, toggleWarning } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user;
 

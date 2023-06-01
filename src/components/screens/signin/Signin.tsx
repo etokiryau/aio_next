@@ -1,21 +1,23 @@
 import { FC, useState } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { useGoogleLogin } from '@react-oauth/google';
 // import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { useLinkedIn } from 'react-linkedin-login-oauth2';
+import { useTypedDispatch } from "@/hooks/useReduxHooks";
+import { toggleWarning } from "./userSlice";
 
 import { useAuth } from "@/hooks/useAuth";
 import Meta from "@/components/seo/Meta";
+import EmailConfirmation from "@/components/emailConfirmation/EmailConfirmation";
 import ArrowLarge from "@/components/ui/ArrowLargeIcon";
 import GoogleIcon from "@/components/ui/GoogleIcon";
 import FacebookIcon from "@/components/ui/FacebookIcon";
-import TwitterIcon from "@/components/ui/TwitterIcon";
 import LinkedInIcon from "@/components/ui/LinkedInIcon";
 
 import styles from "./signin.module.scss";
+import RegistrationWarning from "@/components/ui/registrationWarning/RegistrationWarning";
 
 interface ISendingData {
     email: string,
@@ -27,7 +29,10 @@ interface ISendingData {
 const Signin: FC = () => {
     const { login, logout } = useAuth();
     const router = useRouter();
+    const previousPath = router.query.from;
+    const dispatch = useTypedDispatch();
     const [signin, setSignin] = useState(true);
+    const [isConfirmingStep, setIsConfirmingStep] = useState(false);
 
     const changeForm = (): void => {
         setSignin(prev => !prev);
@@ -66,7 +71,9 @@ const Signin: FC = () => {
         ? {email: values.email, password: values.password}
         : {email: values.email, password: values.password, name: values.name}
 
-        console.log(data)
+        if (!signin) {
+            setIsConfirmingStep(true);
+        }
     };
 
     const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
@@ -89,6 +96,18 @@ const Signin: FC = () => {
         },
     });
 
+    const goBack = (): void => {
+        if (isConfirmingStep) {
+            dispatch(toggleWarning());
+            return;
+        }
+
+
+        previousPath 
+        ? router.push(String(previousPath))
+        : router.push('/');
+    };
+
     {/* Signin
             <button onClick={() => login({name: 'Kirill', email: 'myEmail', token: 'sdf43', userId: 1})}>Sign in</button>
             <button onClick={logout}>Sign out</button> */}
@@ -96,13 +115,13 @@ const Signin: FC = () => {
     return (
         <Meta title="Sign in">
             <div className={styles.signin}>
-                <Link href="/" className={styles.signin__back}>
+                <div onClick={goBack} className={styles.signin__back}>
                     <div>
                         <ArrowLarge />
                         <p>Back to main page</p>
                     </div>
-                </Link>
-                <div className={styles.signin__wrapper}>
+                </div>
+                {!isConfirmingStep && <div className={styles.signin__wrapper}>
                     <div className={styles.signin__header}>
                         <div className={!signin ? styles.bottomHeader : ''}>
                             <h1>Sign in</h1>
@@ -170,7 +189,7 @@ const Signin: FC = () => {
                         <div className={`${styles.signin__forgot} ${!signin ? styles.hidden : ''}`}>
                             <p>Forgot password?</p>
                         </div>
-                        <button type="submit" disabled={!formik.isValid || formik.isSubmitting}>Submit</button>
+                        <button className={styles.signin__submit} type="submit" disabled={!formik.isValid || formik.isSubmitting}>Submit</button>
                     </form>
                     <div className={styles.signin__separation} />
                     <div className={styles.signin__outside}>
@@ -197,14 +216,23 @@ const Signin: FC = () => {
                             <p>Continue with LinkedIn</p>
                         </div>
                     </div>
-                </div>
-                <div className={styles.signin__underneath}>
+                </div>}
+                {!isConfirmingStep && <div className={styles.signin__underneath}>
                     <div className={!signin ? styles.bottomUnderneath : ''}>
                         <p onClick={changeForm}>Don’t have an account? <span>Sign up</span></p>
                         <p onClick={changeForm}>Already have account? <span>Sign in</span></p>
                     </div>
-                </div>
+                </div>}
+
+                {isConfirmingStep && <EmailConfirmation email={formik.values.email} />}
             </div>
+
+            <RegistrationWarning 
+                callback={() => {
+                    dispatch(toggleWarning());
+                    router.push('/');
+                }
+            } />
         </Meta>
     )
 }

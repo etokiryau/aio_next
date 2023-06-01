@@ -64,7 +64,8 @@
                 max-height: 46px;
                 z-index: 10;
                 user-select: none;
-                transition: .3s ease;
+                transition: .1s ease;
+                z-index: 2;
             }
 
             &_preview {
@@ -75,7 +76,7 @@
 
                 div {
                     display: flex;
-                    gap: 8px;
+                    gap: 16px;
                 }
 
                 &:hover {
@@ -87,20 +88,32 @@
                 p:first-child {
                     font-weight: 400;
                 }
+
+                input {
+                    width: min(100%, 500px);
+                    border: none;
+                    background-color: transparent;
+
+                    &::placeholder {
+                        font-size: 16px;
+                    }
+                }
             }
 
             &_options {
+                overflow: auto;
                 visibility: hidden;
                 opacity: 0;
                 background-color: vars.$secondaryColor;
                 border-radius: 0 0 vars.$primaryBorderRadius vars.$primaryBorderRadius;
+                max-height: 150px;
 
-                .languageOption, .currencyOption {
+                .languageOption, .currencyOption, .locationOption {
                     padding: 6px 16px;
                     display: flex;
                     gap: 16px;
                     cursor: pointer;
-
+                    
                     p:first-child {
                         font-weight: 400;
                     }
@@ -124,6 +137,7 @@
                 overflow: visible;
                 max-height: 200px;
                 box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+                z-index: 10;
 
                 svg {
                     fill: vars.$additionalColor;

@@ -63,7 +63,10 @@ const Header: FC = () => {
 					<div className={styles.header__user_preferences}>
 						<HeaderPreferences />
 					</div>
-					<Link href="/signin">Sign up</Link>
+					<Link href={{
+						pathname: '/signin',
+						query: { from: pathname },
+					}}>Sign up</Link>
 					<div onClick={toggleNavbar} className={`${styles.header__user_burger} ${navbar ? styles.activeBurger : ''}`}>
 						<span></span>
 						<span></span>

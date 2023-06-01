@@ -1,0 +1,68 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.warning {
+    @include mixins.flexCenter;
+    position: fixed;
+    inset: 0;
+    background-color: rgba($color: vars.$primaryColor, $alpha: .4);
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s ease;
+
+    &__wrapper {
+        margin: 0 10px;
+        padding: 32px 24px 40px;
+        width: min(100%, 440px);
+        background-color: vars.$secondaryColor;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+        border-radius: vars.$primaryBorderRadius;
+
+        &_icons {
+            display: flex;
+            justify-content: space-between;
+
+            div {
+                @include mixins.flexCenter;
+                cursor: pointer;
+                transition: .5s ease;
+
+                &:hover {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        p {
+            margin-top: 32px;
+            font-size: 20px;
+        }
+
+        &_buttons {
+            @include mixins.flexColumn;
+            margin-top: 32px;
+            gap: 16px;
+
+            button {
+                padding: 8px 20px;
+
+                &:first-child {
+                    @include mixins.button;
+                }
+
+                &:last-child {
+                    @include mixins.whiteButton;
+                }
+
+                &:hover {
+                    @include mixins.hoveredButton;
+                }
+            }
+        }
+    }
+}
+
+.active {
+    opacity: 1;
+    visibility: visible;
+}

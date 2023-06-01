@@ -1,0 +1,70 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.confirmation {
+    margin-top: 8px;
+    padding: 24px 20px;
+    box-shadow: 0 10px 40px #0000001a;
+    border-radius: vars.$primaryBorderRadius;
+    text-align: center;
+
+    h3 {
+        font-size: vars.$subHeaderFontSize;
+    }
+
+    p {
+        margin-top: 32px;
+    }
+
+    &__inputs {
+        margin-top: 32px;
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        height: 72px;
+
+        input {
+            padding: 22px;
+            width: 64px;
+            background: vars.$secondaryColor;
+            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+            border-radius: vars.$primaryBorderRadius;
+            border: none;
+            font-size: vars.$subHeaderFontSize;
+            color: vars.$primaryColor;
+            transition: .3s ease;
+
+            &:disabled {
+                box-shadow: none;
+                background-color: rgba($color: vars.$primaryColor, $alpha: .1);
+            }
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+    }
+
+    .failed {
+        color: vars.$additionalColor;
+        input {
+            color: vars.$additionalColor;
+        }
+    }
+
+    button {
+        margin-top: 32px;
+        border: none;
+        font-size: 20px;
+
+        #send {
+            font-weight: 500;
+        }
+
+        &:disabled {
+            cursor: auto;
+        }
+    }
+}

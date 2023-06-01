@@ -7,6 +7,7 @@
 
     &__back {
         margin-left: 8px;
+        cursor: pointer;
        
         p {
             font-size: 18px;
@@ -115,7 +116,7 @@
         
     }
 
-    button {
+    &__submit {
         @include mixins.button;
         margin-top: 16px;
         padding: 8px 16px;

@@ -22,13 +22,16 @@ const userPreferencesSlice = createSlice({
         togglePopup: (state) => {
             state.isOpen = !state.isOpen;
         },
-        setLanguage: (state, action: PayloadAction<string>) => {
-            state.language = action.payload;
+        setPreferences: (state, action: PayloadAction<IState>) => {
+            state.isOpen = action.payload.isOpen;
+            state.language = action.payload.language;
+            state.location = action.payload.location;
+            state.currency = action.payload.currency;
         }
     },
 });
 
-export const { togglePopup, setLanguage } = userPreferencesSlice.actions;
+export const { togglePopup, setPreferences } = userPreferencesSlice.actions;
 
 export const selectUserPreferences = (state: RootState) => state.userPreferences;
 
