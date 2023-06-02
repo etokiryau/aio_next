@@ -1,0 +1,219 @@
+@use '@/styles/_variables.module.scss' as vars ;
+@use '@/styles/_mixins.module.scss' as mixins;
+
+.purchase {
+    padding: 0 2.5%;
+    display: flex;
+    gap: 20px;
+
+    h3 {
+        font-size: vars.$primaryFontSize;
+    }
+
+    &__information {
+        padding: 40px 24px;
+        display: flex;
+        flex: 1;
+        border: vars.$primaryBorder;
+        border-radius: vars.$primaryBorderRadius;
+
+        &_contact {
+            padding-right: 24px;
+            flex: 1;
+
+            &_wrapper {
+                margin-top: 8px;
+            }
+
+            &_single {
+                margin-top: 24px;
+
+                #contactTitle {
+                    color: black;
+                }
+
+                #contactValue {
+                    margin-top: 8px;
+                    padding: 8px;
+                    background-color: rgba($color: vars.$primaryColor, $alpha: .1);
+                    border-radius: 8px;
+                    border: solid .4px transparent;
+                }
+            }
+        }
+
+        &_payment {
+            padding-left: 24px;
+            flex: 1;
+            border-left: solid .4px rgba($color: vars.$primaryColor, $alpha: .4);
+
+            &_wrapper {
+                margin-top: 8px;
+            }
+
+            &_single {
+                @include mixins.flexColumn;
+                margin-top: 24px;
+                flex: 1;
+                flex-basis: 115px;
+
+                label {
+                    color: black;
+                }
+
+                input {
+                    margin-top: 8px;
+                    padding: 8px;
+                    border: solid .4px rgba($color: vars.$primaryColor, $alpha: .4);
+                    border-radius: 8px;
+                    width: 100%;
+                    transition: .3s ease;
+
+                    &::placeholder {
+                        color: rgba($color: vars.$primaryColor, $alpha: .4);
+                    }
+
+                    &:focus  {
+                        background-color: rgba($color: vars.$primaryColor, $alpha: .1);
+                        border: solid .4px rgba($color: vars.$primaryColor, $alpha: .6);
+                    }
+                    
+                    &::-webkit-outer-spin-button,
+                    &::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+
+                .inputError {
+                    border-color: vars.$additionalColor;
+                }
+
+                #cardName {
+                    text-transform: uppercase;
+                }
+
+                &_wrapper {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0 20px;
+
+                    input {
+                        width: min(100%, 100px);
+                    }
+                }
+            }
+
+            &_submit {
+                margin-top: 56px;
+                text-align: right;
+
+                button {
+                    @include mixins.button;
+                    padding: 8px 20px;
+    
+                    &:hover {
+                        @include mixins.hoveredButton;
+                    }
+    
+                    &:disabled {
+                        opacity: .4;
+                        cursor: auto;
+    
+                        &:hover {
+                            transform: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__preview {
+        display: flex;
+        flex-basis: 420px;
+
+        &_wrapper {
+            @include mixins.flexColumn;
+            padding: 40px 24px;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        &_information {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+
+            &_left {
+                @include mixins.flexColumn;
+                justify-content: space-between;
+
+                &_title {
+                    h2 {
+                        font-size: 20px;
+                        font-weight: 400;
+                    }
+
+                    p {
+                        margin-top: 8px;
+                        font-size: 12px;
+                    }
+                }
+
+                &_preferences {
+                    div {
+                        display: grid;
+                        grid-template-columns: 24px 1fr;
+                        align-items: center;
+                        font-size: 16px;
+
+                        svg {
+                            fill: vars.$primaryColor;
+                        }
+
+                        &:last-child {
+                            margin-top: 8px;
+                        }
+                    }
+                }
+            }
+
+            img {
+                border-radius: 8px;
+            }
+        }
+
+        &_preliminaryCost {
+            margin-top: 16px;
+            text-align: right;
+
+            p {
+                &:first-child {
+                    font-size: 12px;
+                }
+
+                &:last-child {
+                    margin-top: 4px;
+                    font-weight: 400;
+                }
+            }
+        }
+
+        &_cost {
+            text-align: right;
+
+            p {
+                &:first-child {
+                    font-weight: 400;
+                    
+                }
+
+                &:last-child {
+                    margin-top: 4px;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

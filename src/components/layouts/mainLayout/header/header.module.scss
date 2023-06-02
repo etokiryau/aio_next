@@ -1,5 +1,5 @@
-@use '../../../../styles/_variables.module.scss' as vars ;
-@use '../../../../styles/_mixins.module.scss' as mixins;
+@use '@/styles/_variables.module.scss' as vars ;
+@use '@/styles/_mixins.module.scss' as mixins;
 
 .header {
     position: fixed;
@@ -50,15 +50,64 @@
         @include mixins.flexCenter;
         gap: 32px;
 
-        a {
-            padding: 0 16px;
-            @include mixins.flexCenter;
+        &_signup {
             @include mixins.whiteButton;
-            height: 100%;
-            border-radius: 30px;
+            padding: 8px 20px;
 
             &:hover {
                 @include mixins.hoveredButton;
+            }
+        }
+
+        &_signedin {
+            position: relative;
+            user-select: none;
+
+            &_icon {
+                cursor: pointer;
+            }
+
+            &_menu {
+                position: absolute;
+                top: 50px;
+                right: -32px;
+                @include mixins.flexColumn;
+                width: max-content;
+                background-color: vars.$primaryColor;
+                border-radius: vars.$primaryBorderRadius;
+                color: vars.$secondaryColor;
+                visibility: hidden;
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: .3s ease;
+
+                a {
+                    padding: 16px 40px 8px;
+                    border-radius: vars.$primaryBorderRadius vars.$primaryBorderRadius 0 0;
+                    transition: .3s ease;
+
+                    &:hover {
+                        background-color: rgba($color: vars.$secondaryColor, $alpha: .1);
+                    }
+                }
+
+                button {
+                    padding: 8px 40px 16px;
+                    border: none;
+                    color: vars.$secondaryColor;
+                    border-radius: 0 0 vars.$primaryBorderRadius vars.$primaryBorderRadius;
+                    transition: .3s ease;
+
+                    &:hover {
+                        background-color: rgba($color: vars.$secondaryColor, $alpha: .1);
+                    }
+                }
+            }
+
+            .activeSignedInMenu {
+                visibility: visible;
+                opacity: 1;
+                transform: none;
             }
         }
 

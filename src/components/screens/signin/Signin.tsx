@@ -73,6 +73,9 @@ const Signin: FC = () => {
 
         if (!signin) {
             setIsConfirmingStep(true);
+            return
+        } else {
+            login({name: 'Kirill', email: 'michigan@kamishok.com', token: 'sdf43', userId: 1});
         }
     };
 
@@ -102,15 +105,10 @@ const Signin: FC = () => {
             return;
         }
 
-
         previousPath 
         ? router.push(String(previousPath))
         : router.push('/');
     };
-
-    {/* Signin
-            <button onClick={() => login({name: 'Kirill', email: 'myEmail', token: 'sdf43', userId: 1})}>Sign in</button>
-            <button onClick={logout}>Sign out</button> */}
 
     return (
         <Meta title="Sign in">

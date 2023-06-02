@@ -81,9 +81,9 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 							<p>free</p>
 						</div>
 
-						<div className={styles.project__header_right_explore}>
-							Explore project
-						</div>
+						<Link href="/purchase" className={styles.project__header_right_purchase}>
+							Purchase
+						</Link>
 						<div className={styles.project__header_right_customise}>
 							<EditIcon />
 							<p>Customise</p>

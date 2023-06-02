@@ -5,7 +5,11 @@ import Footer from "./footer/Footer";
 import Meta from "@/components/seo/Meta";
 import { IMeta } from "@/components/seo/meta.interface";
 
-const MainLayout: FC<PropsWithChildren<IMeta>> = ({ children, title, description }) => {
+interface IProps extends IMeta {
+    footer?: boolean
+}
+
+const MainLayout: FC<PropsWithChildren<IProps>> = ({ children, title, description, footer = true }) => {
 
     return (
         <Meta title={title} description={description} >
@@ -13,7 +17,7 @@ const MainLayout: FC<PropsWithChildren<IMeta>> = ({ children, title, description
             <main style={{margin: '105px auto 100px', width: 'min(100%, 1440px)'}}>
                 {children}
             </main>
-            <Footer />
+            {footer && <Footer />}
         </Meta>
     )
 }

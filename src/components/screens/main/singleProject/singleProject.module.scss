@@ -73,13 +73,13 @@
                 }
             }
 
-            &_explore {
-                @include mixins.flexCenter;
+            &_purchase {
                 @include mixins.button;
                 padding: 8px 20px;
 
                 &:hover {
                     @include mixins.hoveredButton;
+                    color: vars.$secondaryColor;
                 }
             }
 
