@@ -1,7 +1,12 @@
 "use client";
 
 import { FC, useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import { useFormik } from "formik";
+
+import { useTypedDispatch, useTypedSelector } from "@/hooks/useReduxHooks";
+import { selectProjects } from "../screens/main/projects/projectsSlice";
+import { setStatusToConfirmed } from "../screens/signin/userSlice";
 
 import styles from "./emailConfirmation.module.scss";
 
@@ -13,6 +18,9 @@ const EmailConfirmation: FC<IProps> = ({ email }) => {
     const [seconds, setSeconds] = useState(60);
     const [isFailed, setisFailed] = useState(false);
     const inputRefs = useRef<HTMLInputElement[] | null[]>([]);
+    const { projectForPurchase } = useTypedSelector(selectProjects);
+    const dispatch = useTypedDispatch();
+    const router = useRouter();
 
     const formik = useFormik({
         initialValues: {
@@ -47,7 +55,7 @@ const EmailConfirmation: FC<IProps> = ({ email }) => {
 
     useEffect(() => {
         const timer = setInterval(() => {
-          setSeconds((prevSeconds) => prevSeconds - 1);
+            setSeconds((prevSeconds) => prevSeconds - 1);
         }, 1000);
     
         if (seconds === 0) {
@@ -70,7 +78,17 @@ const EmailConfirmation: FC<IProps> = ({ email }) => {
 
     useEffect(() => {
         if (formik.values[3]) {
-            setisFailed(true);
+            // setisFailed(true);
+            dispatch(setStatusToConfirmed());
+            
+            if (projectForPurchase) {
+                router.push({
+                    pathname: '/purchase',
+                    query: {project: projectForPurchase}
+                });
+            } else {
+                router.push('/dashboard');
+            }
         }
     }, [formik.values]);
 

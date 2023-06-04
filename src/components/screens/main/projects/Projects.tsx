@@ -16,8 +16,10 @@ import Cross from "@/components/ui/CrossIcon";
 import ProjectTile from "@/components/ui/projectTile/ProjectTile";
 import ProjectListItem from "@/components/ui/projectListItem/ProjectListItem";
 import { useCopyLinkToClipboard } from "@/hooks/useCopylinkToClipBoard";
+import { currencyData } from "@/utillis/preferenceData";
 
 import styles from "./projects.module.scss";
+import { selectUserPreferences } from "@/components/userPreferences/userPreferencesSlice";
 
 const Projects: NextPage = () => {
 	const [listMode, setListMode] = useState(false);
@@ -25,6 +27,7 @@ const Projects: NextPage = () => {
 
 	const dispatch = useTypedDispatch();
 	const { favourites, filters } = useTypedSelector(selectProjects);
+	const { currency } = useTypedSelector(selectUserPreferences);
 	const filteredProjects = useTypedSelector(selectFilteredProjects);
 	const sortedProjects = useTypedSelector(selectSortedProjects);
 
@@ -49,7 +52,7 @@ const Projects: NextPage = () => {
 				floorNumber: item.floorNumber,
 				houseDimensions: item.houseDimensions,
 				cost: item.cost,
-				currency: item.currency
+				currency: currencyData[currency]
 			};
 
 			return (
@@ -73,7 +76,7 @@ const Projects: NextPage = () => {
 				floorNumber: item.floorNumber,
 				houseDimensions: item.houseDimensions,
 				cost: item.cost,
-				currency: item.currency
+				currency: currencyData[currency]
 			};
 
 			return (

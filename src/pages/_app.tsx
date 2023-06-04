@@ -1,6 +1,7 @@
 import { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import "../styles/globals.scss";
+import { parseCookies } from "nookies";
 
 import store from "@/redux/store";
 import Loading from "@/components/Loading";
@@ -18,3 +19,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 		</Provider>
 	);
 }
+
+// MyApp.getServerSideProps = async ({ req }) => {
+// 	// Get the user data from the cookie
+// 	const { token } = parseCookies();
+  
+// 	// Here, you can perform additional checks or validation if needed
+// 	const user = { token };
+  
+// 	// Pass the user data as a prop to all pages
+// 	return { props: { user } };
+//   };

@@ -1,29 +1,40 @@
+"use client";
+
 import { FC, useState, useRef, useEffect } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import { useTypedDispatch, useTypedSelector } from "@/hooks/useReduxHooks";
 import Geonames from 'geonames.js';
 
+import { useAuth } from "@/hooks/useAuth";
 import { languagesData, currencyData } from "@/utillis/preferenceData";
 import {
 	selectUserPreferences,
 	setPreferences,
-	togglePopup
+	setDocumentationPreferences,
+	closePopup as closePreferencePopup
 } from "./userPreferencesSlice";
+import { changeAuthMode } from "../screens/signin/userSlice";
+import { setProjectForPurchase } from "../screens/main/projects/projectsSlice";
 import Triangle from "@/components/ui/TriangleIcon";
 import CrossIcon from "../ui/CrossIcon";
+import Warning from "../ui/warning/Warning";
 
 import styles from "./userPreferences.module.scss";
 
 const UserPreferences: FC = () => {
-	const { isOpen, language, currency, location } = useTypedSelector(selectUserPreferences);
+	const { token } = useAuth();
+	const { type, isOpen, language, currency, location, documentationLanguage } = useTypedSelector(selectUserPreferences);
 	const [activeSection, setActiveSection] = useState<string | null>(null);
 	const [locationInput, setLocationInput] = useState(location);
 	const [chosenCurrency, setChosenCurrency] = useState<string>(currency);
 	const [chosenLanguage, setChosenLanguage] = useState<string>(language);
 	const [foundLocations, setFoundLocations] = useState<any[] | null>(null);
+	const [loginWarning, setLoginWarning] = useState<boolean>(false);
 	const popupRef = useRef<HTMLDivElement>(null);
 	const inputRef = useRef<HTMLInputElement>(null);
 	const dispatch = useTypedDispatch();
+	const router = useRouter();
 
 	const geonames = Geonames({
 		username: 'aio.house',
@@ -119,7 +130,8 @@ const UserPreferences: FC = () => {
 	};
 
 	const closePopup = (event: React.MouseEvent<HTMLDivElement>): void => {
-		event?.target === popupRef.current && dispatch(togglePopup());
+		setLoginWarning(false);
+		event?.target === popupRef.current && dispatch(closePreferencePopup());
 	};
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -136,12 +148,32 @@ const UserPreferences: FC = () => {
 	};
 
 	const handleSubmit = (): void => {
-		dispatch(setPreferences({
-			isOpen: false,
-			language: chosenLanguage,
-			location: locationInput,
-			currency: chosenCurrency
-		}))
+		if (type === 'project') {
+			if (!locationInput) return;
+			
+			dispatch(setDocumentationPreferences({
+				location: locationInput,
+				documentationLanguage: chosenLanguage,
+				currency: chosenCurrency
+			}));
+
+			if (!token) {
+				setTimeout(() => {
+					setLoginWarning(true);
+				}, 100);
+			} else {
+				dispatch(closePreferencePopup());
+				const project = router.query.name;
+				router.push({pathname: '/purchase', query: {project}})
+			}
+		} else {
+			dispatch(setPreferences({
+				isOpen: false,
+				language: chosenLanguage,
+				currency: chosenCurrency
+			}))
+		}
+
 		setActiveSection(null);
 	};
 
@@ -151,7 +183,7 @@ const UserPreferences: FC = () => {
 		if (isOpen) {
 			setLocationInput(location);
 			setChosenCurrency(currency);
-			setChosenLanguage(language);
+			setChosenLanguage(type === 'common' ? language : documentationLanguage);
 			setActiveSection(null);
 		}
 	}, [isOpen]);
@@ -168,16 +200,18 @@ const UserPreferences: FC = () => {
 				isOpen ? styles.activePopup : ""
 			}`}
 		>
-			<div className={`${styles.preferences}`}>
+			{!loginWarning && <div className={`${styles.preferences}`}>
 				<div className={styles.preferences__header}>
-					<p>Regional settings</p>
-					<div onClick={() => dispatch(togglePopup())}>
+					{type === 'common' 
+					? <p>Language and currency</p>
+					: <p>Project details</p>}
+					<div onClick={() => dispatch(closePreferencePopup())}>
 						<CrossIcon />
 					</div>
 				</div>
 				<div className={styles.preferences__preferences}>
 					<div className={styles.preferences__preferences_single}>
-						<p>Language</p>
+						<p>{type === 'common' ? 'Language' : 'Documentation language'}</p>
 						<div
 							className={`${
 								styles.preferences__preferences_single_wrapper
@@ -203,8 +237,9 @@ const UserPreferences: FC = () => {
 							</div>
 						</div>
 					</div>
-					<div className={styles.preferences__preferences_single}>
-						<p>Region (city)</p>
+
+					{type === "project" && <div className={styles.preferences__preferences_single}>
+						<p>Location of builiding</p>
 						<div
 							className={`${
 								styles.preferences__preferences_single_wrapper
@@ -225,7 +260,8 @@ const UserPreferences: FC = () => {
 								{locationOptions()}
 							</div>
 						</div>
-					</div>
+					</div>}
+
 					<div className={styles.preferences__preferences_single}>
 						<p>Currency</p>
 						<div
@@ -251,10 +287,35 @@ const UserPreferences: FC = () => {
 				</div>
 				<div className={styles.preferences__buttons}>
 					<div onClick={handleSubmit} className={styles.preferences__buttons_single}>
-						Save
+						{type === 'common' ? 'Save' : 'Confirm'}
 					</div>
 				</div>
-			</div>
+			</div>}
+			
+			{loginWarning && 
+				<Warning 
+					firstButtonCallback={() => {
+						setLoginWarning(false);
+						dispatch(setProjectForPurchase(String(router.query.name)));
+						dispatch(closePreferencePopup());
+						dispatch(changeAuthMode('signup'));
+						router.push('/signin');
+					}} 
+					secondButtonCallback={() => {
+						setLoginWarning(false);
+						dispatch(setProjectForPurchase(String(router.query.name)));
+						dispatch(changeAuthMode('signin'));
+						dispatch(closePreferencePopup());
+						router.push('/signin');
+					}}
+					closeButtonCallback={() => {
+						setLoginWarning(false);
+						dispatch(closePreferencePopup());
+					}}
+					firstButtonTitle="Sign up"
+					secondButtonTitle="Sign in"
+					text="To continue your purchase, please sign up or log in to AIO system"
+				/>}
 		</div>
 	);
 };

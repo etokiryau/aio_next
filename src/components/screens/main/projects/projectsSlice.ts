@@ -13,7 +13,8 @@ interface IProjectsState {
         cost: [number, number] | null,
         roofType: string | null
     },
-    sorting: {type: string, direction: 'ascending' | 'descending'} | null
+    sorting: {type: string, direction: 'ascending' | 'descending'} | null,
+    projectForPurchase: string | null
 };
 
 interface ISortingProperties {
@@ -32,7 +33,8 @@ const initialState: IProjectsState = {
         cost: null,
         roofType: null
     },
-    sorting: null
+    sorting: null,
+    projectForPurchase: null
 };
 
 const projectsSlice = createSlice({
@@ -69,11 +71,14 @@ const projectsSlice = createSlice({
         },
         setSorting: (state, action: PayloadAction<{type: string, direction: 'ascending' | 'descending'} | null>) => {
             state.sorting = action.payload;
+        },
+        setProjectForPurchase: (state, action: PayloadAction<string | null>) => {
+            state.projectForPurchase = action.payload;
         }
     },
 });
 
-export const { setProjects, toggleFavourite, togglePropertyFilter, resetFilters } = projectsSlice.actions;
+export const { setProjects, toggleFavourite, togglePropertyFilter, resetFilters, setProjectForPurchase } = projectsSlice.actions;
 
 export const selectProjects = (state: RootState) => state.projects;
 

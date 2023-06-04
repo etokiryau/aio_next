@@ -17,12 +17,12 @@ const Loading: FC = () => {
 
 	useEffect(() => {
 		if (!initialLoad) {
-			const handleStart: TypeHandleFunction = url => {
+			const handleStart: TypeHandleFunction = () => {
 				setProgress(0);
 				setLoading(true);
 			};
 
-			const handleComplete: TypeHandleFunction = url => {
+			const handleComplete: TypeHandleFunction = () => {
 				setProgress(100);
 				setTimeout(() => setLoading(false), 1000);
 			};
@@ -55,8 +55,9 @@ const Loading: FC = () => {
 	}, [router.pathname, initialLoad, loading]);
 
 	useEffect(() => {
-		document.body.style.overflow =
+		document.body.style.overflow = 
 			loading || initialLoad ? "hidden" : "visible";
+
 	}, [loading, initialLoad]);
 
 	return <LoadingUI isLoading={loading || initialLoad} progress={progress} />;

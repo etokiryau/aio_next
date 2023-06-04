@@ -3,4 +3,5 @@ export interface IUser {
     token: string | null,
     userId: number | null,
     name: string | null,
+    isConfirmed: boolean
 };

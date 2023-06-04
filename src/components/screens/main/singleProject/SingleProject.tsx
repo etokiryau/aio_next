@@ -7,18 +7,20 @@ import MainLayout from "@/components/layouts/mainLayout/MainLayout";
 import { IProjectPageProps } from "@/interfaces/projects.interface";
 import { useCopyLinkToClipboard } from "@/hooks/useCopylinkToClipBoard";
 import { selectProjects, toggleFavourite } from "../projects/projectsSlice";
+import { openPopup, selectUserPreferences } from "@/components/userPreferences/userPreferencesSlice";
+import TechnicalIndicators from "@/components/ui/technicalIndicators/TechnicalIndicators";
+import SetupNavigator from "@/components/setupNavigator/SetupNavigator";
+import AccordionItem from "@/components/ui/accordionItem/AccordionItem";
+import ModelTile from "@/components/modelTile/ModelTile";
+import UserPreferences from "@/components/userPreferences/UserPreferences";
 
 import ArrowLargeIcon from "@/components/ui/ArrowLargeIcon";
 import LikeIcon from "@/components/ui/LikeIcon";
 import ShareIcon from "@/components/ui/ShareIcon";
 import EditIcon from "@/components/ui/EditIcon";
 import CarouselSlider from "@/components/carouselSlider/CarouselSlider";
-import TechnicalIndicators from "@/components/ui/technicalIndicators/TechnicalIndicators";
-import SetupNavigator from "@/components/setupNavigator/SetupNavigator";
-import AccordionItem from "@/components/ui/accordionItem/AccordionItem";
 
 import styles from "./singleProject.module.scss";
-import ModelTile from "@/components/modelTile/ModelTile";
 
 const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 	const { id, name, cost, currency, totalArea, height, houseDimensions } = project;
@@ -81,9 +83,9 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 							<p>free</p>
 						</div>
 
-						<Link href="/purchase" className={styles.project__header_right_purchase}>
+						<p onClick={() => dispatch(openPopup('project'))} className={styles.project__header_right_purchase}>
 							Purchase
-						</Link>
+						</p>
 						<div className={styles.project__header_right_customise}>
 							<EditIcon />
 							<p>Customise</p>
@@ -212,6 +214,7 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 
 				{copyingMessage}
 			</div>
+			<UserPreferences />
 		</MainLayout>
 	);
 };

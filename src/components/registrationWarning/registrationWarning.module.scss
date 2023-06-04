@@ -1,0 +1,17 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.warning {
+    @include mixins.flexCenter;
+    position: fixed;
+    inset: 0;
+    background-color: rgba($color: vars.$primaryColor, $alpha: .4);
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s ease;
+}
+
+.active {
+    opacity: 1;
+    visibility: visible;
+}

@@ -4,7 +4,7 @@ import { useTypedDispatch, useTypedSelector } from "@/hooks/useReduxHooks";
 
 import {
 	selectUserPreferences,
-	togglePopup
+	openPopup
 } from "@/components/userPreferences/userPreferencesSlice";
 import { languagesData } from "@/utillis/preferenceData";
 import LocationMarkerIcon from "../../../ui/LocationMarkerIcon";
@@ -18,7 +18,7 @@ const HeaderPreferences: FC = () => {
 
 	return (
 		<div
-			onClick={() => dispatch(togglePopup())}
+			onClick={() => dispatch(openPopup('common'))}
 			className={styles.preferences}
 		>
 			<div className={styles.preferences__language}>

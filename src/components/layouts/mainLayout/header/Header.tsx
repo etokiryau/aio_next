@@ -6,9 +6,9 @@ import { useAuth } from "@/hooks/useAuth";
 import UserPreferences from "@/components/userPreferences/UserPreferences";
 import HeaderPreferences from "../headerPreferences/HeaderPreferences";
 import LogoIcon from "@/components/ui/LogoIcon";
+import UserIcon from "@/components/ui/UserIcon";
 
 import styles from "./header.module.scss";
-import UserIcon from "@/components/ui/UserIcon";
 
 interface IPath {
 	name: string;
@@ -22,6 +22,7 @@ const Header: FC = () => {
 	const signedInMenuRef = useRef<HTMLDivElement>(null);
 	const [navbar, setNavbar] = useState(false);
 	const [signedInMenu, setSignedInMenu] = useState(false);
+	console.log(typeof token)
 
 	const pathes: IPath[] = [
 		{ name: "Home", path: "/", width: 49 },

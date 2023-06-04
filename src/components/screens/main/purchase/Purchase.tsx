@@ -1,5 +1,6 @@
 import { FC } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { useTypedSelector } from "@/hooks/useReduxHooks";
@@ -22,7 +23,8 @@ interface ICardData {
 
 const Purchase: FC= () => {
     const { email } = useAuth();
-    const { location, currency, language } = useTypedSelector(selectUserPreferences);
+    const { location, currency, documentationLanguage } = useTypedSelector(selectUserPreferences);
+    const router = useRouter();
 
     const validationSchema = Yup.object({
         cardNumber: Yup.string().min(25, 'At least 16 digits').required('Card number is required'),
@@ -48,8 +50,11 @@ const Purchase: FC= () => {
         }
     });
 
-    const handleSubmit = (values: ICardData) => {
-        console.log(values)
+    const handleSubmit = async (values: ICardData): Promise<void> => {
+        console.log(values);
+        await new Promise(resolve => {
+            setTimeout(() => resolve(router.push('/dashboard')), 4000)
+        })
     };
 
     const handleBlurName = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
@@ -148,7 +153,7 @@ const Purchase: FC= () => {
                                 </div>
                             </div>
                             <div className={styles.purchase__information_payment_submit}>
-                                <button disabled={!formik.isValid} type="submit">Finish purchase</button>
+                                <button disabled={!formik.isValid || formik.isSubmitting} type="submit">Finish purchase</button>
                             </div>
                         </div>
                     </form>
@@ -165,7 +170,7 @@ const Purchase: FC= () => {
                                     <div className={styles.purchase__preview_information_left_preferences}>
                                         <div>
                                             <LanguageIcon />
-                                            <p>{languagesData[language].title}</p>
+                                            <p>{languagesData[documentationLanguage].title}</p>
                                         </div>
                                         <div>
                                             <LocationMarkerIcon />

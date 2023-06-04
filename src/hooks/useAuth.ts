@@ -5,7 +5,7 @@ import {
 	setUser,
 	removeUser
 } from "@/components/screens/signin/userSlice";
-import { parseCookies, setCookie, destroyCookie } from "nookies";
+import { setCookie, destroyCookie } from "nookies";
 
 interface IAuthHook extends IUser {
 	login: (user: IUser) => void;
@@ -13,13 +13,13 @@ interface IAuthHook extends IUser {
 }
 
 export const useAuth = (): IAuthHook => {
-	const { email, name, token, userId } = useTypedSelector(selectUser);
+	const { email, name, token, userId, isConfirmed } = useTypedSelector(selectUser);
 
 	const dispatch = useTypedDispatch();
 
 	const login = (user: IUser): void => {
 		dispatch(setUser(user));
-		setCookie(null, "token", "token", {
+		setCookie(null, "token", String(token), {
 			maxAge: 30 * 24 * 60 * 60,
 			path: "/"
 		});
@@ -30,5 +30,5 @@ export const useAuth = (): IAuthHook => {
 		destroyCookie(null, "token");
 	};
 
-	return { email, name, token, userId, login, logout };
+	return { email, name, token, userId, isConfirmed, login, logout };
 };

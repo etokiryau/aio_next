@@ -3,7 +3,8 @@ import { RootState } from "@/redux/store";
 import { IUser } from "@/interfaces/user.interface";
 
 interface IState extends IUser {
-    isActiveWarning: boolean
+    isActiveWarning: boolean,
+    authMode: 'signin' | 'signup'
 }
 
 const initialState: IState = {
@@ -11,7 +12,9 @@ const initialState: IState = {
     token: null,
     userId: null,
     name: null,
-    isActiveWarning: false
+    isConfirmed: false,
+    isActiveWarning: false,
+    authMode: 'signin'
 };
 
 const userSlice = createSlice({
@@ -19,10 +22,10 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser(state, action: PayloadAction<IUser>) {
-            state.email = action.payload.email,
-            state.token = action.payload.token,
+            state.email = action.payload.email;
+            state.token = action.payload.token;
             state.userId = action.payload.userId,
-            state.name = action.payload.name
+            state.name = action.payload.name;
         },
         removeUser(state) {
             state.email = null;
@@ -31,12 +34,21 @@ const userSlice = createSlice({
             state.name = null;
         },
         toggleWarning: (state) => {
-            state.isActiveWarning = !state.isActiveWarning
+            state.isActiveWarning = !state.isActiveWarning;
+        },
+        setStatusToConfirmed: (state) => {
+            state.isConfirmed = true;
+        },
+        changeAuthMode: (state, action: PayloadAction<'signin' | 'signup'>) => {
+            state.authMode = action.payload
+        },
+        setToken: (state, action: PayloadAction<string>) => {
+            state.token = action.payload
         }
     }
 })
 
-export const { setUser, removeUser, toggleWarning } = userSlice.actions;
+export const { setUser, removeUser, toggleWarning, changeAuthMode, setStatusToConfirmed, setToken } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user;
 
