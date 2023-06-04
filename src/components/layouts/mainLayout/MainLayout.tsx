@@ -3,7 +3,6 @@ import { parseCookies } from "nookies";
 
 import { useTypedDispatch } from "@/hooks/useReduxHooks";
 import { setPreferenceFromCookie } from "@/components/userPreferences/userPreferencesSlice";
-import { setToken } from "@/components/screens/signin/userSlice";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Meta from "@/components/seo/Meta";

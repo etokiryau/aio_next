@@ -42,13 +42,13 @@ const userSlice = createSlice({
         changeAuthMode: (state, action: PayloadAction<'signin' | 'signup'>) => {
             state.authMode = action.payload
         },
-        setToken: (state, action: PayloadAction<string>) => {
-            state.token = action.payload
-        }
+        // setToken: (state, action: PayloadAction<string>) => {
+        //     state.token = action.payload
+        // }
     }
 })
 
-export const { setUser, removeUser, toggleWarning, changeAuthMode, setStatusToConfirmed, setToken } = userSlice.actions;
+export const { setUser, removeUser, toggleWarning, changeAuthMode, setStatusToConfirmed } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user;
 

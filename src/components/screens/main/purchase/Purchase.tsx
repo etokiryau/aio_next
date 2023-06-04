@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
@@ -22,9 +22,13 @@ interface ICardData {
 };
 
 const Purchase: FC= () => {
-    const { email } = useAuth();
+    const { email, token } = useAuth();
     const { location, currency, documentationLanguage } = useTypedSelector(selectUserPreferences);
     const router = useRouter();
+
+    useEffect(() => {
+        !token && router.push('/');
+    }, [token]);
 
     const validationSchema = Yup.object({
         cardNumber: Yup.string().min(25, 'At least 16 digits').required('Card number is required'),
