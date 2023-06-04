@@ -22,7 +22,7 @@ const MainLayout: FC<PropsWithChildren<IProps>> = ({ children, title, descriptio
         const { token, preferences } = parseCookies();
         preferences && dispatch(setPreferenceFromCookie(JSON.parse(preferences)));
         
-        if (token) {
+        if (token !== 'null') {
             login({
                 name: "Kirill",
                 email: "michigan@kamishok.com",
