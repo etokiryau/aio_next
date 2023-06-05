@@ -19,6 +19,25 @@
         height: 100%;
         object-fit: cover;
     }
+
+    &__freeLabel {
+        position: absolute;
+        top: 0;
+        left: 20px;
+        padding: 8px;
+        padding-top: 24px;
+        background-color: vars.$additionalColor;
+        color: vars.$secondaryColor;
+        pointer-events: none;
+        z-index: 10;
+
+        p {
+            font-size: 16px;
+            font-weight: 700;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+    }
     
     &_buttons {
         position: absolute;
@@ -85,7 +104,6 @@
         &_down {
             padding: 16px 24px;
             display: flex;
-            // justify-content: space-between;
             transition: .3s ease;
 
             p {

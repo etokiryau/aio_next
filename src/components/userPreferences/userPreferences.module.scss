@@ -48,11 +48,6 @@
             margin-top: 24px;
             height: 70px;
 
-            svg {
-                transition: .3s ease;
-                fill: vars.$primaryColor;
-            }
-
             &_wrapper {
                 overflow: hidden;
                 position: absolute;
@@ -66,6 +61,54 @@
                 user-select: none;
                 transition: .1s ease;
                 z-index: 2;
+
+                &:focus-within, &:active {
+                    overflow: visible;
+                    max-height: 200px;
+                    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+                    z-index: 10;
+
+                    svg {
+                        fill: vars.$additionalColor;
+                    }
+
+                    .preferences__preferences_single_options {
+                        visibility: visible;
+                        opacity: 1;
+                    }
+                }
+            }
+
+            &_header {
+                display: flex;
+                justify-content: space-between;
+
+                div {
+                    position: relative;
+
+                    #warning {
+                        position: absolute;
+                        top: 20px;
+                        left: 20px;
+                        padding: 16px 24px;
+                        width: 360px;
+                        background-color: vars.$secondaryColor;
+                        border-radius: 0px vars.$primaryBorderRadius vars.$primaryBorderRadius vars.$primaryBorderRadius;
+                        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+                        color: vars.$additionalColor;
+                        visibility: hidden;
+                        opacity: 0;
+                        z-index: 100;
+                        transition: .3s ease;
+                    }
+
+                    &:hover {
+                        #warning {
+                            visibility: visible;
+                            opacity: 1;
+                        }
+                    }
+                }
             }
 
             &_preview {
@@ -73,6 +116,11 @@
                 display: flex;
                 justify-content: space-between;
                 cursor: pointer;
+                
+                svg {
+                    transition: .3s ease;
+                    fill: vars.$primaryColor;
+                }
 
                 div {
                     display: flex;
@@ -90,7 +138,7 @@
                 }
 
                 input {
-                    width: min(100%, 500px);
+                    width: 100%;
                     border: none;
                     background-color: transparent;
 

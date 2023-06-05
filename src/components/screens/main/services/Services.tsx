@@ -255,7 +255,7 @@ const Services: FC = () => {
                                     value={formik.values.email}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    className={formik.touched.email && formik.errors.email ? styles.inputError : ''}
+                                    // className={formik.touched.email && formik.errors.email ? styles.inputError : ''}
                                     type="email" 
                                     id="email" 
                                     name="email" 
@@ -266,7 +266,7 @@ const Services: FC = () => {
                                     value={formik.values.name}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    className={formik.touched.name && formik.errors.name ? styles.inputError : ''}
+                                    // className={formik.touched.name && formik.errors.name ? styles.inputError : ''}
                                     id="name"
                                     name="name"
                                     placeholder="Name"
@@ -277,7 +277,7 @@ const Services: FC = () => {
                                     value={formik.values.telephone}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    className={formik.touched.telephone && formik.errors.telephone ? styles.inputError : ''}
+                                    // className={formik.touched.telephone && formik.errors.telephone ? styles.inputError : ''}
                                     id="telephone"
                                     name="telephone"
                                     placeholder="Phone number"

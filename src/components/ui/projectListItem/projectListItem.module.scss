@@ -1,5 +1,5 @@
-@use '../../../styles/_variables.module' as vars;
-@use '../../../styles/_mixins.module' as mixins;
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
 
 .listItem {
     padding: 16px 0;
@@ -32,7 +32,7 @@
                         opacity: 1;
                     }
     
-                    p {
+                    #name {
                         transform: translateY(-50%) translateX(270px);
                     }
                 }
@@ -65,16 +65,35 @@
         img {
             height: 100%;
             opacity: 0;
-            border-radius: 24px;
+            border-radius: vars.$primaryBorderRadius;
             transition: .5s ease-in-out;
             object-fit: cover;
         }
 
-        p {
+        #name {
             position: absolute;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translateY(-50%) translateX(80px);
             transition: .3s ease-in-out;
+        }
+
+        &_freeLabel {
+            position: absolute;   
+            top: 0;
+            left: 0;
+            padding: 8px;
+            padding-top: 24px;
+            background-color: vars.$additionalColor;
+            color: vars.$secondaryColor;
+            pointer-events: none;
+            z-index: 10;
+
+            p {
+                font-size: 16px;
+                font-weight: 700;
+                writing-mode: vertical-rl;
+                transform: rotate(180deg);
+            }   
         }
     }
 

@@ -22,8 +22,7 @@ const Header: FC = () => {
 	const signedInMenuRef = useRef<HTMLDivElement>(null);
 	const [navbar, setNavbar] = useState(false);
 	const [signedInMenu, setSignedInMenu] = useState(false);
-	console.log(typeof token)
-
+	
 	const pathes: IPath[] = [
 		{ name: "Home", path: "/", width: 49 },
 		{ name: "Projects", path: "/projects", width: 66 },

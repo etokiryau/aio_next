@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             totalArea: 178,
             height: 5.2,
             houseDimensions: [10, 16],
-            cost: 199,
+            cost: 0,
             currency: '€',
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 3,

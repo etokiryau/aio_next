@@ -42,7 +42,10 @@ const ProjectListItem: FC<IProjectListItem> = ({ info, likeFill,handleLike,handl
 						width={250}
 						height={50}
 					/>
-					<p>{name}</p>
+					<p id={styles.name}>{name}</p>
+					{cost === 0 && <div className={styles.listItem__name_freeLabel}>
+						<p>Test</p>
+					</div>}
 				</div>
 				<div className={styles.listItem__indicators}>
 					<p>{totalArea} m2</p>
@@ -52,10 +55,13 @@ const ProjectListItem: FC<IProjectListItem> = ({ info, likeFill,handleLike,handl
 					<p>
 						{houseDimensions[0]} m x {houseDimensions[1]} m
 					</p>
-					<p>
+					{cost !== 0 && <p>
 						{cost}
 						{currency}
-					</p>
+					</p>}
+					{cost === 0 && <p>
+						free
+					</p>}
 				</div>
 			</Link>
 			<div className={styles.listItem__buttons}>

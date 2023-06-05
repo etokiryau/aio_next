@@ -1,18 +1,21 @@
-import { FC, useEffect } from "react";
+import { FC, useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
-import { useTypedSelector } from "@/hooks/useReduxHooks";
+import { useTypedSelector, useTypedDispatch } from "@/hooks/useReduxHooks";
+import Geonames from 'geonames.js';
 
-import { selectUserPreferences } from "@/components/userPreferences/userPreferencesSlice";
+import { selectUserPreferences, setDocumentationPreferences } from "@/components/userPreferences/userPreferencesSlice";
 import { useAuth } from "@/hooks/useAuth";
 import MainLayout from "@/components/layouts/mainLayout/MainLayout";
 import { languagesData } from "@/utillis/preferenceData";
-
-import styles from "./purchase.module.scss";
 import LanguageIcon from "@/components/ui/LanguageIcon";
 import LocationMarkerIcon from "@/components/ui/LocationMarkerIcon";
+import WarningIcon from "@/components/ui/WarningIcon";
+import TriangleIcon from "@/components/ui/TriangleIcon";
+
+import styles from "./purchase.module.scss";
 
 interface ICardData {
     cardNumber: string,
@@ -21,14 +24,26 @@ interface ICardData {
     cvv: string
 };
 
-const Purchase: FC= () => {
+const Purchase: FC = () => {
     const { email, token } = useAuth();
     const { location, currency, documentationLanguage } = useTypedSelector(selectUserPreferences);
+    const [locationInput, setLocationInput] = useState(location);
+	const [chosenLanguage, setChosenLanguage] = useState<string>(documentationLanguage);
+    const [activeSection, setActiveSection] = useState<string | null>(null);
+    const [foundLocations, setFoundLocations] = useState<any[] | null>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
+    const dispatch = useTypedDispatch();
 
     useEffect(() => {
         !token && router.push('/');
     }, [token]);
+
+    const geonames = Geonames({
+		username: 'aio.house',
+		lan: 'en',
+		encoding: 'JSON'
+	});
 
     const validationSchema = Yup.object({
         cardNumber: Yup.string().min(25, 'At least 16 digits').required('Card number is required'),
@@ -102,6 +117,99 @@ const Purchase: FC= () => {
         formik.setFieldValue('cvv', value);
     };
 
+    const locationOptions = (): JSX.Element[] | null => {
+		if (!foundLocations) return null;
+		else {
+			return foundLocations.map((item, i) => {
+				return (
+					<p className={styles.locationOption} 
+						onClick={() => {
+							setLocationInput(item.toponymName);
+							setActiveSection(null);
+                            dispatch(setDocumentationPreferences({
+                                currency, location: locationInput, documentationLanguage: chosenLanguage
+                            }))
+						}} 
+						key={i}
+					>{item.toponymName}</p>
+				)
+			})
+		}
+	};
+
+    const languageOptions = (): JSX.Element[] => {
+		const result: JSX.Element[] = [];
+
+		for (let key in languagesData) {
+			if (key === chosenLanguage) continue;
+
+			const element: JSX.Element = (
+				<div
+					className={styles.languageOption}
+					key={languagesData[key].alt}
+					onClick={() => {
+						setChosenLanguage(key);
+						setActiveSection(null);
+					}}
+				>
+					<Image
+						src={languagesData[key].src}
+						alt={languagesData[key].alt}
+						width={20}
+						height={15}
+					/>
+					<p>{languagesData[key].title}</p>
+				</div>
+			);
+
+			result.push(element);
+		}
+
+		return result;
+	};
+
+    const toggleOptions = (section: string): void => {
+		if (section === activeSection) {
+			setActiveSection(null);
+		} else {
+			setActiveSection(section);
+		}
+	};
+
+    const toggleLocationSection = (event: React.MouseEvent<HTMLDivElement>): void => {
+		if (event.target === inputRef.current) return;
+		toggleOptions('location');
+	};
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+		setLocationInput(event.target.value);
+
+		const searchCities = (): void => {
+			geonames.search({name_startsWith: locationInput, cities: 'cities15000', maxRows: 20})
+			.then(resp => {
+				setFoundLocations(resp.geonames);
+			})
+			.catch(err => setFoundLocations(null));
+		};
+		searchCities();
+	};
+
+    useEffect(() => {
+        setLocationInput(location);
+        setChosenLanguage(documentationLanguage);
+        setActiveSection(null);
+	}, []);
+
+    useEffect(() => {
+		activeSection === 'location' && inputRef.current?.focus();
+	}, [activeSection]);
+
+    useEffect(() => {
+        dispatch(setDocumentationPreferences({
+            currency, location: locationInput, documentationLanguage: chosenLanguage
+        }))
+    }, [chosenLanguage])
+
     return (
         <MainLayout title="Purchase" footer={false}>
             <div className={styles.purchase}>
@@ -114,8 +222,75 @@ const Purchase: FC= () => {
                                 <p id={styles.contactValue}>{email}</p>
                             </div>
                             <div className={styles.purchase__information_contact_single}>
-                                <p>Region (city)</p>
-                                <p id={styles.contactValue}>{location}</p>
+                                <div className={styles.purchase__information_contact_single_header}>
+                                    <p>Documentation language</p>
+                                    <div>
+                                        <WarningIcon hasFilling={true} />
+                                        <p id={styles.warning}>
+                                            Your project&#39;s characteristics are tailored
+                                            to the climate conditions of the selected 
+                                            building location! 
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div
+                                    className={`${
+                                        styles.purchase__information_contact_single_wrapper
+                                    } ${activeSection === 'language' ? styles.activeSection : ""}`}
+                                >
+                                    <div
+                                        onClick={() => toggleOptions("language")}
+                                        className={styles.purchase__information_contact_single_preview}
+                                    >
+                                        <div>
+                                            <Image
+                                                src={languagesData[chosenLanguage].src}
+                                                alt="flag"
+                                                width={21}
+                                                height={15}
+                                            />
+                                            <p>{languagesData[chosenLanguage].title}</p>
+                                        </div>
+                                        <TriangleIcon />
+                                    </div>
+                                    <div className={styles.purchase__information_contact_single_options}>
+                                        {languageOptions()}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles.purchase__information_contact_single}>
+                                <div className={styles.purchase__information_contact_single_header}>
+                                    <p>Building location</p>
+                                    <div>
+                                        <WarningIcon hasFilling={true} />
+                                        <p id={styles.warning}>
+                                            Your project&#39;s characteristics are tailored
+                                            to the climate conditions of the selected 
+                                            building location! 
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className={`${styles.purchase__information_contact_single_wrapper}`}>
+                                    <div
+                                        onClick={toggleLocationSection}
+                                        className={styles.purchase__information_contact_single_preview}
+                                    >
+                                        <div className={styles.purchase__information_contact_single_preview_input}>
+                                            {locationInput || activeSection === 'location'
+                                            ? <input type="text" placeholder="Start searching..."
+                                                ref={inputRef} value={locationInput ? locationInput : ''} 
+                                                onChange={handleInputChange}
+                                                /> 
+                                            : <span>Choose region</span>}
+                                        </div>
+                                        <TriangleIcon />
+                                    </div>
+                                    <div className={styles.purchase__information_contact_single_options}>
+                                        {locationOptions()}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

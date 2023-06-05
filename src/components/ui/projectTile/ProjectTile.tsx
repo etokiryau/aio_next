@@ -41,6 +41,11 @@ const ProjectTile: FC<IProjectTile> = ({
 	return (
 		<div className={styles.projectTile}>
 			<Image src={previewSrc} alt="project" width={780} height={300} />
+
+			{cost === 0 && <div className={styles.projectTile__freeLabel}>
+				<p>Test</p>
+			</div>}
+
 			<div className={styles.projectTile_buttons}>
 				<div data-link={`/projects/${name}`} onClick={handleShare}>
 					<ShareIcon />
@@ -50,6 +55,7 @@ const ProjectTile: FC<IProjectTile> = ({
 					<LikeIcon isActive={likeFill ? true : false} />
 				</div>
 			</div>
+
 			<Link
 				href={`/projects/${name}`}
 				className={styles.projectTile_information}
@@ -64,10 +70,11 @@ const ProjectTile: FC<IProjectTile> = ({
 							{houseDimensions[1]} m
 						</p>
 					</div>
-					<p id={styles.cost}>
+					{cost !== 0 && <p id={styles.cost}>
 						{cost}
 						{currency}
-					</p>
+					</p>}
+					{cost === 0 && <p id={styles.cost}>free</p>}
 				</div>
 				<div className={styles.projectTile_information_down}>
 					<p>{name}</p>

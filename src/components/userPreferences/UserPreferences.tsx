@@ -16,11 +16,12 @@ import {
 } from "./userPreferencesSlice";
 import { changeAuthMode } from "../screens/signin/userSlice";
 import { setProjectForPurchase } from "../screens/main/projects/projectsSlice";
-import Triangle from "@/components/ui/TriangleIcon";
+import TriangleIcon from "@/components/ui/TriangleIcon";
 import CrossIcon from "../ui/CrossIcon";
 import Warning from "../ui/warning/Warning";
 
 import styles from "./userPreferences.module.scss";
+import WarningIcon from "../ui/WarningIcon";
 
 const UserPreferences: FC = () => {
 	const { token } = useAuth();
@@ -211,7 +212,17 @@ const UserPreferences: FC = () => {
 				</div>
 				<div className={styles.preferences__preferences}>
 					<div className={styles.preferences__preferences_single}>
-						<p>{type === 'common' ? 'Language' : 'Documentation language'}</p>
+						<div className={styles.preferences__preferences_single_header}>
+							<p>{type === 'common' ? 'Language' : 'Documentation language'}</p>
+							{type === 'project' && <div>
+								<WarningIcon hasFilling={true} />
+								<p id={styles.warning}>
+									Your project&#39;s characteristics are tailored
+									to the climate conditions of the selected 
+									building location! 
+								</p>
+							</div>}
+						</div>
 						<div
 							className={`${
 								styles.preferences__preferences_single_wrapper
@@ -230,7 +241,7 @@ const UserPreferences: FC = () => {
 									/>
 									<p>{languagesData[chosenLanguage].title}</p>
 								</div>
-								<Triangle />
+								<TriangleIcon />
 							</div>
 							<div className={styles.preferences__preferences_single_options}>
 								{languageOptions()}
@@ -239,12 +250,18 @@ const UserPreferences: FC = () => {
 					</div>
 
 					{type === "project" && <div className={styles.preferences__preferences_single}>
-						<p>Location of builiding</p>
-						<div
-							className={`${
-								styles.preferences__preferences_single_wrapper
-							} ${activeSection === 'location' ? styles.activeSection : ""}`}
-						>
+						<div className={styles.preferences__preferences_single_header}>
+							<p>Builiding location</p>
+							{type === 'project' && <div>
+								<WarningIcon hasFilling={true} />
+								<p id={styles.warning}>
+									Your project&#39;s characteristics are tailored
+									to the climate conditions of the selected 
+									building location! 
+								</p>
+							</div>}
+						</div>
+						<div className={`${styles.preferences__preferences_single_wrapper}`}>
 							<div
 								onClick={toggleLocationSection}
 								className={styles.preferences__preferences_single_preview}
@@ -254,7 +271,7 @@ const UserPreferences: FC = () => {
 									? <input ref={inputRef} value={locationInput ? locationInput : ''} onChange={handleInputChange} type="text" placeholder="Start searching..." /> 
 									: <span>Choose region</span>}
 								</div>
-								<Triangle />
+								<TriangleIcon />
 							</div>
 							<div className={styles.preferences__preferences_single_options}>
 								{locationOptions()}
@@ -277,7 +294,7 @@ const UserPreferences: FC = () => {
                                     <p>{currencyData[chosenCurrency]}</p>
 									<p>{chosenCurrency}</p>
 								</div>
-								<Triangle />
+								<TriangleIcon />
 							</div>
 							<div className={styles.preferences__preferences_single_options}>
 								{currencyOptions()}

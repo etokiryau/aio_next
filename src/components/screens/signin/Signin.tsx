@@ -112,7 +112,7 @@ const Signin: FC = () => {
 		}
 	};
 
-	const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+	const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>): void => {
 		e.preventDefault();
 	};
 
@@ -139,10 +139,8 @@ const Signin: FC = () => {
 			dispatch(toggleWarning());
 			return;
 		}
+
 		router.back();
-		// previousPath
-		// ? router.push(String(previousPath))
-		// : router.push('/');
 	};
 
 	return (
@@ -151,7 +149,10 @@ const Signin: FC = () => {
 				<div onClick={goBack} className={styles.signin__back}>
 					<div>
 						<ArrowLarge />
-						<p>Back to main page</p>
+						{!projectForPurchase 
+							? <p>Back to main site</p>
+							: <p>Back to project page</p>
+						}
 					</div>
 				</div>
 				{!isConfirmingStep && (

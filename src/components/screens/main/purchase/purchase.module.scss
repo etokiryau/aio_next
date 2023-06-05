@@ -26,7 +26,12 @@
             }
 
             &_single {
+                position: relative;
                 margin-top: 24px;
+                
+                &:last-child {
+                    margin-top: 72px;
+                }
 
                 #contactTitle {
                     color: black;
@@ -35,9 +40,162 @@
                 #contactValue {
                     margin-top: 8px;
                     padding: 8px;
-                    background-color: rgba($color: vars.$primaryColor, $alpha: .1);
+                    background-color: rgba($color: vars.$primaryColor, $alpha: .05);
                     border-radius: 8px;
                     border: solid .4px transparent;
+                }
+
+                &_header {
+                    display: flex;
+                    justify-content: space-between;
+
+                    div {
+                        position: relative;
+
+                        #warning {
+                            position: absolute;
+                            top: 20px;
+                            left: 20px;
+                            padding: 16px 24px;
+                            width: 360px;
+                            background-color: vars.$secondaryColor;
+                            border-radius: 0px vars.$primaryBorderRadius vars.$primaryBorderRadius vars.$primaryBorderRadius;
+                            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+                            color: vars.$additionalColor;
+                            visibility: hidden;
+                            opacity: 0;
+                            transition: .3s ease;
+                        }
+
+                        &:hover {
+                            #warning {
+                                visibility: visible;
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+
+                &_wrapper {
+                    overflow: hidden;
+                    position: absolute;
+                    top: 30px;
+                    left:0;
+                    width: 100%;
+                    background-color: rgba($color: vars.$primaryColor, $alpha: .1);
+                    border-radius: 8px;
+                    max-height: 40px;
+                    z-index: 10;
+                    user-select: none;
+                    transition: .1s ease;
+                    z-index: 2;
+
+                    &:focus-within, &:active {
+                        overflow: visible;
+                        max-height: 200px;
+                        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+                        z-index: 10;
+    
+                        svg {
+                            fill: vars.$additionalColor;
+                        }
+    
+                        .purchase__information_contact_single_options {
+                            visibility: visible;
+                            opacity: 1;
+                        }
+                    }
+                }
+    
+                &_preview {
+                    padding: 8px 16px;
+                    min-height: 40px;
+                    display: flex;
+                    justify-content: space-between;
+                    cursor: pointer;
+
+                    svg {
+                        fill: vars.$primaryColor;
+                        transition: .3s ease;
+                    }
+    
+                    div {
+                        display: flex;
+                        gap: 16px;
+                    }
+    
+                    &:hover {
+                        svg {
+                            fill: vars.$additionalColor;
+                        }
+                    }
+    
+                    p:first-child {
+                        font-weight: 400;
+                    }
+
+                    &_input {
+                        width: 100%;
+                    }
+    
+                    input {
+                        width: 100%;
+                        border: none;
+                        background-color: transparent;
+    
+                        &::placeholder {
+                            font-size: 16px;
+                        }
+                    }
+                }
+    
+                &_options {
+                    overflow: auto;
+                    visibility: hidden;
+                    opacity: 0;
+                    background-color: vars.$secondaryColor;
+                    border-radius: 0 0 8px 8px;
+                    max-height: 150px;
+    
+                    .languageOption, .locationOption {
+                        padding: 6px 16px;
+                        display: flex;
+                        gap: 16px;
+                        cursor: pointer;
+                        
+                        p:first-child {
+                            font-weight: 400;
+                        }
+    
+                        &:first-child {
+                            padding: 12px 16px 6px;
+                        }
+    
+                        &:last-child {
+                            padding: 6px 16px 12px;
+                            border-radius: 0 0 8px 8px;
+                        }
+    
+                        &:hover {
+                            background-color: rgba($color: vars.$primaryColor, $alpha: .2);
+                        }
+                    }
+                }
+    
+                .activeSection  {
+                    overflow: visible;
+                    max-height: 200px;
+                    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+                    z-index: 10;
+    
+                    svg {
+                        fill: vars.$additionalColor;
+                    }
+    
+                    .purchase__information_contact_single_options {
+                        visibility: visible;
+                        opacity: 1;
+                    }
                 }
             }
         }
