@@ -7,23 +7,27 @@ import MainLayout from "@/components/layouts/mainLayout/MainLayout";
 import { IProjectPageProps } from "@/interfaces/projects.interface";
 import { useCopyLinkToClipboard } from "@/hooks/useCopylinkToClipBoard";
 import { selectProjects, toggleFavourite } from "../projects/projectsSlice";
-import { openPopup, selectUserPreferences } from "@/components/userPreferences/userPreferencesSlice";
+import {
+	openPopup,
+	selectUserPreferences
+} from "@/components/userPreferences/userPreferencesSlice";
 import TechnicalIndicators from "@/components/ui/technicalIndicators/TechnicalIndicators";
 import SetupNavigator from "@/components/setupNavigator/SetupNavigator";
 import AccordionItem from "@/components/ui/accordionItem/AccordionItem";
 import ModelTile from "@/components/modelTile/ModelTile";
 import UserPreferences from "@/components/userPreferences/UserPreferences";
 
-import ArrowLargeIcon from "@/components/ui/ArrowLargeIcon";
-import LikeIcon from "@/components/ui/LikeIcon";
-import ShareIcon from "@/components/ui/ShareIcon";
-import EditIcon from "@/components/ui/EditIcon";
+import ArrowLargeIcon from "@/components/ui/_icons/ArrowLargeIcon";
+import LikeIcon from "@/components/ui/_icons/LikeIcon";
+import ShareIcon from "@/components/ui/_icons/ShareIcon";
+import EditIcon from "@/components/ui/_icons/EditIcon";
 import CarouselSlider from "@/components/carouselSlider/CarouselSlider";
 
 import styles from "./singleProject.module.scss";
 
 const SingleProject: FC<IProjectPageProps> = ({ project }) => {
-	const { id, name, cost, currency, totalArea, height, houseDimensions } = project;
+	const { id, name, cost, currency, totalArea, height, houseDimensions } =
+		project;
 	const router = useRouter();
 	const dispatch = useTypedDispatch();
 	const [copyingMessage, copyLinkToClipboard] = useCopyLinkToClipboard();
@@ -55,17 +59,20 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 						<ArrowLargeIcon />
 						<p>Back to catalog</p>
 					</div>
-					
+
 					<div className={styles.project__sticky_right}>
 						<div onClick={() => dispatch(toggleFavourite(id))}>
 							<LikeIcon isActive={isFavourite(id)} />
 						</div>
-						<div data-link={`/projects/${name}`} onClick={copyLinkToClipboard}>
+						<div
+							data-link={`/projects/${name}`}
+							onClick={copyLinkToClipboard}
+						>
 							<ShareIcon />
 						</div>
 					</div>
 				</section>
-				
+
 				<section className={styles.project__header}>
 					<div className={styles.project__header_left}>
 						<p>{name}</p>
@@ -83,7 +90,10 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 							<p>free</p>
 						</div>
 
-						<p onClick={() => dispatch(openPopup('project'))} className={styles.project__header_right_purchase}>
+						<p
+							onClick={() => dispatch(openPopup("project"))}
+							className={styles.project__header_right_purchase}
+						>
 							Purchase
 						</p>
 						<div className={styles.project__header_right_customise}>
@@ -99,17 +109,29 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 
 				<section className={styles.project__indicators}>
 					<h2>Main technical indicators</h2>
-					<TechnicalIndicators totalArea={totalArea} height={height} houseDimensions={houseDimensions} />
+					<TechnicalIndicators
+						totalArea={totalArea}
+						height={height}
+						houseDimensions={houseDimensions}
+					/>
 				</section>
 
 				<section className={styles.project__models}>
 					<h2>Try 3D model and Virtual tour</h2>
 					<div className={styles.project__models_wrapper}>
 						<div className={styles.project__models_single}>
-							<ModelTile type="model" preview="/project23.jpg" src="dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dHN3aWdsenZ5dWJtbTZwaG04d2Ria2IzZHhqbmZrcnYtcHJvamVjdF9hL3Byb2plY3RfYV9mcmVlLm53ZA" />
+							<ModelTile
+								type="model"
+								preview="/project23.jpg"
+								src="dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dHN3aWdsenZ5dWJtbTZwaG04d2Ria2IzZHhqbmZrcnYtcHJvamVjdF9hL3Byb2plY3RfYV9mcmVlLm53ZA"
+							/>
 						</div>
 						<div className={styles.project__models_single}>
-							<ModelTile type="tour" preview="/projectPreview.jpg" src="" />
+							<ModelTile
+								type="tour"
+								preview="/projectPreview.jpg"
+								src=""
+							/>
 						</div>
 					</div>
 				</section>
@@ -133,7 +155,10 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 								<li>List of sheets</li>
 								<li>Facades</li>
 								<li>The color scheme of the facades</li>
-								<li>Floor plans of buildings and structures with spaces explication</li>
+								<li>
+									Floor plans of buildings and structures with
+									spaces explication
+								</li>
 								<li>Roofing plan</li>
 								<li>Sections</li>
 								<li>Window and door list</li>
@@ -145,8 +170,13 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 						<AccordionItem header="Structural engineering">
 							<ul>
 								<li>Load-bearing wall plan</li>
-								<li>Plan of the foundation bottom reinforcement</li>
-								<li>The plan of the foundation upper reinforcement</li>
+								<li>
+									Plan of the foundation bottom reinforcement
+								</li>
+								<li>
+									The plan of the foundation upper
+									reinforcement
+								</li>
 								<li>Plans of the slabs lower reinforcement</li>
 								<li>Plans of the slabs upper reinforcement</li>
 								<li>Sections</li>
@@ -159,36 +189,48 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 
 						<AccordionItem header="Mechanical, electrical and plumbing">
 							<div className={styles.container}>
-								<div >
+								<div>
 									<p>Power supply system:</p>
 									<ul>
-										<li>Schematic diagrams of power supply of power receivers from the main, additional and backup power supply sources</li>
+										<li>
+											Schematic diagrams of power supply
+											of power receivers from the main,
+											additional and backup power supply
+											sources
+										</li>
 										<li>Lightning plans</li>
 										<li>Power supply network plan</li>
 										<li>Socket placement layout</li>
-										<li>Schematic single-line diagram of the power supply</li>
+										<li>
+											Schematic single-line diagram of the
+											power supply
+										</li>
 										<li>Bill of quantities</li>
 									</ul>
 								</div>
 
-								<div >
+								<div>
 									<p>Water supply system:</p>
 									<ul>
 										<li>General information</li>
 										<li>Water supply plan</li>
 										<li>Collector connection scheme</li>
-										<li>Plumbing fixture connection scheme</li>
+										<li>
+											Plumbing fixture connection scheme
+										</li>
 										<li>Water system isometry</li>
 										<li>House water inlet scheme</li>
 										<li>Bill of quantities</li>
 									</ul>
 								</div>
 
-								<div >
+								<div>
 									<p>Water disposal system:</p>
 									<ul>
 										<li>Sewerage systems plans</li>
-										<li>Plumbing fixture connection scheme</li>
+										<li>
+											Plumbing fixture connection scheme
+										</li>
 										<li>Sewerage system isometry</li>
 										<li>Bill of quantities</li>
 									</ul>
@@ -198,9 +240,21 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 
 						<AccordionItem header="3D model">
 							<ul>
-								<li>Instructions for working with a 3D model</li>
-								<li>3D model for all simulated sections exe file &quot;Enscape&quot; for a virtual tour of the object</li>
-								<li>Link to the browser version of the project with the ability to view all the documentation, walk around the facility and clarify the volumes from any device from anywhere in the world</li>
+								<li>
+									Instructions for working with a 3D model
+								</li>
+								<li>
+									3D model for all simulated sections exe file
+									&quot;Enscape&quot; for a virtual tour of
+									the object
+								</li>
+								<li>
+									Link to the browser version of the project
+									with the ability to view all the
+									documentation, walk around the facility and
+									clarify the volumes from any device from
+									anywhere in the world
+								</li>
 							</ul>
 						</AccordionItem>
 					</div>
@@ -208,7 +262,10 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 
 				<section className={styles.project__services}>
 					<h2>Additional services</h2>
-					<h3>If you like the project but want to change it a little, we can customise it for you</h3>
+					<h3>
+						If you like the project but want to change it a little,
+						we can customise it for you
+					</h3>
 					<Link href="/services">Learn more</Link>
 				</section>
 

@@ -1,8 +1,9 @@
 import { NextPage } from "next";
+import Dashboard from "@/components/screens/account/dashboard/Dashboard";
 
 const DashboardPage: NextPage = () => {
 
-    return <div>Dashboard</div>
+    return <Dashboard />
 }
 
 export default DashboardPage;

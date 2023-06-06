@@ -1,0 +1,11 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 270px;
+    height: 100vh;
+    background-color: rgba($color: vars.$primaryColor, $alpha: .1);
+}

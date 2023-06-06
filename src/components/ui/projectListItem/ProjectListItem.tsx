@@ -1,8 +1,8 @@
 import { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import ShareIcon from "../ShareIcon";
-import LikeIcon from "../LikeIcon";
+import ShareIcon from "../_icons/ShareIcon";
+import LikeIcon from "../_icons/LikeIcon";
 
 import styles from "./projectListItem.module.scss";
 
@@ -21,7 +21,12 @@ interface IProjectListItem {
 	handleShare: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-const ProjectListItem: FC<IProjectListItem> = ({ info, likeFill,handleLike,handleShare }) => {
+const ProjectListItem: FC<IProjectListItem> = ({
+	info,
+	likeFill,
+	handleLike,
+	handleShare
+}) => {
 	const {
 		name,
 		totalArea,
@@ -43,9 +48,11 @@ const ProjectListItem: FC<IProjectListItem> = ({ info, likeFill,handleLike,handl
 						height={50}
 					/>
 					<p id={styles.name}>{name}</p>
-					{cost === 0 && <div className={styles.listItem__name_freeLabel}>
-						<p>Test</p>
-					</div>}
+					{cost === 0 && (
+						<div className={styles.listItem__name_freeLabel}>
+							<p>Test</p>
+						</div>
+					)}
 				</div>
 				<div className={styles.listItem__indicators}>
 					<p>{totalArea} m2</p>
@@ -55,23 +62,20 @@ const ProjectListItem: FC<IProjectListItem> = ({ info, likeFill,handleLike,handl
 					<p>
 						{houseDimensions[0]} m x {houseDimensions[1]} m
 					</p>
-					{cost !== 0 && <p>
-						{cost}
-						{currency}
-					</p>}
-					{cost === 0 && <p>
-						free
-					</p>}
+					{cost !== 0 && (
+						<p>
+							{cost}
+							{currency}
+						</p>
+					)}
+					{cost === 0 && <p>free</p>}
 				</div>
 			</Link>
 			<div className={styles.listItem__buttons}>
 				<div onClick={handleLike}>
 					<LikeIcon isActive={likeFill ? true : false} />
 				</div>
-				<div
-					data-link={`/projects/${name}`}
-					onClick={handleShare}
-				>
+				<div data-link={`/projects/${name}`} onClick={handleShare}>
 					<ShareIcon />
 				</div>
 			</div>

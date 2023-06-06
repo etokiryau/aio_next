@@ -2,13 +2,13 @@
 @use '@/styles/_mixins.module' as mixins;
 
 .advantages {
-    margin-top: 205px;
+    margin-top: 154px;
     text-align: center;
 
     &__header {
         margin: 0 auto;
         width: 62.5%;
-        height: calc(100vh - 120px);
+        height: calc(100vh - 220px);
     }
 
     &__content {
@@ -73,4 +73,10 @@
         }
     }
     
+    &__advantageCards {
+        margin-top: 112px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
 }

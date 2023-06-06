@@ -1,5 +1,5 @@
-@use '../../../../styles/_variables.module' as vars;
-@use '../../../../styles/_mixins.module' as mixins;
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
 
 .projects {
     .filters {
@@ -223,25 +223,6 @@
             transform: translateX(-50%);
             z-index: 100;
 
-            &_toggler {
-                display: flex;
-                padding: 6px 8px;
-                gap: 12px;
-                background-color: vars.$primaryColor;
-                color: vars.$secondaryColor;
-                border-radius: 24px;
-
-                p {
-                    @include mixins.button;
-                    padding: 6px 5px;
-                    font-size: 20px;
-                    width: 70px;
-                    text-align: center;
-                    transition: .3s ease;
-                    line-height: 15px;
-                }
-            }
-
             &_toTop {
                 @include mixins.flexCenter;
                 @include mixins.button;
@@ -262,10 +243,6 @@
                         margin-top: -2px;
                     }
                 }
-            }
-            
-            .activeMode {
-                @include mixins.whiteButton;
             }
         }
 

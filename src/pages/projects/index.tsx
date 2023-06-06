@@ -13,6 +13,13 @@ const ProjectsPage: NextPage<IProjectsProps> = ({ projects }) => {
     dispatch(setProjects(projects));
 
     // useEffect(() => {
+    //     const data = fetchData('Projects/1')
+    //     console.log(data)
+    // }, [])
+    // const data = await fetchData('projects')
+    // console.log(data)
+
+    // useEffect(() => {
     //     const data = {
     //         area: 1212,
     //         cost: 345345,

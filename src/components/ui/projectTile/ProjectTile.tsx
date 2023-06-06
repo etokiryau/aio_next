@@ -1,9 +1,9 @@
 import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ShareIcon from "../ShareIcon";
-import LikeIcon from "../LikeIcon";
-import ArrowSmall from "@/components/ui/ArrowSmallIcon";
+import ShareIcon from "../_icons/ShareIcon";
+import LikeIcon from "../_icons/LikeIcon";
+import ArrowSmall from "@/components/ui/_icons/ArrowSmallIcon";
 
 import styles from "./projectTile.module.scss";
 
@@ -42,9 +42,11 @@ const ProjectTile: FC<IProjectTile> = ({
 		<div className={styles.projectTile}>
 			<Image src={previewSrc} alt="project" width={780} height={300} />
 
-			{cost === 0 && <div className={styles.projectTile__freeLabel}>
-				<p>Test</p>
-			</div>}
+			{cost === 0 && (
+				<div className={styles.projectTile__freeLabel}>
+					<p>Test</p>
+				</div>
+			)}
 
 			<div className={styles.projectTile_buttons}>
 				<div data-link={`/projects/${name}`} onClick={handleShare}>
@@ -70,10 +72,12 @@ const ProjectTile: FC<IProjectTile> = ({
 							{houseDimensions[1]} m
 						</p>
 					</div>
-					{cost !== 0 && <p id={styles.cost}>
-						{cost}
-						{currency}
-					</p>}
+					{cost !== 0 && (
+						<p id={styles.cost}>
+							{cost}
+							{currency}
+						</p>
+					)}
 					{cost === 0 && <p id={styles.cost}>free</p>}
 				</div>
 				<div className={styles.projectTile_information_down}>

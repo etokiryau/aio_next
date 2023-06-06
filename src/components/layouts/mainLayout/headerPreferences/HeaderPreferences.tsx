@@ -7,7 +7,7 @@ import {
 	openPopup
 } from "@/components/userPreferences/userPreferencesSlice";
 import { languagesData } from "@/utillis/preferenceData";
-import LocationMarkerIcon from "../../../ui/LocationMarkerIcon";
+import LocationMarkerIcon from "../../../ui/_icons/LocationMarkerIcon";
 
 import styles from "./headerPreferences.module.scss";
 
@@ -18,7 +18,7 @@ const HeaderPreferences: FC = () => {
 
 	return (
 		<div
-			onClick={() => dispatch(openPopup('common'))}
+			onClick={() => dispatch(openPopup("common"))}
 			className={styles.preferences}
 		>
 			<div className={styles.preferences__language}>

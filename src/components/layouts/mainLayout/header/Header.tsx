@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
 import UserPreferences from "@/components/userPreferences/UserPreferences";
 import HeaderPreferences from "../headerPreferences/HeaderPreferences";
-import LogoIcon from "@/components/ui/LogoIcon";
-import UserIcon from "@/components/ui/UserIcon";
+import LogoIcon from "@/components/ui/_icons/LogoIcon";
+import UserIcon from "@/components/ui/_icons/UserIcon";
 
 import styles from "./header.module.scss";
 

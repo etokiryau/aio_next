@@ -11,8 +11,8 @@ import {
 } from "./projectsSlice";
 
 import MainLayout from "@/components/layouts/mainLayout/MainLayout";
-import Triangle from "@/components/ui/TriangleIcon";
-import Cross from "@/components/ui/CrossIcon";
+import Triangle from "@/components/ui/_icons/TriangleIcon";
+import Cross from "@/components/ui/_icons/CrossIcon";
 import ProjectTile from "@/components/ui/projectTile/ProjectTile";
 import ProjectListItem from "@/components/ui/projectListItem/ProjectListItem";
 import { useCopyLinkToClipboard } from "@/hooks/useCopylinkToClipBoard";
@@ -20,6 +20,7 @@ import { currencyData } from "@/utillis/preferenceData";
 
 import styles from "./projects.module.scss";
 import { selectUserPreferences } from "@/components/userPreferences/userPreferencesSlice";
+import Toggler from "@/components/ui/toggler/Toggler";
 
 const Projects: NextPage = () => {
 	const [listMode, setListMode] = useState(false);
@@ -43,29 +44,27 @@ const Projects: NextPage = () => {
 		return favourites.some(item => item === id);
 	};
 
-	const projectsListContent: JSX.Element[] = sortedProjects.map(
-		(item, i) => {
-			const info = {
-				name: item.name,
-				previewSrc: item.previewSrc,
-				totalArea: item.totalArea,
-				floorNumber: item.floorNumber,
-				houseDimensions: item.houseDimensions,
-				cost: item.cost,
-				currency: currencyData[currency]
-			};
+	const projectsListContent: JSX.Element[] = sortedProjects.map((item, i) => {
+		const info = {
+			name: item.name,
+			previewSrc: item.previewSrc,
+			totalArea: item.totalArea,
+			floorNumber: item.floorNumber,
+			houseDimensions: item.houseDimensions,
+			cost: item.cost,
+			currency: currencyData[currency]
+		};
 
-			return (
-				<ProjectListItem
-					key={i}
-					info={info}
-					handleShare={e => copyLinkToClipboard(e)}
-					handleLike={() => dispatch(toggleFavourite(item.id))}
-					likeFill={isFavourite(item.id)}
-				/>
-			);
-		}
-	);
+		return (
+			<ProjectListItem
+				key={i}
+				info={info}
+				handleShare={e => copyLinkToClipboard(e)}
+				handleLike={() => dispatch(toggleFavourite(item.id))}
+				likeFill={isFavourite(item.id)}
+			/>
+		);
+	});
 
 	const projectsTilesContent: JSX.Element[] = filteredProjects.map(
 		(item, i) => {
@@ -104,12 +103,9 @@ const Projects: NextPage = () => {
 				<section className={styles.filters}>
 					<div className={styles.filters__wrapper}>
 						<div className={styles.filters__left}>
-
-							<div className={`${styles.filters__left_button} 
-								${filters.floorNumber
-										? styles.activeButton
-										: ""
-								}`}
+							<div
+								className={`${styles.filters__left_button} 
+								${filters.floorNumber ? styles.activeButton : ""}`}
 							>
 								<p>
 									Floors
@@ -120,30 +116,69 @@ const Projects: NextPage = () => {
 								{!filters.floorNumber ? (
 									<Triangle />
 								) : (
-									<div 
-										className={styles.filters__left_button_close}
-										onClick={() => dispatch(togglePropertyFilter({floorNumber: null}))}
+									<div
+										className={
+											styles.filters__left_button_close
+										}
+										onClick={() =>
+											dispatch(
+												togglePropertyFilter({
+													floorNumber: null
+												})
+											)
+										}
 									>
 										<Cross />
 									</div>
 								)}
 
-								<div className={styles.filters__left_button_popup}>
-									<p id={styles.filterOption} onClick={() => dispatch(togglePropertyFilter({floorNumber: 1}))}>
+								<div
+									className={
+										styles.filters__left_button_popup
+									}
+								>
+									<p
+										id={styles.filterOption}
+										onClick={() =>
+											dispatch(
+												togglePropertyFilter({
+													floorNumber: 1
+												})
+											)
+										}
+									>
 										1 floor
 									</p>
-									<p id={styles.filterOption} onClick={() => dispatch(togglePropertyFilter({floorNumber: 2}))}>
+									<p
+										id={styles.filterOption}
+										onClick={() =>
+											dispatch(
+												togglePropertyFilter({
+													floorNumber: 2
+												})
+											)
+										}
+									>
 										2 floors
 									</p>
-									<p id={styles.filterOption} onClick={() => dispatch(togglePropertyFilter({floorNumber: 3}))}>
+									<p
+										id={styles.filterOption}
+										onClick={() =>
+											dispatch(
+												togglePropertyFilter({
+													floorNumber: 3
+												})
+											)
+										}
+									>
 										3 floors
 									</p>
 								</div>
 							</div>
-							
-							<div className={`${styles.filters__left_button} 
-								${filters.totalArea ? styles.activeButton : ""
-								}`}
+
+							<div
+								className={`${styles.filters__left_button} 
+								${filters.totalArea ? styles.activeButton : ""}`}
 							>
 								<p>
 									Area
@@ -155,25 +190,53 @@ const Projects: NextPage = () => {
 									<Triangle />
 								) : (
 									<div
-										className={styles.filters__left_button_close}
-										onClick={() => dispatch(togglePropertyFilter({totalArea: null}))}
+										className={
+											styles.filters__left_button_close
+										}
+										onClick={() =>
+											dispatch(
+												togglePropertyFilter({
+													totalArea: null
+												})
+											)
+										}
 									>
 										<Cross />
 									</div>
 								)}
-								<div className={styles.filters__left_button_popup}>
-									<div className={styles.filters__left_button_popup_input}>
+								<div
+									className={
+										styles.filters__left_button_popup
+									}
+								>
+									<div
+										className={
+											styles.filters__left_button_popup_input
+										}
+									>
 										<p>minimum</p>
 										<div>
-											<input type="number" name="" id="" />
+											<input
+												type="number"
+												name=""
+												id=""
+											/>
 											<p>m2</p>
 										</div>
 									</div>
-									
-									<div className={styles.filters__left_button_popup_input}>
+
+									<div
+										className={
+											styles.filters__left_button_popup_input
+										}
+									>
 										<p>maximum</p>
 										<div>
-											<input type="number" name="" id="" />
+											<input
+												type="number"
+												name=""
+												id=""
+											/>
 											<p>m2</p>
 										</div>
 									</div>
@@ -181,11 +244,9 @@ const Projects: NextPage = () => {
 								</div>
 							</div>
 
-							<div className={`${styles.filters__left_button} 
-								${filters.roofType
-										? styles.activeButton
-										: ""
-								}`}
+							<div
+								className={`${styles.filters__left_button} 
+								${filters.roofType ? styles.activeButton : ""}`}
 							>
 								<p>
 									Roof
@@ -196,28 +257,68 @@ const Projects: NextPage = () => {
 								{!filters.roofType ? (
 									<Triangle />
 								) : (
-									<div 
-										className={styles.filters__left_button_close}
-										onClick={() => dispatch(togglePropertyFilter({roofType: null}))}
+									<div
+										className={
+											styles.filters__left_button_close
+										}
+										onClick={() =>
+											dispatch(
+												togglePropertyFilter({
+													roofType: null
+												})
+											)
+										}
 									>
 										<Cross />
 									</div>
 								)}
 
-								<div className={styles.filters__left_button_popup}>
-									<p id={styles.filterOption} onClick={() => dispatch(togglePropertyFilter({roofType: 'Flat'}))}>
+								<div
+									className={
+										styles.filters__left_button_popup
+									}
+								>
+									<p
+										id={styles.filterOption}
+										onClick={() =>
+											dispatch(
+												togglePropertyFilter({
+													roofType: "Flat"
+												})
+											)
+										}
+									>
 										Flat
 									</p>
-									<p id={styles.filterOption} onClick={() => dispatch(togglePropertyFilter({roofType: 'Pitched'}))}>
+									<p
+										id={styles.filterOption}
+										onClick={() =>
+											dispatch(
+												togglePropertyFilter({
+													roofType: "Pitched"
+												})
+											)
+										}
+									>
 										Pitched
 									</p>
-									<p id={styles.filterOption} onClick={() => dispatch(togglePropertyFilter({roofType: 'Mixed'}))}>
+									<p
+										id={styles.filterOption}
+										onClick={() =>
+											dispatch(
+												togglePropertyFilter({
+													roofType: "Mixed"
+												})
+											)
+										}
+									>
 										Mixed
 									</p>
 								</div>
 							</div>
 
-							<div className={`${styles.filters__left_button} 
+							<div
+								className={`${styles.filters__left_button} 
 								${filters.cost ? styles.activeButton : ""}`}
 							>
 								<p>
@@ -230,25 +331,53 @@ const Projects: NextPage = () => {
 									<Triangle />
 								) : (
 									<div
-										className={styles.filters__left_button_close}
-										onClick={() => dispatch(togglePropertyFilter({cost: null}))}
+										className={
+											styles.filters__left_button_close
+										}
+										onClick={() =>
+											dispatch(
+												togglePropertyFilter({
+													cost: null
+												})
+											)
+										}
 									>
 										<Cross />
 									</div>
 								)}
-								<div className={styles.filters__left_button_popup}>
-									<div className={styles.filters__left_button_popup_input}>
+								<div
+									className={
+										styles.filters__left_button_popup
+									}
+								>
+									<div
+										className={
+											styles.filters__left_button_popup_input
+										}
+									>
 										<p>minimum</p>
 										<div>
-											<input type="number" name="" id="" />
+											<input
+												type="number"
+												name=""
+												id=""
+											/>
 											<p>$</p>
 										</div>
 									</div>
-									
-									<div className={styles.filters__left_button_popup_input}>
+
+									<div
+										className={
+											styles.filters__left_button_popup_input
+										}
+									>
 										<p>maximum</p>
 										<div>
-											<input type="number" name="" id="" />
+											<input
+												type="number"
+												name=""
+												id=""
+											/>
 											<p>$</p>
 										</div>
 									</div>
@@ -257,7 +386,9 @@ const Projects: NextPage = () => {
 							</div>
 						</div>
 						<div className={styles.filters__right}>
-							<p onClick={() => dispatch(resetFilters())}>Reset filters</p>
+							<p onClick={() => dispatch(resetFilters())}>
+								Reset filters
+							</p>
 							<div>Filter</div>
 						</div>
 					</div>
@@ -265,13 +396,19 @@ const Projects: NextPage = () => {
 
 				<section className={styles.secondaryFilter}>
 					<p
-						onClick={() => dispatch(togglePropertyFilter({ favourites: false }))}
+						onClick={() =>
+							dispatch(
+								togglePropertyFilter({ favourites: false })
+							)
+						}
 						className={!filters.favourites ? styles.active : ""}
 					>
 						All projects
 					</p>
 					<p
-						onClick={() => dispatch(togglePropertyFilter({ favourites: true }))}
+						onClick={() =>
+							dispatch(togglePropertyFilter({ favourites: true }))
+						}
 						className={filters.favourites ? styles.active : ""}
 					>
 						Saved
@@ -312,20 +449,14 @@ const Projects: NextPage = () => {
 					) : null}
 
 					<div className={styles.projectsList__sticky}>
-						<div className={styles.projectsList__sticky_toggler}>
-							<p
-								onClick={() => setListMode(true)}
-								className={listMode ? styles.activeMode : ""}
-							>
-								List
-							</p>
-							<p
-								onClick={() => setListMode(false)}
-								className={!listMode ? styles.activeMode : ""}
-							>
-								Grid
-							</p>
-						</div>
+						<Toggler
+							theme="dark"
+							isFirstButtonActive={listMode}
+							firstButtonTitle="List"
+							secondButtonTitle="Grid"
+							firstButtonCallback={() => setListMode(true)}
+							secondButtonCallback={() => setListMode(false)}
+						/>
 						<div
 							onClick={handleScrollToTop}
 							className={styles.projectsList__sticky_toTop}

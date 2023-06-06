@@ -375,3 +375,7 @@
         }
     }
 }
+
+.thanks {
+    @include mixins.flexCenter;
+}

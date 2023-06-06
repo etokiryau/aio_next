@@ -16,12 +16,12 @@ import {
 } from "./userPreferencesSlice";
 import { changeAuthMode } from "../screens/signin/userSlice";
 import { setProjectForPurchase } from "../screens/main/projects/projectsSlice";
-import TriangleIcon from "@/components/ui/TriangleIcon";
-import CrossIcon from "../ui/CrossIcon";
+import TriangleIcon from "@/components/ui/_icons/TriangleIcon";
+import CrossIcon from "../ui/_icons/CrossIcon";
 import WarningWindow from "../ui/warningWindow/WarningWindow";
 
 import styles from "./userPreferences.module.scss";
-import WarningIcon from "../ui/WarningIcon";
+import WarningIcon from "../ui/toggler/WarningIcon";
 
 const UserPreferences: FC = () => {
 	const { token } = useAuth();
@@ -135,7 +135,9 @@ const UserPreferences: FC = () => {
 		}
 	};
 
-	const toggleLocationSection = (event: React.MouseEvent<HTMLDivElement>): void => {
+	const toggleLocationSection = (
+		event: React.MouseEvent<HTMLDivElement>
+	): void => {
 		if (event.target === inputRef.current) return;
 		toggleOptions("location");
 	};
@@ -145,7 +147,9 @@ const UserPreferences: FC = () => {
 		event?.target === popupRef.current && dispatch(closePreferencePopup());
 	};
 
-	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+	const handleInputChange = (
+		event: React.ChangeEvent<HTMLInputElement>
+	): void => {
 		setLocationInput(event.target.value);
 
 		const searchCities = (): void => {
@@ -236,7 +240,11 @@ const UserPreferences: FC = () => {
 					</div>
 					<div className={styles.preferences__preferences}>
 						<div className={styles.preferences__preferences_single}>
-							<div className={styles.preferences__preferences_single_header}>
+							<div
+								className={
+									styles.preferences__preferences_single_header
+								}
+							>
 								<p>
 									{type === "common"
 										? "Language"
@@ -265,28 +273,50 @@ const UserPreferences: FC = () => {
 							>
 								<div
 									onClick={() => toggleOptions("language")}
-									className={styles.preferences__preferences_single_preview}
+									className={
+										styles.preferences__preferences_single_preview
+									}
 								>
 									<div>
 										<Image
-											src={languagesData[chosenLanguage].src}
+											src={
+												languagesData[chosenLanguage]
+													.src
+											}
 											alt="flag"
 											width={21}
 											height={15}
 										/>
-										<p>{languagesData[chosenLanguage].title}</p>
+										<p>
+											{
+												languagesData[chosenLanguage]
+													.title
+											}
+										</p>
 									</div>
 									<TriangleIcon />
 								</div>
-								<div className={styles.preferences__preferences_single_options}>
+								<div
+									className={
+										styles.preferences__preferences_single_options
+									}
+								>
 									{languageOptions()}
 								</div>
 							</div>
 						</div>
 
 						{type === "project" && (
-							<div className={styles.preferences__preferences_single}>
-								<div className={styles.preferences__preferences_single_header}>
+							<div
+								className={
+									styles.preferences__preferences_single
+								}
+							>
+								<div
+									className={
+										styles.preferences__preferences_single_header
+									}
+								>
 									<p>Builiding location</p>
 									{type === "project" && (
 										<div>
@@ -300,10 +330,14 @@ const UserPreferences: FC = () => {
 										</div>
 									)}
 								</div>
-								<div className={`${styles.preferences__preferences_single_wrapper}`}>
+								<div
+									className={`${styles.preferences__preferences_single_wrapper}`}
+								>
 									<div
 										onClick={toggleLocationSection}
-										className={styles.preferences__preferences_single_preview}
+										className={
+											styles.preferences__preferences_single_preview
+										}
 									>
 										<div>
 											{locationInput ||
@@ -325,7 +359,11 @@ const UserPreferences: FC = () => {
 										</div>
 										<TriangleIcon />
 									</div>
-									<div className={styles.preferences__preferences_single_options}>
+									<div
+										className={
+											styles.preferences__preferences_single_options
+										}
+									>
 										{locationOptions()}
 									</div>
 								</div>
@@ -345,7 +383,9 @@ const UserPreferences: FC = () => {
 							>
 								<div
 									onClick={() => toggleOptions("currency")}
-									className={styles.preferences__preferences_single_preview}
+									className={
+										styles.preferences__preferences_single_preview
+									}
 								>
 									<div>
 										<p>{currencyData[chosenCurrency]}</p>
@@ -353,7 +393,11 @@ const UserPreferences: FC = () => {
 									</div>
 									<TriangleIcon />
 								</div>
-								<div className={styles.preferences__preferences_single_options}>
+								<div
+									className={
+										styles.preferences__preferences_single_options
+									}
+								>
 									{currencyOptions()}
 								</div>
 							</div>

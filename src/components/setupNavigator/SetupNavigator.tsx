@@ -1,13 +1,13 @@
 import { FC, useState, useRef, useEffect } from "react";
 import Image from "next/image";
 
-import BackRotationIcon from "../ui/BackRotationIcon";
-import ForwardRotationIcon from "../ui/ForwardRotationIcon";
-import ResetIcon from "../ui/ResetIcon";
-import MoveIcon from "../ui/MoveIcon";
-import ZoomInIcon from "../ui/ZoomInIcon";
-import ZoomOutIcon from "../ui/ZoomOutIcon";
-import SearchIcon from "../ui/SearchIcon";
+import BackRotationIcon from "../ui/_icons/BackRotationIcon";
+import ForwardRotationIcon from "../ui/_icons/ForwardRotationIcon";
+import ResetIcon from "../ui/_icons/ResetIcon";
+import MoveIcon from "../ui/_icons/MoveIcon";
+import ZoomInIcon from "../ui/_icons/ZoomInIcon";
+import ZoomOutIcon from "../ui/_icons/ZoomOutIcon";
+import SearchIcon from "../ui/_icons/SearchIcon";
 
 import styles from "./setupNavigator.module.scss";
 interface IRoomsStyle {

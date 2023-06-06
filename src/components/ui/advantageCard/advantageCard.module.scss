@@ -1,0 +1,21 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.advantage {
+    padding: 24px 16px 16px;
+    width: 20%;
+    background-color: rgba($color: vars.$primaryColor, $alpha: .1);
+    border-radius: vars.$primaryBorderRadius;
+
+    #header {
+        font-size: 40px;
+        font-weight: 500;
+        color: vars.$additionalColor;
+    }
+
+    #content {
+        margin: 16px auto 0;
+        width: 70%;
+        font-size: 20px;
+    }
+}

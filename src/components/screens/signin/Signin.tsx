@@ -12,10 +12,10 @@ import { selectProjects } from "../main/projects/projectsSlice";
 import { useAuth } from "@/hooks/useAuth";
 import Meta from "@/components/seo/Meta";
 import EmailConfirmation from "@/components/emailConfirmation/EmailConfirmation";
-import ArrowLarge from "@/components/ui/ArrowLargeIcon";
-import GoogleIcon from "@/components/ui/GoogleIcon";
-import FacebookIcon from "@/components/ui/FacebookIcon";
-import LinkedInIcon from "@/components/ui/LinkedInIcon";
+import ArrowLarge from "@/components/ui/_icons/ArrowLargeIcon";
+import GoogleIcon from "@/components/ui/_icons/GoogleIcon";
+import FacebookIcon from "@/components/ui/_icons/FacebookIcon";
+import LinkedInIcon from "@/components/ui/_icons/LinkedInIcon";
 import RegistrationWarning from "@/components/registrationWarning/RegistrationWarning";
 
 import styles from "./signin.module.scss";
@@ -31,15 +31,13 @@ const Signin: FC = () => {
 	const { login, isConfirmed } = useAuth();
 	const router = useRouter();
 	const dispatch = useTypedDispatch();
-    const { authMode } = useTypedSelector(selectUser);
+	const { authMode } = useTypedSelector(selectUser);
 	const [isConfirmingStep, setIsConfirmingStep] = useState(false);
-	
-    const { projectForPurchase } = useTypedSelector(selectProjects);
+
+	const { projectForPurchase } = useTypedSelector(selectProjects);
 
 	const changeForm = (): void => {
-		dispatch(changeAuthMode(
-            authMode === 'signin' ? 'signup' : 'signin'
-        ));
+		dispatch(changeAuthMode(authMode === "signin" ? "signup" : "signin"));
 		setTimeout(() => {
 			formik.validateForm();
 		}, 100);
@@ -52,7 +50,7 @@ const Signin: FC = () => {
 		password: Yup.string()
 			.min(6, "Password must be at least 6 characters")
 			.required("Password is required"),
-		...(authMode === 'signup' && {
+		...(authMode === "signup" && {
 			name: Yup.string().required("Name is required"),
 			confirmedPassword: Yup.string()
 				.oneOf([Yup.ref("password")], "Passwords do not match")
@@ -75,21 +73,22 @@ const Signin: FC = () => {
 	});
 
 	const handleSubmit = (values: ISendingData): void => {
-		const data: ISendingData = authMode === 'signin'
-			? { email: values.email, password: values.password }
-			: {
-                email: values.email,
-                password: values.password,
-                name: values.name
-            };
+		const data: ISendingData =
+			authMode === "signin"
+				? { email: values.email, password: values.password }
+				: {
+						email: values.email,
+						password: values.password,
+						name: values.name
+				  };
 
-		if (authMode === 'signup') {
-            login({
+		if (authMode === "signup") {
+			login({
 				name: "Micha",
 				email: "michigan@kamishok.com",
 				token: "sdf43",
 				userId: 1,
-                isConfirmed: false
+				isConfirmed: false
 			});
 			!isConfirmed && setIsConfirmingStep(true);
 		} else {
@@ -98,17 +97,17 @@ const Signin: FC = () => {
 				email: "michigan@kamishok.com",
 				token: "sdf43",
 				userId: 1,
-                isConfirmed: false
+				isConfirmed: false
 			});
 
 			if (projectForPurchase) {
-                router.push({
-                    pathname: '/purchase',
-                    query: {project: projectForPurchase}
-                });
-            } else {
-                router.push('/dashboard');
-            }
+				router.push({
+					pathname: "/purchase",
+					query: { project: projectForPurchase }
+				});
+			} else {
+				router.push("/dashboard");
+			}
 		}
 	};
 
@@ -149,23 +148,36 @@ const Signin: FC = () => {
 				<div onClick={goBack} className={styles.signin__back}>
 					<div>
 						<ArrowLarge />
-						{!projectForPurchase 
-							? <p>Back to main site</p>
-							: <p>Back to project page</p>
-						}
+						{!projectForPurchase ? (
+							<p>Back to main site</p>
+						) : (
+							<p>Back to project page</p>
+						)}
 					</div>
 				</div>
 				{!isConfirmingStep && (
 					<div className={styles.signin__wrapper}>
 						<div className={styles.signin__header}>
-							<div className={authMode === 'signup' ? styles.bottomHeader : ""}>
+							<div
+								className={
+									authMode === "signup"
+										? styles.bottomHeader
+										: ""
+								}
+							>
 								<h1>Sign in</h1>
 								<h2>Sign up</h2>
 							</div>
 						</div>
 						<form onSubmit={formik.handleSubmit}>
 							<div className={styles.signin__inputs}>
-								<div className={authMode === 'signin' ? styles.hidden : ""}>
+								<div
+									className={
+										authMode === "signin"
+											? styles.hidden
+											: ""
+									}
+								>
 									<input
 										value={formik.values.name}
 										onChange={formik.handleChange}
@@ -236,7 +248,13 @@ const Signin: FC = () => {
 										)}
 								</div>
 
-								<div className={authMode === 'signin' ? styles.hidden : ""}>
+								<div
+									className={
+										authMode === "signin"
+											? styles.hidden
+											: ""
+									}
+								>
 									<input
 										value={formik.values.confirmedPassword}
 										onChange={formik.handleChange}
@@ -266,7 +284,7 @@ const Signin: FC = () => {
 							</div>
 							<div
 								className={`${styles.signin__forgot} ${
-									authMode === 'signup' ? styles.hidden : ""
+									authMode === "signup" ? styles.hidden : ""
 								}`}
 							>
 								<p>Forgot password?</p>
@@ -316,7 +334,13 @@ const Signin: FC = () => {
 				)}
 				{!isConfirmingStep && (
 					<div className={styles.signin__underneath}>
-						<div className={authMode === 'signup' ? styles.bottomUnderneath : ""}>
+						<div
+							className={
+								authMode === "signup"
+									? styles.bottomUnderneath
+									: ""
+							}
+						>
 							<p onClick={changeForm}>
 								Don’t have an account? <span>Sign up</span>
 							</p>
