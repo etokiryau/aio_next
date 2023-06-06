@@ -3,7 +3,7 @@ import { FC } from "react";
 import WarningIcon from "../WarningIcon";
 import CrossIcon from "../CrossIcon";
 
-import styles from "./registrationWarning.module.scss";
+import styles from "./warningWindow.module.scss";
 
 interface IProps {
     firstButtonCallback: () => void,
@@ -14,7 +14,7 @@ interface IProps {
     secondButtonTitle: string,
 };
 
-const Warning: FC<IProps> = ({ firstButtonCallback, secondButtonCallback, closeButtonCallback, text, firstButtonTitle, secondButtonTitle }) => {
+const WarningWindow: FC<IProps> = ({ firstButtonCallback, secondButtonCallback, closeButtonCallback, text, firstButtonTitle, secondButtonTitle }) => {
 
     return (
         <div className={styles.warning__wrapper}>
@@ -33,4 +33,4 @@ const Warning: FC<IProps> = ({ firstButtonCallback, secondButtonCallback, closeB
     )
 }
 
-export default Warning;
+export default WarningWindow;

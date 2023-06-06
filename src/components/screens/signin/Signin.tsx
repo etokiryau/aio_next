@@ -16,9 +16,9 @@ import ArrowLarge from "@/components/ui/ArrowLargeIcon";
 import GoogleIcon from "@/components/ui/GoogleIcon";
 import FacebookIcon from "@/components/ui/FacebookIcon";
 import LinkedInIcon from "@/components/ui/LinkedInIcon";
+import RegistrationWarning from "@/components/registrationWarning/RegistrationWarning";
 
 import styles from "./signin.module.scss";
-import RegistrationWarning from "@/components/registrationWarning/RegistrationWarning";
 
 interface ISendingData {
 	email: string;
