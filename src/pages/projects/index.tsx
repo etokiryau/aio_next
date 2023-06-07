@@ -13,7 +13,7 @@ const ProjectsPage: NextPage<IProjectsProps> = ({ projects }) => {
     dispatch(setProjects(projects));
 
     // useEffect(() => {
-    //     const data = fetchData('Projects/1')
+    //     const data = fetchData('api/Projects/GetProjects')
     //     console.log(data)
     // }, [])
     // const data = await fetchData('projects')
@@ -21,14 +21,15 @@ const ProjectsPage: NextPage<IProjectsProps> = ({ projects }) => {
 
     // useEffect(() => {
     //     const data = {
-    //         area: 1212,
-    //         cost: 345345,
-    //         floorNumber: 12,
-    //         height: 100,
-    //         name: "eto novyi proekt",
-    //         roofType: 'bez kryshi'
+    //         // area: 1212,
+    //         // cost: 345345,
+    //         // floorNumber: 12,
+    //         // height: 100,
+    //         // name: "eto novyi proekt",
+    //         // roofType: 'bez kryshi'
+    //         name: 'hehe'
     //     }
-    //     postData('projects', data)
+    //     postData('api/Projects/Create', data)
     //     // const data = fetchData('projects');
     //     // console.log(data)
     // }, [])
@@ -46,7 +47,6 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             height: 5.2,
             houseDimensions: [10, 16],
             cost: 0,
-            currency: '€',
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 3,
             roofType: 'Flat',
@@ -60,7 +60,6 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             height: 5.2,
             houseDimensions: [21, 15],
             cost: 399,
-            currency: '$',
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 2,
             roofType: 'Mixed',
@@ -74,7 +73,6 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             height: 5.2,
             houseDimensions: [32, 36],
             cost: 499,
-            currency: '$',
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 2,
             roofType: 'Flat',
@@ -88,7 +86,6 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             height: 5.2,
             houseDimensions: [15, 26],
             cost: 699,
-            currency: '€',
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 3,
             roofType: 'Flat',
@@ -102,10 +99,9 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             height: 5.2,
             houseDimensions: [10, 16],
             cost: 399,
-            currency: '$',
             locations: ['Portugal', 'Spain'],
             floorNumber: 1,
-            roofType: 'Sloped',
+            roofType: 'Pitched',
             landDimensions: [30, 50]
         },
         {
@@ -116,7 +112,6 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             height: 5.2,
             houseDimensions: [12, 19],
             cost: 199,
-            currency: '€',
             locations: ['Portugal', 'France'],
             floorNumber: 1,
             roofType: 'Mixed',

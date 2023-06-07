@@ -17,18 +17,24 @@ interface IRoomsStyle {
 };
 
 const SetupNavigator: FC = () => {
-    const [rotation, setRotation] = useState(0);
-    const [scale, setScale] = useState(1);
+    const [rotation, setRotation] = useState<number>(0);
+    const [scale, setScale] = useState<number>(1);
     const [position, setPosition] = useState<{x: number, y: number}>({ x: 100, y: 20 });
     const zoomRange = {min: 0.5, max: 5.5, step: 0.1};
-    const [term, setTerm] = useState('');
-    const [currentRoom, setCurrentRoom] = useState<number | null>(null);
-    const [currentFloor, setCurrentFloor] = useState(1);
+    const [term, setTerm] = useState<string>('');
+    const [currentRoom, setCurrentRoom] = useState<number>(0);
+    const [currentFloor, setCurrentFloor] = useState<number>(0);
 
     const style: IRoomsStyle = {
         top: `${position.y}px`,
         left: `${position.x}px`,
         transform: `rotate(${rotation}deg) scale(${scale})`
+    };
+
+    const floorsMapping: {[key: number]: string} = {
+        0: '1st floor',
+        1: '2nd floor',
+        2: '3rd floor'
     };
 
     const changeRotation = (degree: number): void => {
@@ -48,9 +54,7 @@ const SetupNavigator: FC = () => {
     };
 
     const changeCurrentRoom = (order: number): void => {
-        setCurrentRoom((prev) => {
-            return prev === order ? null : order
-        })
+        setCurrentRoom(order)
     };
 
     const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>): void => {
@@ -135,7 +139,7 @@ const SetupNavigator: FC = () => {
 
     return (
         <>
-            <div className={styles.setup__floor}>1st floor</div>
+            <div className={styles.setup__floor}>{floorsMapping[currentFloor]}</div>
             <div className={styles.setup}>
                 <div className={styles.setup__layout}>
                     <div className={styles.setup__layout_scale}>
@@ -168,9 +172,9 @@ const SetupNavigator: FC = () => {
                 <div className={styles.setup__navigation}>
                     <p>Choose floor:</p>
                     <div className={styles.setup__navigation_floors}>
-                        <p>1st floor</p>
-                        <p>2nd floor</p>
-                        <p>3rd floor</p>
+                        <p onClick={() => setCurrentFloor(0)} className={currentFloor === 0 ? styles.activeFloor : ''}>1st floor</p>
+                        <p onClick={() => setCurrentFloor(1)} className={currentFloor === 1 ? styles.activeFloor : ''}>2nd floor</p>
+                        <p onClick={() => setCurrentFloor(2)} className={currentFloor === 2 ? styles.activeFloor : ''}>3rd floor</p>
                     </div>
                     <div className={styles.setup__navigation_input}>
                         <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="Search number or room" />

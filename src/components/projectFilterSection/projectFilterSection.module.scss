@@ -1,0 +1,170 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.filters {
+    display: inline-flex;
+    justify-content: space-between;
+    width: min(95%, 1440px);
+
+    &__left {
+        display: flex;
+        gap: 24px;
+    
+        svg {
+            fill: vars.$primaryColor;
+        }
+    
+        &_button {
+            position: relative;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            min-width: 120px;
+            background: #F8F8F8;
+            border-radius: 8px;
+            transition: .2s ease;
+            user-select: none;
+
+            &:nth-child(2) {
+                .filters__left_button_popup {
+                    &_input {
+                        div {
+                            p::after {
+                                content: '\00B2'
+                            }
+                        }
+                    }
+                }  
+            }
+
+            &:nth-child(2n) {
+                .filters__left_button_popup {
+                    padding: 8px 16px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                    color: vars.$primaryColor;
+
+                    &_input {
+                        margin-top: 8px;
+    
+                        p {
+                            font-size: 16px;
+                            opacity: 1;
+                        }
+    
+                        div {
+                            margin-top: 8px;
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                            color: vars.$primaryColor;
+                        }
+                    }
+                    
+                    input {
+                        -webkit-appearance: none;
+                        appearance: none;
+                        padding: 5px;
+                        width: max(100%, 50px);
+                        border: solid 1px vars.$primaryColor;
+                        border-radius: 8px;
+                        font-size: 16px;
+    
+                        &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+                            -webkit-appearance: none; 
+                            margin: 0; 
+                        }
+                    }
+    
+                    button {
+                        @include mixins.button;
+                        margin-top: 16px;
+                        padding: 8px;
+                        width: fit-content;
+                        height: fit-content;
+                        font-size: 16px;
+    
+                        &:hover {
+                            @include mixins.hoveredButton;
+                        }
+                    }
+                }
+            }
+    
+            p {
+                opacity: 0.4;
+            }
+    
+            &_close {
+                @include mixins.flexCenter;
+                cursor: pointer;
+            }
+    
+            &_popup {
+                position: absolute;
+                top: 34px;
+                left: 0;
+                width: 100%;
+                border-radius: 0 0 8px 8px;
+                background: #F8F8F8;
+                visibility: hidden;
+                opacity: 0;
+                transition: .1s ease;
+                z-index: 2;
+            }
+    
+            &:hover {
+                border-radius: 8px 8px 0 0;
+    
+                .filters__left_button_popup {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+    
+            #filterOption {
+                padding: 8px 16px;
+                opacity: 1;
+                cursor: pointer;
+    
+                &:last-child { 
+                    border-radius: 0 0 8px 8px;
+                }
+    
+                &:hover {
+                    background: rgba($color: vars.$primaryColor, $alpha: .2);
+                }
+            }
+        }
+    }
+
+    .activeButton {
+        p {
+            opacity: 1;
+        }
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+    
+        p {
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    
+        div {
+            @include mixins.button;
+            padding: 8px 20px;
+    
+            &:hover {
+                @include mixins.hoveredButton;
+            }
+        }
+        
+    }
+}

@@ -94,8 +94,7 @@ const Header: FC = () => {
 					{!token && 
 					<Link
 						className={styles.header__user_signup}
-						href={{pathname: '/signin', query: { from: pathname },
-					}}>Sign up</Link>}
+						href={{pathname: '/signin'}}>Sign up</Link>}
 
 					{token && 
 					<div ref={signedInMenuRef} className={styles.header__user_signedin}>

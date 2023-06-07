@@ -24,7 +24,6 @@ export interface ISingleProject {
     height: number,
     houseDimensions: [number, number],
     cost: number,
-    currency: string,
     locations: string[],
     floorNumber: number,
     roofType: string,

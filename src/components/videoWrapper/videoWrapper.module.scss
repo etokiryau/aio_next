@@ -26,22 +26,25 @@
             opacity: .8;
         }
 
-        svg {
-            width: 35px;
-            height: 35px;
-            transform: rotate(-90deg);
-
-            circle {
-                width: 100%;
-                height: 100%;
-                fill: transparent;
-                stroke-width: 2;
-                stroke: vars.$primaryColor;
-                stroke-linecap: round;
-                stroke-dasharray: 100;
-                transition: .5s ease;
+        &_circle {
+            svg {
+                width: 35px;
+                height: 35px;
+                transform: rotate(-90deg);
+    
+                circle {
+                    width: 100%;
+                    height: 100%;
+                    fill: transparent;
+                    stroke-width: 2;
+                    stroke: vars.$primaryColor;
+                    stroke-linecap: round;
+                    stroke-dasharray: 100;
+                    transition: .5s ease;
+                }
             }
         }
+        
     }
 
     .triangle {
@@ -61,16 +64,5 @@
         top: 50%;
         left: calc(52% - 1px);
         transform: translate(-50%, -50%);
-        display: flex;
-        justify-content: space-between;
-        width: 10px;
-        height: 12px;
-
-        span {
-            width: 2px;
-            height: 100%;
-            background-color: vars.$primaryColor;
-            border-radius: 4px;
-        }
     }
 }

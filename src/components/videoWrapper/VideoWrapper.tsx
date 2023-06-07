@@ -1,5 +1,7 @@
 import { FC, useRef, useEffect, useState } from "react";
 
+import PauseIcon from "../ui/_icons/PauseIcon";
+
 import styles from "./videoWrapper.module.scss";
 
 const VideoWrapper: FC<{ src: string[] }> = ({ src }) => {
@@ -69,14 +71,16 @@ const VideoWrapper: FC<{ src: string[] }> = ({ src }) => {
 				})}
 			</video>
 			<div className={styles.video__control} onClick={togglePlay}>
-                <svg>
-                    <circle cx="50%" cy="50%" r="16" strokeDashoffset={100 - (100 * (100 - Number(progress))) / 100}/>
-                </svg>
+				<div className={styles.video__control_circle}>
+					<svg>
+						<circle cx="50%" cy="50%" r="16" strokeDashoffset={100 - (100 * (100 - Number(progress))) / 100}/>
+					</svg>
+				</div>
+                
                 {!isPlaying && <div className={styles.triangle}></div>}
                 {isPlaying && 
                 <div className={styles.pause}>
-                    <span></span>
-                    <span></span>
+					<PauseIcon />
                 </div>}
 			</div>
 		</div>

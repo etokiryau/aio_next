@@ -55,7 +55,7 @@
                 left:0;
                 width: 100%;
                 background: #F8F8F8;
-                border-radius: vars.$primaryBorderRadius;
+                border-radius: 8px;
                 max-height: 46px;
                 z-index: 10;
                 user-select: none;
@@ -153,7 +153,7 @@
                 visibility: hidden;
                 opacity: 0;
                 background-color: vars.$secondaryColor;
-                border-radius: 0 0 vars.$primaryBorderRadius vars.$primaryBorderRadius;
+                border-radius: 0 0 8px 8px;
                 max-height: 150px;
 
                 .languageOption, .currencyOption, .locationOption {
@@ -172,7 +172,7 @@
 
                     &:last-child {
                         padding: 6px 16px 12px;
-                        border-radius: 0 0 vars.$primaryBorderRadius vars.$primaryBorderRadius;
+                        border-radius: 0 0 8px 8px;
                     }
 
                     &:hover {
