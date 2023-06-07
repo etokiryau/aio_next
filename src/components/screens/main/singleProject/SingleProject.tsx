@@ -26,12 +26,13 @@ import CarouselSlider from "@/components/carouselSlider/CarouselSlider";
 import styles from "./singleProject.module.scss";
 
 const SingleProject: FC<IProjectPageProps> = ({ project }) => {
-	const { id, name, cost, currency, totalArea, height, houseDimensions } =
+	const { id, name, cost, totalArea, height, houseDimensions } =
 		project;
 	const router = useRouter();
 	const dispatch = useTypedDispatch();
 	const [copyingMessage, copyLinkToClipboard] = useCopyLinkToClipboard();
 	const { favourites } = useTypedSelector(selectProjects);
+	const { currency } = useTypedSelector(selectUserPreferences);
 
 	useEffect(() => {
 		if (favourites.length > 0) return;
