@@ -35,7 +35,7 @@ const ProjectFilterSection: FC = () => {
     });
 
     const handleSubmit = (values: IInputs) => {
-        
+        console.log(values)
     };
 
     const changeFilter = (type: string, value: string | number | null): void => {
