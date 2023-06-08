@@ -57,7 +57,7 @@ const projectsSlice = createSlice({
             
             localStorage.setItem('favouriteProjects', JSON.stringify([...state.favourites]));
         },
-        togglePropertyFilter: (state, action: PayloadAction<{[key: string]: number | boolean | string | null}>) => {
+        togglePropertyFilter: (state, action: PayloadAction<{[key: string]: number | boolean | string | [number, number] | null}>) => {
             state.filters = {...state.filters, ...action.payload};
         },
         resetFilters: (state) => {

@@ -7,10 +7,7 @@ import MainLayout from "@/components/layouts/mainLayout/MainLayout";
 import { IProjectPageProps } from "@/interfaces/projects.interface";
 import { useCopyLinkToClipboard } from "@/hooks/useCopylinkToClipBoard";
 import { selectProjects, toggleFavourite } from "../projects/projectsSlice";
-import {
-	openPopup,
-	selectUserPreferences
-} from "@/components/userPreferences/userPreferencesSlice";
+import { openPopup, selectUserPreferences } from "@/components/userPreferences/userPreferencesSlice";
 import TechnicalIndicators from "@/components/ui/technicalIndicators/TechnicalIndicators";
 import SetupNavigator from "@/components/setupNavigator/SetupNavigator";
 import AccordionItem from "@/components/ui/accordionItem/AccordionItem";

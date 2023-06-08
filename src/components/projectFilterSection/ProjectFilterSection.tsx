@@ -10,9 +10,12 @@ import { currencyData } from "@/utillis/preferenceData";
 
 import styles from "./projectFilterSection.module.scss";
 
-interface IInputs {
+interface IAreaInputs {
     minArea: string,
-    maxArea: string,
+    maxArea: string
+};
+
+interface ICostInputs {
     minCost: string,
     maxCost: string
 };
@@ -22,20 +25,44 @@ const ProjectFilterSection: FC = () => {
 	const { filters } = useTypedSelector(selectProjects);
 	const { currency } = useTypedSelector(selectUserPreferences);
 
-    const formik = useFormik({
+    const formikArea = useFormik({
         initialValues: {
             minArea: '',
-            maxArea: '',
-            minCost: '',
-            maxCost: ''
+            maxArea: ''
         },
-        onSubmit: (values: IInputs) => {
-            handleSubmit(values);
+        onSubmit: (values: IAreaInputs) => {
+            handleAreaSubmit(values);
         }
     });
 
-    const handleSubmit = (values: IInputs) => {
-        console.log(values)
+    const formikCost = useFormik({
+        initialValues: {
+            minCost: '',
+            maxCost: ''
+        },
+        onSubmit: (values: ICostInputs) => {
+            handleCostSubmit(values);
+        }
+    });
+
+    const handleAreaSubmit = (values: IAreaInputs) => {
+        const min = Number(values.minArea);
+        const max = Number(values.maxArea);
+        
+        if (min && max) {
+            dispatch(togglePropertyFilter({'totalArea': [min, max]}))
+        }
+        
+    };
+
+    const handleCostSubmit = (values: ICostInputs) => {
+        const min = Number(values.minCost);
+        const max = Number(values.maxCost);
+        
+        if (min && max) {
+            dispatch(togglePropertyFilter({'cost': [min, max]}))
+        }
+        
     };
 
     const changeFilter = (type: string, value: string | number | null): void => {
@@ -44,7 +71,7 @@ const ProjectFilterSection: FC = () => {
 
     return (
         <div className={styles.filters}>
-            <form onSubmit={formik.handleSubmit} className={styles.filters__left}>
+            <div className={styles.filters__left}>
                 <div
                     className={`${styles.filters__left_button} 
                     ${filters.floorNumber ? styles.activeButton : ""}`}
@@ -87,14 +114,14 @@ const ProjectFilterSection: FC = () => {
                     </div>
                 </div>
                 
-                <div
+                <form onSubmit={formikArea.handleSubmit}
                     className={`${styles.filters__left_button} 
                     ${filters.totalArea ? styles.activeButton : ""}`}
                 >
                     <p>
                         Area
                         {filters.totalArea
-                            ? `: ${filters.totalArea}`
+                            ? `: ${filters.totalArea[0]} - ${filters.totalArea[1]}`
                             : ""}
                     </p>
                     {!filters.totalArea ? (
@@ -110,7 +137,7 @@ const ProjectFilterSection: FC = () => {
                         <div className={styles.filters__left_button_popup_input}>
                             <p>minimum</p>
                             <div>
-                                <input value={formik.values.minArea} onChange={formik.handleChange} type="number" name="minArea" id="minArea" placeholder="100" />
+                                <input value={formikArea.values.minArea} onChange={formikArea.handleChange} type="number" name="minArea" id="minArea" placeholder="100" />
                                 <p>m</p>
                             </div>
                         </div>
@@ -118,13 +145,13 @@ const ProjectFilterSection: FC = () => {
                         <div className={styles.filters__left_button_popup_input}>
                             <p>maximum</p>
                             <div>
-                                <input value={formik.values.maxArea} onChange={formik.handleChange} type="number" name="maxArea" id="maxArea" placeholder="3000" />
+                                <input value={formikArea.values.maxArea} onChange={formikArea.handleChange} type="number" name="maxArea" id="maxArea" placeholder="3000" />
                                 <p>m</p>
                             </div>
                         </div>
                         <button type="submit">Apply</button>
                     </div>
-                </div>
+                </form>
 
                 <div
                     className={`${styles.filters__left_button} 
@@ -168,14 +195,14 @@ const ProjectFilterSection: FC = () => {
                     </div>
                 </div>
 
-                <div
+                <form onSubmit={formikCost.handleSubmit}
                     className={`${styles.filters__left_button} 
                     ${filters.cost ? styles.activeButton : ""}`}
                 >
                     <p>
                         Cost
                         {filters.cost
-                            ? `: ${filters.cost[0]} - ${filters.cost[1]}$`
+                            ? `: ${filters.cost[0]} - ${filters.cost[1]}${currencyData[currency]}`
                             : ""}
                     </p>
                     {!filters.cost ? (
@@ -191,7 +218,7 @@ const ProjectFilterSection: FC = () => {
                         <div className={styles.filters__left_button_popup_input }>
                             <p>minimum</p>
                             <div>
-                                <input type="number" name="" id="" placeholder="10" />
+                                <input value={formikCost.values.minCost} onChange={formikCost.handleChange} type="number" name="minCost" id="minCost" placeholder="10" />
                                 <p>{currencyData[currency]}</p>
                             </div>
                         </div>
@@ -199,15 +226,15 @@ const ProjectFilterSection: FC = () => {
                         <div className={styles.filters__left_button_popup_input } >
                             <p>maximum</p>
                             <div>
-                                <input type="number" name="" id="" placeholder="1000" />
+                                <input value={formikCost.values.maxCost} onChange={formikCost.handleChange} type="number" name="maxCost" id="maxCost" placeholder="1000" />
                                 <p>{currencyData[currency]}</p>
                             </div>
                         </div>
                         <button type="submit">Apply</button>
                     </div>
-                </div>
+                </form>
                 
-            </form>
+            </div>
             <div className={styles.filters__right}>
                 <p onClick={() => dispatch(resetFilters())}>
                     Reset filters
