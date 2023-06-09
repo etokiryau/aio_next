@@ -33,7 +33,7 @@ const userPreferencesSlice = createSlice({
         closePopup: (state) => {
             state.isOpen = false;
         },
-        setPreferences: (state, action: PayloadAction<Omit<IState, 'documentationLanguage' | 'location' | 'type'>>) => {
+        setPreferences: (state, action: PayloadAction<Omit<IState, 'documentationLanguage' | 'location' | 'type' | 'cookiePopup'>>) => {
             state.isOpen = action.payload.isOpen;
             state.language = action.payload.language;
             state.currency = action.payload.currency;
