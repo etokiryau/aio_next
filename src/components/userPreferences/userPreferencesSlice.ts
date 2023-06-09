@@ -42,7 +42,7 @@ const userPreferencesSlice = createSlice({
                 path: "/"
             });
         },
-        setDocumentationPreferences: (state, action: PayloadAction<Omit<IState, 'isOpen' | 'language' | 'type'>>) => {
+        setDocumentationPreferences: (state, action: PayloadAction<Omit<IState, 'isOpen' | 'language' | 'type' | 'cookiePopup'>>) => {
             state.documentationLanguage = action.payload.documentationLanguage;
             state.location = action.payload.location;
             state.currency = action.payload.currency;
