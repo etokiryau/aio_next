@@ -13,6 +13,7 @@ import SetupNavigator from "@/components/setupNavigator/SetupNavigator";
 import AccordionItem from "@/components/ui/accordionItem/AccordionItem";
 import ModelTile from "@/components/modelTile/ModelTile";
 import UserPreferences from "@/components/userPreferences/UserPreferences";
+import { currencyData } from "@/utillis/preferenceData";
 
 import ArrowLargeIcon from "@/components/ui/_icons/ArrowLargeIcon";
 import LikeIcon from "@/components/ui/_icons/LikeIcon";
@@ -23,7 +24,7 @@ import CarouselSlider from "@/components/carouselSlider/CarouselSlider";
 import styles from "./singleProject.module.scss";
 
 const SingleProject: FC<IProjectPageProps> = ({ project }) => {
-	const { id, name, cost, totalArea, height, houseDimensions } =
+	const { id, name, cost, reducedCost, totalArea, height, houseDimensions } =
 		project;
 	const router = useRouter();
 	const dispatch = useTypedDispatch();
@@ -75,24 +76,23 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 					<div className={styles.project__header_left}>
 						<p>{name}</p>
 						{/* <p>(SKU: 100.951.116)</p> */}
-						<p>
+						{reducedCost === 0 && <p id={styles.notion}>
 							*You can try this project in AIO ecosystem for free
-						</p>
+						</p>}
 					</div>
 					<div className={styles.project__header_right}>
 						<div className={styles.project__header_right_cost}>
-							<p>
-								{cost}
-								{currency}
-							</p>
-							<p>free</p>
+							<p	id={reducedCost ? styles.lineThrough : ''}
+								>{cost} {currencyData[currency]}</p>
+							{reducedCost === 0 && <p>free</p>}
+							{reducedCost && <p>{reducedCost} {currencyData[currency]}</p>}
 						</div>
 
 						<p
 							onClick={() => dispatch(openPopup("project"))}
 							className={styles.project__header_right_purchase}
 						>
-							Purchase
+							{cost ? 'Purchase' : 'Explore'}
 						</p>
 						<div className={styles.project__header_right_customise}>
 							<EditIcon />

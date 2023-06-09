@@ -1,13 +1,14 @@
 import { FC, PropsWithChildren, useEffect } from "react";
-import { parseCookies } from "nookies";
+import { parseCookies, setCookie } from "nookies";
 
 import { useTypedDispatch } from "@/hooks/useReduxHooks";
-import { setPreferenceFromCookie } from "@/components/userPreferences/userPreferencesSlice";
+import { setPreferenceFromCookie, toggleCookiePopup } from "@/components/userPreferences/userPreferencesSlice";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Meta from "@/components/seo/Meta";
 import { IMeta } from "@/components/seo/meta.interface";
 import { useAuth } from "@/hooks/useAuth";
+import CookiePopup from "@/cookiePopup/CookiePopup";
 
 interface IProps extends IMeta {
     footer?: boolean
@@ -15,7 +16,7 @@ interface IProps extends IMeta {
 
 const MainLayout: FC<PropsWithChildren<IProps>> = ({ children, title, description, footer = true }) => {
     const dispatch = useTypedDispatch();
-    const { login } = useAuth()
+    const { login } = useAuth();
 
     useEffect(() => {
         const { token, preferences } = parseCookies();
@@ -32,11 +33,28 @@ const MainLayout: FC<PropsWithChildren<IProps>> = ({ children, title, descriptio
         }
     }, []);
 
+    useEffect(() => {
+        const { cookieNotification } = parseCookies();
+
+        if (cookieNotification === 'notified') {
+            return;
+        } else {
+            setCookie(null, 'cookieNotification', 'notified', {
+                maxAge: 7 * 24 * 60 * 60,
+                path: "/"
+            });
+            setTimeout(() => {
+                dispatch(toggleCookiePopup(true));
+            }, 2000)
+        }
+    }, []);
+
     return (
         <Meta title={title} description={description} >
             <Header />
             <main style={{margin: '105px auto 100px', width: 'min(100%, 1440px)'}}>
                 {children}
+                <CookiePopup />
             </main>
             {footer && <Footer />}
         </Meta>

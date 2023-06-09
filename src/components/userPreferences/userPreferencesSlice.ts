@@ -8,7 +8,8 @@ interface IState {
     language: string,
     currency: string,
     location: string | null,
-    documentationLanguage: string
+    documentationLanguage: string,
+    cookiePopup: boolean
 };
 
 const initialState: IState = {
@@ -17,7 +18,8 @@ const initialState: IState = {
     language: 'En',
     currency: 'USD',
     location: null,
-    documentationLanguage: 'En'
+    documentationLanguage: 'En',
+    cookiePopup: false
 };
 
 const userPreferencesSlice = createSlice({
@@ -53,11 +55,14 @@ const userPreferencesSlice = createSlice({
             state.location = action.payload.location;
             state.currency = action.payload.currency;
             state.language = action.payload.language;
+        },
+        toggleCookiePopup: (state, action: PayloadAction<boolean>) => {
+            state.cookiePopup = action.payload;
         }
     },
 });
 
-export const { closePopup, openPopup, setPreferences, setDocumentationPreferences, setPreferenceFromCookie } = userPreferencesSlice.actions;
+export const { closePopup, openPopup, setPreferences, setDocumentationPreferences, setPreferenceFromCookie, toggleCookiePopup } = userPreferencesSlice.actions;
 
 export const selectUserPreferences = (state: RootState) => state.userPreferences;
 

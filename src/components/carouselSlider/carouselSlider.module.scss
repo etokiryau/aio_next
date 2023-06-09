@@ -16,7 +16,7 @@
         top: 0;
         width: 62.5%;
         height: calc(100vh - 280px);
-        transition: left .9s, transform 1s, visibility 0s , opacity .9s;
+        transition: left .9s, transform 1s, opacity .9s;
         user-select: none;
         
         img {
@@ -31,7 +31,7 @@
         top: 0;
         width: 26%;
         height: 290px;
-        transition: left .9s, transform 1s, visibility 0s , opacity .9s;
+        transition: left .9s, transform 1s, opacity .9s;
         text-align: left;
         user-select: none;
 

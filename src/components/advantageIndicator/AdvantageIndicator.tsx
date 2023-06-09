@@ -51,8 +51,8 @@ const AdvantageIndicator: FC<IProps> = ({title, target, duration, multiplier = 1
 
     return (
         <div className={styles.indicator} ref={counterRef}>
-            <p className={styles.indicator_name}>{title}</p>
-            <div className={styles.indicator_value}>
+            <p className={styles.indicator__name}>{title}</p>
+            <div className={styles.indicator__value}>
                 <span id={styles.circle} />
                 <span id={styles.line} style={{width: `${count * multiplier / smooth}%`}}>
                     {count > 0 && <p>{roundedCounter}%</p>}

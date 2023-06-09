@@ -15,6 +15,7 @@ interface IProjectTile {
 		floorNumber: number;
 		houseDimensions: [number, number];
 		cost: number;
+		reducedCost: number | null;
 		currency: string;
 	};
 	likeFill: boolean;
@@ -35,6 +36,7 @@ const ProjectTile: FC<IProjectTile> = ({
 		houseDimensions,
 		previewSrc,
 		cost,
+		reducedCost,
 		currency
 	} = info;
 
@@ -42,13 +44,13 @@ const ProjectTile: FC<IProjectTile> = ({
 		<div className={styles.projectTile}>
 			<Image src={previewSrc} alt="project" width={780} height={300} />
 
-			{cost === 0 && (
+			{reducedCost === 0 && (
 				<div className={styles.projectTile__freeLabel}>
 					<p>Test</p>
 				</div>
 			)}
 
-			<div className={styles.projectTile_buttons}>
+			<div className={styles.projectTile__buttons}>
 				<div data-link={`/projects/${name}`} onClick={handleShare}>
 					<ShareIcon />
 				</div>
@@ -60,9 +62,9 @@ const ProjectTile: FC<IProjectTile> = ({
 
 			<Link
 				href={`/projects/${name}`}
-				className={styles.projectTile_information}
+				className={styles.projectTile__information}
 			>
-				<div className={styles.projectTile_information_up}>
+				<div className={styles.projectTile__information_up}>
 					<div>
 						<p>total area: {totalArea} m2</p>
 						<p>floors: {floorNumber}</p>
@@ -72,15 +74,15 @@ const ProjectTile: FC<IProjectTile> = ({
 							{houseDimensions[1]} m
 						</p>
 					</div>
-					{cost !== 0 && (
+					{reducedCost !== 0 && (
 						<p id={styles.cost}>
-							{cost}
+							{reducedCost ? reducedCost : cost}
 							{currency}
 						</p>
 					)}
-					{cost === 0 && <p id={styles.cost}>free</p>}
+					{reducedCost === 0 && <p id={styles.cost}>free</p>}
 				</div>
-				<div className={styles.projectTile_information_down}>
+				<div className={styles.projectTile__information_down}>
 					<p>{name}</p>
 					<ArrowSmall />
 				</div>

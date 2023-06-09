@@ -84,8 +84,8 @@ const Signin: FC = () => {
 
 		if (authMode === "signup") {
 			login({
-				name: "Micha",
-				email: "michigan@kamishok.com",
+				name: String(data.name),
+				email: String(data.email),
 				token: "sdf43",
 				userId: 1,
 				isConfirmed: false
@@ -93,8 +93,8 @@ const Signin: FC = () => {
 			!isConfirmed && setIsConfirmingStep(true);
 		} else {
 			login({
-				name: "Kirill",
-				email: "michigan@kamishok.com",
+				name: String(data.name),
+				email: String(data.email),
 				token: "sdf43",
 				userId: 1,
 				isConfirmed: false

@@ -1,0 +1,52 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.cookie {
+    position: fixed;
+    bottom: 20px;
+    left: 2.5%;
+    padding: 16px;
+    background-color: rgba($color: vars.$primaryColor, $alpha: .6);
+    border-radius: 8px;
+    border: vars.$primaryBorder;
+    width: min(95%, 350px);
+    color: vars.$secondaryColor;
+    transform: translateY(100px);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 10;
+    transition: .3s ease;
+
+    h3 {
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    p {
+        margin-top: 16px;
+        font-size: 14px;
+
+        a {
+            font-weight: 400;
+            color: vars.$primaryColor;
+        }
+    }
+
+    button {
+        @include mixins.button;
+        margin-top: 16px;
+        padding: 8px 20px;
+        font-size: 16px;
+        width: 100%;
+
+        &:hover {
+            @include mixins.hoveredButton
+        }
+    }
+}
+
+.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+}

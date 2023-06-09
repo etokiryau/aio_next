@@ -46,7 +46,8 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             totalArea: 178,
             height: 5.2,
             houseDimensions: [10, 16],
-            cost: 0,
+            cost: 100,
+            reducedCost: 0,
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 3,
             roofType: 'Flat',
@@ -59,7 +60,8 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             totalArea: 278,
             height: 5.2,
             houseDimensions: [21, 15],
-            cost: 399,
+            cost: 499,
+            reducedCost: 399,
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 2,
             roofType: 'Mixed',
@@ -73,6 +75,7 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             height: 5.2,
             houseDimensions: [32, 36],
             cost: 499,
+            reducedCost: null,
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 2,
             roofType: 'Flat',
@@ -86,6 +89,7 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             height: 5.2,
             houseDimensions: [15, 26],
             cost: 699,
+            reducedCost: null,
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 3,
             roofType: 'Flat',
@@ -99,6 +103,7 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             height: 5.2,
             houseDimensions: [10, 16],
             cost: 399,
+            reducedCost: 200,
             locations: ['Portugal', 'Spain'],
             floorNumber: 1,
             roofType: 'Pitched',
@@ -112,12 +117,12 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             height: 5.2,
             houseDimensions: [12, 19],
             cost: 199,
+            reducedCost: null,
             locations: ['Portugal', 'France'],
             floorNumber: 1,
             roofType: 'Mixed',
             landDimensions: [30, 50]
         }
-        
     ]
 
     return {

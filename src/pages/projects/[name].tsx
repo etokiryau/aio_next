@@ -16,7 +16,8 @@ const projects: ISingleProject[] = [
         totalArea: 178,
         height: 5.2,
         houseDimensions: [10, 16],
-        cost: 199,
+        cost: 100,
+        reducedCost: 0,
         locations: ['Portugal', 'France', 'Spain'],
         floorNumber: 3,
         roofType: 'Flat',
@@ -29,7 +30,8 @@ const projects: ISingleProject[] = [
         totalArea: 278,
         height: 5.2,
         houseDimensions: [21, 15],
-        cost: 399,
+        cost: 499,
+        reducedCost: 399,
         locations: ['Portugal', 'France', 'Spain'],
         floorNumber: 2,
         roofType: 'Mixed',
@@ -43,6 +45,7 @@ const projects: ISingleProject[] = [
         height: 5.2,
         houseDimensions: [32, 36],
         cost: 499,
+        reducedCost: null,
         locations: ['Portugal', 'France', 'Spain'],
         floorNumber: 2,
         roofType: 'Flat',
@@ -56,6 +59,7 @@ const projects: ISingleProject[] = [
         height: 5.2,
         houseDimensions: [15, 26],
         cost: 699,
+        reducedCost: null,
         locations: ['Portugal', 'France', 'Spain'],
         floorNumber: 3,
         roofType: 'Flat',
@@ -69,9 +73,10 @@ const projects: ISingleProject[] = [
         height: 5.2,
         houseDimensions: [10, 16],
         cost: 399,
+        reducedCost: 200,
         locations: ['Portugal', 'Spain'],
         floorNumber: 1,
-        roofType: 'Sloped',
+        roofType: 'Pitched',
         landDimensions: [30, 50]
     },
     {
@@ -82,13 +87,13 @@ const projects: ISingleProject[] = [
         height: 5.2,
         houseDimensions: [12, 19],
         cost: 199,
+        reducedCost: null,
         locations: ['Portugal', 'France'],
         floorNumber: 1,
         roofType: 'Mixed',
         landDimensions: [30, 50]
     }
-    
-];
+]
 
 const SingleProjectPage: NextPage<IProjectProps> = ({ response }) => {
     const project: ISingleProject = {
@@ -99,6 +104,7 @@ const SingleProjectPage: NextPage<IProjectProps> = ({ response }) => {
         height: 0,
         houseDimensions: [0, 0],
         cost: 0,
+        reducedCost: 0,
         locations: [''],
         floorNumber: 1,
         roofType: '',

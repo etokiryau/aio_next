@@ -49,6 +49,7 @@ const Projects: NextPage = () => {
 			totalArea: item.totalArea,
 			floorNumber: item.floorNumber,
 			houseDimensions: item.houseDimensions,
+			reducedCost: item.reducedCost,
 			cost: item.cost,
 			currency: currencyData[currency]
 		};
@@ -73,6 +74,7 @@ const Projects: NextPage = () => {
 				floorNumber: item.floorNumber,
 				houseDimensions: item.houseDimensions,
 				cost: item.cost,
+				reducedCost: item.reducedCost,
 				currency: currencyData[currency]
 			};
 

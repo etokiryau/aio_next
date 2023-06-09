@@ -14,6 +14,7 @@ interface IProjectListItem {
 		floorNumber: number;
 		houseDimensions: [number, number];
 		cost: number;
+		reducedCost: number | null;
 		currency: string;
 	};
 	likeFill: boolean;
@@ -34,6 +35,7 @@ const ProjectListItem: FC<IProjectListItem> = ({
 		houseDimensions,
 		previewSrc,
 		cost,
+		reducedCost,
 		currency
 	} = info;
 
@@ -48,7 +50,7 @@ const ProjectListItem: FC<IProjectListItem> = ({
 						height={50}
 					/>
 					<p id={styles.name}>{name}</p>
-					{cost === 0 && (
+					{reducedCost === 0 && (
 						<div className={styles.listItem__name_freeLabel}>
 							<p>Test</p>
 						</div>
@@ -64,7 +66,7 @@ const ProjectListItem: FC<IProjectListItem> = ({
 					</p>
 					{cost !== 0 && (
 						<p>
-							{cost}
+							{reducedCost ? reducedCost : cost}
 							{currency}
 						</p>
 					)}

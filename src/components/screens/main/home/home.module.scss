@@ -7,13 +7,13 @@
         text-align: center;
     }
 
-    .head {
+    &__head {
         @include mixins.flexCenter;
         gap: 5%;
         padding: 0 50px;
         height: calc(100vh - 105px - 110px);
     
-        &__left {
+        &_left {
             @include mixins.flexCenter;
             flex-direction: column;
             flex: 1;
@@ -25,9 +25,9 @@
             }
     
             a {
+                @include mixins.button;
                 margin-top: 30px;
                 padding: 8px 20px;
-                @include mixins.button;
     
                 &:hover {
                     @include mixins.hoveredButton;
@@ -35,7 +35,7 @@
             }
         }
     
-        &__right {
+        &_right {
             @include mixins.flexCenter;
             flex-direction: column;
             height: 100%;
@@ -43,20 +43,21 @@
         }
     }
 
-    .indicators {
-        margin-top: 100px;
+    &__indicators {
         @include mixins.flexCenter;
+        margin: 100px auto 0;
         flex-direction: column;
         gap: 90px;
+        width: 70%;
     }
 
-    .opportunities {
+    &__opportunities {
         display: flex;
         margin-top: 112px;
         padding: 0 50px;
         gap: 32px;
 
-        &__position {
+        &_position {
             margin-left: 10%;
             width: 2px;
             min-height: 100%;
@@ -72,7 +73,7 @@
             }
         }
 
-        &__list {
+        &_list {
             display: flex;
             flex-direction: column;
             flex: 1;
@@ -96,9 +97,9 @@
                 }
 
                 a {
+                    @include mixins.button;
                     margin-top: 80px;
                     padding: 8px 20px;
-                    @include mixins.button;
 
                     &:hover {
                         @include mixins.hoveredButton;  
@@ -107,7 +108,7 @@
             }
         }
 
-        &__media {
+        &_media {
             flex: 1;
             min-height: 100%;
 
@@ -122,7 +123,7 @@
         }
     }
 
-    .adaptation {
+    &__adaptation {
         position: relative;
         margin-top: 72px;
         
@@ -132,3 +133,18 @@
     }
 }
 
+@media (max-width: 991px) {
+    .home {
+        &__indicators {
+            width: 95%;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .home {
+        &__indicators {
+            
+        }
+    }
+}

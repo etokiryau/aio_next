@@ -39,7 +39,7 @@
         }
     }
     
-    &_buttons {
+    &__buttons {
         position: absolute;
         top: 8px;
         right: 8px;
@@ -60,7 +60,7 @@
         }
     }
 
-    &_information {
+    &__information {
         position: absolute;
         inset: 0;
         display: flex;
@@ -121,7 +121,7 @@
     }
 
     &:hover {
-        .projectTile_information {
+        .projectTile__information {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -177,5 +177,44 @@
     .projectTile { 
         width: calc(66% - 10px);
         max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .projectTile {
+        &__information {
+            background-color: rgba($color: #000000, $alpha: .5);
+
+            &_up {
+                visibility: visible;
+                opacity: 1;
+
+                div {
+                    transform: scale(1);
+                }
+
+                p {
+                    font-size: 16px;
+                }
+
+                #cost {
+                    transform: translateY(0px);
+                }
+            }
+
+            &_down {
+                background-color: rgba($color: vars.$secondaryColor, $alpha: .6);
+                
+                p {
+                    color: vars.$primaryColor;
+                    flex-grow: 1;
+                }
+
+                svg {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+        }
     }
 }

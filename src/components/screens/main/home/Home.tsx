@@ -93,7 +93,7 @@ const Home: FC = () => {
     const opportunitiesContent: JSX.Element[] = opportunities.map((item, i) => {
         return (
             <div ref={ref => opportunityRefs.current[i] = ref} key={i} 
-                className={`${styles.opportunities__list_single} ${i === currentOpportunity ? styles.active : ''}`}
+                className={`${styles.home__opportunities_list_single} ${i === currentOpportunity ? styles.active : ''}`}
             >
                 <p id={styles.name}>{item.name}</p>
                 <p id={styles.description}>{item.description}</p>
@@ -105,19 +105,19 @@ const Home: FC = () => {
     return (
         <MainLayout title="Home page">
             <div className={styles.home}>
-                <section className={styles.head}>
-                    <div className={styles.head__left}>
+                <section className={styles.home__head}>
+                    <div className={styles.home__head_left}>
                         <h1>Innovative Technologies in private construction</h1>
                         <Link href="/projects">Explore projects</Link>
                     </div>
-                    <div className={styles.head__right}>
+                    <div className={styles.home__head_right}>
                         <VideoWrapper src={["/mainVideo.mp4"]} />
                     </div>
                 </section>
 
                 <section>
                     <h2>AIO private construction ecosystem</h2>
-                    <div className={styles.indicators}>
+                    <div className={styles.home__indicators}>
                         <AdvantageIndicator title="Money save" target={17} duration={2000} multiplier={1.4} />
                         <AdvantageIndicator title="Time reduce" target={32} duration={2000} multiplier={1.3} />
                         <AdvantageIndicator title="Quality provide" target={100} duration={2000} />
@@ -126,15 +126,15 @@ const Home: FC = () => {
 
                 <section>
                     <h2>AIO platform opportunities</h2>
-                    <div className={styles.opportunities}>
-                        <div className={styles.opportunities__position}>
+                    <div className={styles.home__opportunities}>
+                        <div className={styles.home__opportunities_position}>
                             <div />
                         </div>
-                        <div className={styles.opportunities__list}>
+                        <div className={styles.home__opportunities_list}>
                             { opportunitiesContent } 
                         </div>
-                        <div className={styles.opportunities__media}>
-                            <div className={styles.opportunities__media_content}>
+                        <div className={styles.home__opportunities_media}>
+                            <div className={styles.home__opportunities_media_content}>
 
                             </div>
                         </div>
@@ -143,7 +143,7 @@ const Home: FC = () => {
 
                 <section>
                     <h2>Project adaptation map</h2>
-                    <div className={styles.adaptation}>
+                    <div className={styles.home__adaptation}>
                         <Image src={projectAdaptation} alt="map-adaptation" width={900} height={900} />
                     </div>
                 </section>
