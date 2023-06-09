@@ -64,13 +64,13 @@ const ProjectListItem: FC<IProjectListItem> = ({
 					<p>
 						{houseDimensions[0]} m x {houseDimensions[1]} m
 					</p>
-					{cost !== 0 && (
+					{reducedCost !== 0 && (
 						<p>
 							{reducedCost ? reducedCost : cost}
 							{currency}
 						</p>
 					)}
-					{cost === 0 && <p>free</p>}
+					{reducedCost === 0 && <p>free</p>}
 				</div>
 			</Link>
 			<div className={styles.listItem__buttons}>
