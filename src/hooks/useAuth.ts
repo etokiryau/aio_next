@@ -19,7 +19,7 @@ export const useAuth = (): IAuthHook => {
 
 	const login = (user: IUser): void => {
 		dispatch(setUser(user));
-		setCookie(null, "token", String(token), {
+		setCookie(null, "token", String(user.token), {
 			maxAge: 30 * 24 * 60 * 60,
 			path: "/"
 		});

@@ -1,6 +1,5 @@
 import MainLayout from "@/components/layouts/mainLayout/MainLayout";
-import { NextPage } from "next"
-import Head from "next/head";
+import { NextPage } from "next";
 import Image from "next/image";
 
 const NotFound: NextPage = () => {

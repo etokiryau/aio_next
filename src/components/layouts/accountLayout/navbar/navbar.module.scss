@@ -2,10 +2,133 @@
 @use '@/styles/_mixins.module' as mixins;
 
 .navbar {
+    overflow: hidden;
     position: fixed;
     top: 0;
     left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
     width: 270px;
     height: 100vh;
     background-color: rgba($color: vars.$primaryColor, $alpha: .1);
+    transition: .3s ease;
+
+    &__content {
+        padding: 20px 28px 0px 40px;
+        transition: .3s ease;
+    }
+
+    &__header {
+        position: relative;
+        min-height: 29px;
+
+        div {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            cursor: pointer;
+            transform: rotate(180deg) translateY(50%);
+            transition: .5s ease;
+        }
+
+        svg {
+            fill: vars.$primaryColor;
+        }
+    }
+
+    &__links {
+        margin-top: 54px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        li {
+            a {
+                position: relative;
+                display: flex;
+                align-items: center;
+                gap: 18px;
+                font-size: 16px;
+                min-width: max-content;
+
+                img {
+                    width: 30px;
+                }
+
+                p {
+                    width: max-content;
+                    transition: .2s ease;
+                }
+            }
+
+
+            .activeLink {
+                margin-left: 16px;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: -18px;
+                    width: 2px;
+                    height: 100%;
+                    background-color: vars.$additionalColor;
+                }
+            }
+        }
+
+    }
+
+    &__back {
+        margin-bottom: 54px;
+        align-self: center;
+        font-size: 20px;
+        font-weight: 600;
+        min-width: max-content;
+        transition: .2s ease;
+    }
+}
+
+.active {
+    width: 96px;
+
+    .navbar {
+        &__content {
+            padding: 20px 28px 0px 24px;
+        }
+        
+        &__header {
+            img {
+                transition: .2s ease;
+                opacity: 0;
+                visibility: hidden;
+            }
+    
+            div {
+                transform: translate(-26px, -50%) rotate(0deg);
+            }
+            
+            svg {
+                fill: vars.$additionalColor;
+            }
+        }
+
+        &__links {
+            li {
+                a {
+                    p {
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+                }
+            }
+        }
+
+        &__back {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
 }

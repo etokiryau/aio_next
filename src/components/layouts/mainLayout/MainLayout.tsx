@@ -8,7 +8,7 @@ import Footer from "./footer/Footer";
 import Meta from "@/components/seo/Meta";
 import { IMeta } from "@/components/seo/meta.interface";
 import { useAuth } from "@/hooks/useAuth";
-import CookiePopup from "@/cookiePopup/CookiePopup";
+import CookiePopup from "@/components/cookiePopup/CookiePopup";
 
 interface IProps extends IMeta {
     footer?: boolean
