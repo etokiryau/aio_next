@@ -62,7 +62,9 @@ const Navbar: FC = () => {
                     })}
                 </ul>
             </div>
-            <Link className={styles.navbar__back} href="/">AIO main page</Link>
+            <Link className={styles.navbar__back} href="/">
+                AIO main page
+            </Link>
         </nav>
     )
 }

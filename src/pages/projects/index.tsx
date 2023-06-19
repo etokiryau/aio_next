@@ -14,9 +14,8 @@ const ProjectsPage: NextPage<IProjectsProps> = ({ projects }) => {
 
     // useEffect(() => {
     //     const data = fetchData('api/Projects/GetProjects')
-    //     console.log(data)
     // }, [])
-    // const data = await fetchData('projects')
+    // const data = fetchData('projects')
     // console.log(data)
 
     // useEffect(() => {

@@ -82,12 +82,14 @@
     }
 
     &__back {
+        overflow: hidden;
         margin-bottom: 54px;
         align-self: center;
         font-size: 20px;
         font-weight: 600;
-        min-width: max-content;
-        transition: .2s ease;
+        max-width: fit-content;
+        height: 23.5px;
+        transition: max-width .2s ease;
     }
 }
 
@@ -127,8 +129,7 @@
         }
 
         &__back {
-            opacity: 0;
-            visibility: hidden;
+            max-width: 36px;
         }
     }
 }
