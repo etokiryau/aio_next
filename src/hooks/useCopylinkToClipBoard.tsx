@@ -1,11 +1,11 @@
 import { ReactNode, useState } from "react";
 import CopyingMessage from "@/components/ui/copyingMessage/CopyingMessage";
 
-export const useCopyLinkToClipboard = (): [ReactNode, (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void] => {
+export const useCopyLinkToClipboard = (): [ReactNode, (e: React.MouseEvent<HTMLDivElement, MouseEvent>, base: boolean) => void] => {
     const [isVisibleCopyingMessage, setIsVisibleCopyingMessage] = useState(false);
     const baseUrl = "https://aio.house";
 
-    const copyLinkToClipboard = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+    const copyLinkToClipboard = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, base = true): void => {
         let target = e.target as HTMLElement;
 
         if (target && target.tagName !== "svg") {
@@ -23,7 +23,10 @@ export const useCopyLinkToClipboard = (): [ReactNode, (e: React.MouseEvent<HTMLD
                 : (target.querySelector("svg") as SVGElement);
 
         const parentDiv = svg.parentNode as HTMLElement;
-        const link = String(baseUrl + parentDiv.getAttribute("data-link")).replace(" ", "%20");
+
+        const link = base 
+            ? String(baseUrl + parentDiv.getAttribute("data-link")).replace(" ", "%20")
+            : String(parentDiv.getAttribute("data-link"));
         
         navigator.clipboard
             .writeText(link)

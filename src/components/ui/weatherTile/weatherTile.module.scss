@@ -1,0 +1,34 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.weather {
+    padding: 20px 20px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: min(100%, 155px);
+    height: 155px;
+    background: vars.$secondaryColor;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+
+    #city {
+        font-size: 12px;
+    }
+
+    #temperature {
+        margin-top: 2px;
+        font-size: vars.$subHeaderFontSize;
+    }
+
+    #weatherCondition {
+        margin-top: 5px;
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    #temperatureSpread {
+        margin-top: 4px;
+        font-size: 12px;
+    }
+}

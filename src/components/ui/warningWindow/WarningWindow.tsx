@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import WarningIcon from "../toggler/WarningIcon";
+import WarningIcon from "../_icons/WarningIcon";
 import CrossIcon from "../_icons/CrossIcon";
 
 import styles from "./warningWindow.module.scss";

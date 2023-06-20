@@ -1,0 +1,33 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.date {
+    padding: 20px 16px 16px;
+    width: min(100%, 155px);
+    height: 155px;
+    background: vars.$secondaryColor;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+
+    #month {
+        font-size: 12px;
+        color: vars.$additionalColor;
+    }
+
+    #day {
+        margin-top: 4px;
+        font-size: vars.$subHeaderFontSize;
+    }
+
+    #workLabel {
+        margin-top: 6px;
+        font-size: 12px;
+        color: rgba($color: vars.$primaryColor, $alpha: .8)
+    }
+
+    #currentWork {
+        margin-top: 6px;
+        font-size: 16px;
+        font-weight: 400;
+    }
+}

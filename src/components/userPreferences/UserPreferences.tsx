@@ -19,9 +19,9 @@ import { setProjectForPurchase } from "../screens/main/projects/projectsSlice";
 import TriangleIcon from "@/components/ui/_icons/TriangleIcon";
 import CrossIcon from "../ui/_icons/CrossIcon";
 import WarningWindow from "../ui/warningWindow/WarningWindow";
+import WarningIcon from "../ui/_icons/WarningIcon";
 
 import styles from "./userPreferences.module.scss";
-import WarningIcon from "../ui/toggler/WarningIcon";
 
 const UserPreferences: FC = () => {
 	const { token } = useAuth();

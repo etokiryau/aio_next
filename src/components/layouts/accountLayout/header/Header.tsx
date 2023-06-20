@@ -2,56 +2,62 @@ import { FC } from "react";
 
 import ContractorIcon from "@/components/ui/_icons/ContractorIcon";
 import BellIcon from "@/components/ui/_icons/BellIcon";
-
-import styles from "./header.module.scss";
 import StatusIcon from "@/components/ui/_icons/StatusIcon";
 import CommentIcon from "@/components/ui/_icons/CommentIcon";
-import WarningIcon from "@/components/ui/toggler/WarningIcon";
+import WarningTriangleIcon from "@/components/ui/_icons/WarningTriangleIcon";
+
+import styles from "./header.module.scss";
 
 const Header: FC = () => {
 
     const iconMap: {[key: string]: React.ReactNode} = {
         'status': <StatusIcon />,
         'comment': <CommentIcon />,
-        'warning': <WarningIcon />
+        'warning': <WarningTriangleIcon />
     };
 
     const notificationsData = [
         {
+            isViewed: false,
             type: 'status',
             title: 'New status',
             date: '2 min'
         },
         {
+            isViewed: false,
             type: 'warning',
             title: 'Inappropriate weather!',
             date: '5 min'
         },
         {
+            isViewed: true,
             type: 'comment',
             title: 'New comment',
             date: 'Today'
         },
         {
+            isViewed: true,
             type: 'status',
             title: 'New status',
             date: 'Yesterday'
         },
         {
+            isViewed: false,
             type: 'comment',
             title: 'New comment',
             date: '10.06.2023'
         },
         {
+            isViewed: true,
             type: 'warning',
             title: 'Inappropriate weather!',
             date: '06.06.2023'
         }
     ];
 
-    const notificationsContent = notificationsData.map((item, i) => {
+    const notificationsContent: JSX.Element[] = notificationsData.map((item, i) => {
         return (
-            <div key={i} className={styles.header__buttons_notifications_popup_single}>
+            <div key={i} className={`${styles.header__buttons_notifications_popup_single} ${item.isViewed ? '' : styles.notViewed}`}>
                 <div className={styles.header__buttons_notifications_popup_single_title}>
                     {iconMap[item.type]}
                     <p>{item.title}</p>

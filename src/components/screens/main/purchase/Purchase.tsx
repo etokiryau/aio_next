@@ -16,7 +16,7 @@ import MainLayout from "@/components/layouts/mainLayout/MainLayout";
 import { languagesData } from "@/utillis/preferenceData";
 import LanguageIcon from "@/components/ui/_icons/LanguageIcon";
 import LocationMarkerIcon from "@/components/ui/_icons/LocationMarkerIcon";
-import WarningIcon from "@/components/ui/toggler/WarningIcon";
+import WarningIcon from "@/components/ui/_icons/WarningIcon";
 import TriangleIcon from "@/components/ui/_icons/TriangleIcon";
 
 import styles from "./purchase.module.scss";
