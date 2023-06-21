@@ -4,14 +4,15 @@ import { FC } from "react";
 import styles from "./copyingMessage.module.scss";
 
 interface ICopyingMessage {
-    isActive: boolean
+    isActive: boolean,
+    text: string
 };
 
-const CopyingMessage: FC<ICopyingMessage> = ({ isActive = false }) => {
+const CopyingMessage: FC<ICopyingMessage> = ({ isActive = false, text }) => {
 
     return (
         <div className={`${styles.copyingMessage} ${isActive ? styles.active : ''}`}>
-            Link copied to the clipboard
+            {text}
         </div>
     )
 }

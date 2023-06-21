@@ -28,7 +28,7 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 		project;
 	const router = useRouter();
 	const dispatch = useTypedDispatch();
-	const [copyingMessage, copyLinkToClipboard] = useCopyLinkToClipboard();
+	const [copyingMessage, copyLinkToClipboard] = useCopyLinkToClipboard('Link copied to the clipboard');
 	const { favourites } = useTypedSelector(selectProjects);
 	const { currency } = useTypedSelector(selectUserPreferences);
 

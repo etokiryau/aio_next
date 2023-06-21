@@ -1,7 +1,7 @@
 import { ReactNode, useState } from "react";
 import CopyingMessage from "@/components/ui/copyingMessage/CopyingMessage";
 
-export const useCopyLinkToClipboard = (): [ReactNode, (e: React.MouseEvent<HTMLDivElement, MouseEvent>, base?: boolean) => void] => {
+export const useCopyLinkToClipboard = (text: string): [ReactNode, (e: React.MouseEvent<HTMLDivElement, MouseEvent>, base?: boolean) => void] => {
     const [isVisibleCopyingMessage, setIsVisibleCopyingMessage] = useState(false);
     const baseUrl = "https://aio.house";
 
@@ -39,5 +39,5 @@ export const useCopyLinkToClipboard = (): [ReactNode, (e: React.MouseEvent<HTMLD
             });
     };
 
-    return [<CopyingMessage key="copying-message" isActive={isVisibleCopyingMessage} />, copyLinkToClipboard];
+    return [<CopyingMessage key="copying-message" text={text} isActive={isVisibleCopyingMessage} />, copyLinkToClipboard];
 }

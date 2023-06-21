@@ -8,9 +8,11 @@ import LocationTile from "@/components/ui/locationTile/LocationTile";
 import { useCopyLinkToClipboard } from "@/hooks/useCopylinkToClipBoard";
 
 import styles from "./dashboard.module.scss";
+import ProgressChart from "@/components/progressChart/ProgressChart";
+import ProgressDates from "@/components/ui/progressDates/ProgressDates";
 
 const Dashboard: FC = () => {
-    const [, copyLinkToClipboard] = useCopyLinkToClipboard();
+    const [CopyingMessage, copyLinkToClipboard] = useCopyLinkToClipboard('Location copied to the clipboard');
 
     return (
         <AccountLayout title="Dashboard">
@@ -19,9 +21,23 @@ const Dashboard: FC = () => {
                     <DateTile month="June" day="13" currentWork="Entrance doors installation" />
                     <EfficiencyTile value={12} />
                     <WeatherTile city="Porto" temperature={29} weatherCondition="Sunny" highTemp={30} lowTemp={13} />
-                    <LocationTile coordinates="123131" callback={(e) => copyLinkToClipboard(e, false)} />
+                    <LocationTile coordinates={{lat: 50.875, lng: -0.2}} callback={(e) => copyLinkToClipboard(e, false)} />
+                </section>
+                <section className={styles.dashboard__progress}>
+                    <div className={styles.dashboard__progress_left}>
+                        <ProgressChart />
+                    </div>
+                    <div className={styles.dashboard__progress_right}>
+                        <div>
+                            <ProgressDates />
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>
                 </section>
             </div>
+            {CopyingMessage}
         </AccountLayout>
     )
 }

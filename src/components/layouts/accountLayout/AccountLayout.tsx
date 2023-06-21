@@ -3,7 +3,7 @@ import { FC, PropsWithChildren } from "react";
 import Meta from "@/components/seo/Meta";
 import { IMeta } from "@/components/seo/meta.interface";
 import Navbar from "./navbar/Navbar";
-import { useTypedDispatch, useTypedSelector } from "@/hooks/useReduxHooks";
+import { useTypedSelector } from "@/hooks/useReduxHooks";
 import { selectAccount } from "./accountSlice";
 import Header from "./header/Header";
 
@@ -14,7 +14,8 @@ const AccountLayout: FC<PropsWithChildren<IMeta>> = ({ children, title }) => {
         marginLeft: isActive ? '96px' : '270px',
         transition: '.3s ease',
         background: 'linear-gradient(180deg, #F9F9F9 0%, #E0E0E0 100%)',
-        height: '100vh'
+        height: '100vh',
+        overflow: 'auto'
     };
 
     return (

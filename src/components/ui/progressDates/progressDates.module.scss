@@ -1,0 +1,18 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.dates {
+    &__header {
+        padding-right: 8px;
+        display: flex;
+        justify-content: space-between;
+
+        h3 {
+            font-size: 16px;
+        }
+
+        p {
+            font-weight: 400;
+        }
+    }
+}

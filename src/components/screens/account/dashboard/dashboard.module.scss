@@ -8,4 +8,19 @@
         display: flex;
         gap: 40px;
     }
+
+    &__progress {
+        margin-top: 40px;
+        display: flex;
+        gap: 20px;
+        height: 370px;
+
+        &_left {
+            flex: 2;
+        }
+
+        &_right {
+            flex: 1;
+        }
+    }
 }

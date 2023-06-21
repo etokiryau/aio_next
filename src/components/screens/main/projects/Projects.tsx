@@ -22,7 +22,7 @@ import styles from "./projects.module.scss";
 
 const Projects: NextPage = () => {
 	const [listMode, setListMode] = useState(false);
-	const [CopyingMessage, copyLinkToClipboard] = useCopyLinkToClipboard();
+	const [CopyingMessage, copyLinkToClipboard] = useCopyLinkToClipboard('Link copied to the clipboard');
 
 	const dispatch = useTypedDispatch();
 	const { favourites, filters } = useTypedSelector(selectProjects);
