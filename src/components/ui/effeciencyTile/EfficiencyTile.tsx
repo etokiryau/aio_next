@@ -15,7 +15,7 @@ const EfficiencyTile: FC<IProps> = ({ value }) => {
                 <div className={styles.efficiency__up_metrics}>
                     <svg id={styles.metric} width="60" height="60" xmlns="http://www.w3.org/2000/svg">
                         <defs>
-                            <linearGradient id="circleGradient" x1="1" y1="1" x2="0.3" y2=".5" gradientTransform="translate(100% 100%)">
+                            <linearGradient id="circleGradient" x1="1" y1="1" x2="0.3" y2=".5">
                                 <stop offset="0%" style={{stopColor: '#725AC1', stopOpacity: '0.2'}} />
                                 <stop offset="50%" style={{stopColor: '#725AC1', stopOpacity: '0.5'}} />
                                 <stop offset="70%" style={{stopColor: '#725AC1', stopOpacity: '0.7'}} />

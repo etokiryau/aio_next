@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from "react";
 
 import GoogleMapService from "@/services/GoogleMapService";

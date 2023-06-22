@@ -11,7 +11,6 @@
     button {
         @include mixins.button;
         padding: 1px 16px;
-        font-size: 20px;
     }
 
     .active {
@@ -29,7 +28,6 @@
     button {
         @include mixins.whiteButton;
         padding: 1px 16px;
-        font-size: 20px;
     }
 
     .active {

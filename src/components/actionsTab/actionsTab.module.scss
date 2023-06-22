@@ -1,0 +1,8 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.actions {
+    h3 {
+        font-size: 16px;
+    }
+}

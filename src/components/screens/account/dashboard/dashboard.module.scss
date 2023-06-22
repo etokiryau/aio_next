@@ -13,14 +13,20 @@
         margin-top: 40px;
         display: flex;
         gap: 20px;
-        height: 370px;
 
         &_left {
             flex: 2;
         }
 
         &_right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
             flex: 1;
         }
+    }
+
+    &__actions {
+        margin-top: 20px;
     }
 }

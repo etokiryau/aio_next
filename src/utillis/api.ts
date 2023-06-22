@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL: string = 'http://localhost:7018';
+const API_BASE_URL: string = 'https://localhost:7060/Home';
 
 export const fetchData = async (endpoint: string) => {
     try {
@@ -8,7 +8,6 @@ export const fetchData = async (endpoint: string) => {
         console.log(response)
         return response.data;
     } catch (error) {
-        console.error('Error fetching data:', error);
         throw new Error('Failed to fetch data');
     }
 };
@@ -18,7 +17,6 @@ export const postData = async (endpoint: string, data: any) => {
         const response = await axios.post(`${API_BASE_URL}/${endpoint}`, data);
         return response.data;
     } catch (error) {
-        console.error('Error posting data:', error);
         throw new Error('Failed to post data');
     }
 };

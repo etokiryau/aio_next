@@ -6,10 +6,12 @@ import EfficiencyTile from "@/components/ui/effeciencyTile/EfficiencyTile";
 import WeatherTile from "@/components/ui/weatherTile/WeatherTile";
 import LocationTile from "@/components/ui/locationTile/LocationTile";
 import { useCopyLinkToClipboard } from "@/hooks/useCopylinkToClipBoard";
-
-import styles from "./dashboard.module.scss";
 import ProgressChart from "@/components/progressChart/ProgressChart";
 import ProgressDates from "@/components/ui/progressDates/ProgressDates";
+import ProgressPurchase from "@/components/ui/progressPurchase/ProgressPurchase";
+import ActionsTab from "@/components/actionsTab/ActionsTab";
+
+import styles from "./dashboard.module.scss";
 
 const Dashboard: FC = () => {
     const [CopyingMessage, copyLinkToClipboard] = useCopyLinkToClipboard('Location copied to the clipboard');
@@ -28,13 +30,16 @@ const Dashboard: FC = () => {
                         <ProgressChart />
                     </div>
                     <div className={styles.dashboard__progress_right}>
-                        <div>
+                        <div className={styles.dashboard__progress_right_content}>
                             <ProgressDates />
                         </div>
-                        <div>
-
+                        <div className={styles.dashboard__progress_right_content}>
+                            <ProgressPurchase value={85} />
                         </div>
                     </div>
+                </section>
+                <section className={styles.dashboard__actions}>
+                    <ActionsTab />
                 </section>
             </div>
             {CopyingMessage}

@@ -15,4 +15,67 @@
             font-weight: 400;
         }
     }
+
+    &__content {
+        margin-top: 8px;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        height: 160px;
+        background-color: vars.$secondaryColor;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+        border-radius: 8px;
+
+        &_info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+
+            #up {
+                font-size: 20px;
+                font-weight: 500;
+            }
+
+            #title {
+                margin-top: 4px;
+                font-size: 14px;
+            }
+        }
+
+        &_chart {
+            position: relative;
+            flex: 1;
+
+            svg {
+                margin: auto;
+                fill: none;
+                transform: rotate(-90deg);
+
+                circle {
+                    &:first-child {
+                        stroke: rgba($color: vars.$primaryColor, $alpha: .2);
+                    }
+
+                    &:last-child {
+                        stroke: vars.$blueColor;
+                        stroke-dasharray: 251;
+                        stroke-dashoffset: 120;
+                        stroke-linecap: round;
+                    }
+                }
+            }
+
+            span {
+                position: absolute;
+                top: 37%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 24px;
+                font-weight: 500;
+                color: vars.$blueColor;
+            }
+        }
+    }
 }

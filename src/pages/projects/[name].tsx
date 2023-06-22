@@ -21,7 +21,7 @@ const projects: ISingleProject[] = [
         locations: ['Portugal', 'France', 'Spain'],
         floorNumber: 3,
         roofType: 'Flat',
-        landDimensions: [30, 50]
+        // landDimensions: [30, 50]
     },
     {
         id: '2',
@@ -35,7 +35,7 @@ const projects: ISingleProject[] = [
         locations: ['Portugal', 'France', 'Spain'],
         floorNumber: 2,
         roofType: 'Mixed',
-        landDimensions: [60, 50]
+        // landDimensions: [60, 50]
     },
     {
         id: '3',
@@ -49,7 +49,7 @@ const projects: ISingleProject[] = [
         locations: ['Portugal', 'France', 'Spain'],
         floorNumber: 2,
         roofType: 'Flat',
-        landDimensions: [50, 64]
+        // landDimensions: [50, 64]
     },
     {
         id: '4',
@@ -63,7 +63,7 @@ const projects: ISingleProject[] = [
         locations: ['Portugal', 'France', 'Spain'],
         floorNumber: 3,
         roofType: 'Flat',
-        landDimensions: [30, 40]
+        // landDimensions: [30, 40]
     },
     {
         id: '5',
@@ -77,7 +77,7 @@ const projects: ISingleProject[] = [
         locations: ['Portugal', 'Spain'],
         floorNumber: 1,
         roofType: 'Pitched',
-        landDimensions: [30, 50]
+        // landDimensions: [30, 50]
     },
     {
         id: '6',
@@ -91,7 +91,7 @@ const projects: ISingleProject[] = [
         locations: ['Portugal', 'France'],
         floorNumber: 1,
         roofType: 'Mixed',
-        landDimensions: [30, 50]
+        // landDimensions: [30, 50]
     }
 ]
 
@@ -108,7 +108,7 @@ const SingleProjectPage: NextPage<IProjectProps> = ({ response }) => {
         locations: [''],
         floorNumber: 1,
         roofType: '',
-        landDimensions: [0, 0]
+        // landDimensions: [0, 0]
     };
 
 

@@ -6,6 +6,7 @@ export interface IProject {
     height: number,
     houseDimensions: [number, number],
     cost: number,
+    reducedCost: number | null,
     locations: string[],
     floorNumber: number,
     roofType: string,
@@ -28,7 +29,7 @@ export interface ISingleProject {
     locations: string[],
     floorNumber: number,
     roofType: string,
-    landDimensions: [number, number]
+    // landDimensions: [number, number]
 };
 
 export interface IProjectsProps {

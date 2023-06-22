@@ -13,8 +13,9 @@ const ProjectsPage: NextPage<IProjectsProps> = ({ projects }) => {
     dispatch(setProjects(projects));
 
     // useEffect(() => {
-    //     const data = fetchData('api/Projects/GetProjects')
+    //     const data = fetchData('GetProjects')
     // }, [])
+    
     // const data = fetchData('projects')
     // console.log(data)
 
@@ -50,7 +51,7 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 3,
             roofType: 'Flat',
-            landDimensions: [30, 50]
+            // landDimensions: [30, 50]
         },
         {
             id: '2',
@@ -64,7 +65,7 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 2,
             roofType: 'Mixed',
-            landDimensions: [60, 50]
+            // landDimensions: [60, 50]
         },
         {
             id: '3',
@@ -78,7 +79,7 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 2,
             roofType: 'Flat',
-            landDimensions: [50, 64]
+            // landDimensions: [50, 64]
         },
         {
             id: '4',
@@ -92,7 +93,7 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 3,
             roofType: 'Flat',
-            landDimensions: [30, 40]
+            // landDimensions: [30, 40]
         },
         {
             id: '5',
@@ -106,7 +107,7 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             locations: ['Portugal', 'Spain'],
             floorNumber: 1,
             roofType: 'Pitched',
-            landDimensions: [30, 50]
+            // landDimensions: [30, 50]
         },
         {
             id: '6',
@@ -120,7 +121,7 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
             locations: ['Portugal', 'France'],
             floorNumber: 1,
             roofType: 'Mixed',
-            landDimensions: [30, 50]
+            // landDimensions: [30, 50]
         }
     ]
 

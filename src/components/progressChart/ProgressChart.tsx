@@ -30,7 +30,7 @@ const ProgressChart: FC = () => {
 
     const lineOptions = {
         responsive: true,
-        aspectRatio: 2.85,
+        aspectRatio: 2.6,
         interaction: {
             mode: 'index' as const,
             intersect: false,

@@ -1,0 +1,101 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.dates {
+    &__header {
+        padding-right: 8px;
+        display: flex;
+        justify-content: space-between;
+
+        h3 {
+            font-size: 16px;
+        }
+
+        p {
+            font-weight: 400;
+        }
+    }
+
+    &__content {
+        margin-top: 8px;
+        padding: 20px;
+        height: 160px;
+        background-color: vars.$secondaryColor;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+        border-radius: 8px;
+        text-align: center;
+
+        &_toggler {
+            display: inline-block;
+            border: solid .4px rgba($color: vars.$primaryColor, $alpha: .4);
+            border-radius: 20px;
+        }
+
+        &_data {
+            position: relative;
+            margin-top: 30px;
+            height: 20px;
+
+            &_bar {
+                position: absolute;
+                left: 0;
+                border-radius: 0px 8px 8px 0px;
+
+                span {
+                    position: absolute;
+                    top: -20px;
+                    right: 0;
+                    color: vars.$blueColor;
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+
+                &:first-child {
+                    top: 1.5px;
+                    width: 100%;
+                    height: 5px;
+                    background-color: vars.$dimmedBlueColor;
+
+                    span {
+                        top: -21.5px
+                    }
+                }
+
+                &:last-child {
+                    top: 0;
+                    height: 8px;
+                    background-color: vars.$blueColor;
+                }
+            }
+        }
+
+        &_labels {
+            margin-top: 10px;
+            display: flex;
+
+            &_single {
+                display: flex;
+                align-items: center;
+                flex: 1;
+                gap: 10px;
+                
+                span {
+                    width: 15px;
+                    height: 5px;
+                    border-radius: 8px;
+                    background-color: vars.$dimmedBlueColor;
+                }
+
+                p {
+                    font-size: 16px;
+                }
+
+                &:last-child {
+                    span {
+                        background-color: vars.$blueColor;
+                    }
+                }
+            }
+        }
+    }
+}
