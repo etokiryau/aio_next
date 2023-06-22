@@ -15,14 +15,16 @@
         gap: 20px;
 
         &_left {
-            flex: 2;
+            flex: 5;
+            max-width: 60%;
         }
 
         &_right {
             display: flex;
             flex-direction: column;
             gap: 20px;
-            flex: 1;
+            flex: 3;
+            min-width: 380px;
         }
     }
 
