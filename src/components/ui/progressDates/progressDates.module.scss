@@ -49,7 +49,6 @@
             flex: 1;
 
             svg {
-                // margin-left: 10%;
                 fill: none;
                 transform: rotate(-90deg);
 
@@ -61,7 +60,6 @@
                     &:last-child {
                         stroke: vars.$blueColor;
                         stroke-dasharray: 251;
-                        stroke-dashoffset: 120;
                         stroke-linecap: round;
                     }
                 }
