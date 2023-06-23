@@ -82,10 +82,13 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 					</div>
 					<div className={styles.project__header_right}>
 						<div className={styles.project__header_right_cost}>
-							<p	id={reducedCost ? styles.lineThrough : ''}
+							{/* cost */}
+							<p id={reducedCost === 0 || reducedCost ? styles.lineThrough : ''}
 								>{cost} {currencyData[currency]}</p>
+
 							{reducedCost === 0 && <p>free</p>}
-							{reducedCost && <p>{reducedCost} {currencyData[currency]}</p>}
+							{/* reduced cost */}
+							{reducedCost !== 0 && reducedCost && <p>{reducedCost} {currencyData[currency]}</p>}
 						</div>
 
 						<p

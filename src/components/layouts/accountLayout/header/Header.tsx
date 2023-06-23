@@ -65,7 +65,7 @@ const Header: FC = () => {
                 <p id={styles.date}>{item.date}</p>
             </div>
         )
-    })
+    });
 
     return (
         <div className={styles.header}>

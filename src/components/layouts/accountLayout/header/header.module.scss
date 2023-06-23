@@ -34,7 +34,6 @@
                 top: 50px;
                 right: -68px;
                 padding: 22px 16px 22px 0px;
-                
                 width: 440px;
                 height: 212px;
                 background-color: vars.$secondaryColor;
@@ -44,6 +43,10 @@
                 visibility: hidden;
                 opacity: 0;
                 transition: .3s ease;
+
+                svg {
+                    fill: vars.$primaryColor;
+                }
 
                 &::after {
                     position: absolute;

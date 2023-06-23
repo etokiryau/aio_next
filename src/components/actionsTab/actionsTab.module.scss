@@ -5,4 +5,117 @@
     h3 {
         font-size: 16px;
     }
+
+    &__content {
+        margin-top: 8px;
+        padding: 16px 56px 32px 20px;
+        background-color: vars.$secondaryColor;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+        border-radius: 8px;
+
+        &_toggler {
+            margin: auto;
+            display: inline;
+            padding: 6px 8px;
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            width: fit-content;
+            border: .4px solid rgba($color: vars.$primaryColor, $alpha: .4);
+            border-radius: vars.$primaryBorderRadius;
+
+            button {
+                padding: 8px 10px;
+                display: flex;
+                gap: 4px;
+                align-items: center;
+                background-color: vars.$secondaryColor;
+                color: vars.$primaryColor;
+                border-radius: 24px;
+                font-size: 16px;
+                border: none;
+                transition: .3s ease;
+
+                svg {
+                    fill: vars.$primaryColor;
+                    transition: .3s ease;
+                }
+            }
+
+            .activeButton {
+                background-color: vars.$primaryColor;
+                color: vars.$secondaryColor;
+                border: none;
+
+                svg {
+                    fill: vars.$secondaryColor;
+                }
+            }
+        }
+
+        &_list {
+            overflow-y: auto;
+            margin-top: 28px;
+            max-height: 154px;
+
+            &::-webkit-scrollbar {
+                width: 4px;
+                background-color: rgba($color: vars.$primaryColor, $alpha: .6);
+                border-radius: 8px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-radius: 4px;
+                background-color: vars.$primaryColor;
+            }
+
+            &::-webkit-scrollbar:horizontal {
+                display: none;
+            }
+
+            &_single {
+                margin-right: 20px;
+                padding-bottom: 8px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 0.4px solid rgba($color: vars.$primaryColor, $alpha: .6);
+
+                &:nth-child(n+2) {
+                    padding-top: 8px;
+                }
+
+                &_left {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-size: 16px;
+
+                    svg {
+                        fill: vars.$primaryColor;
+                    }
+
+                    span {
+                        font-weight: 400;
+                    }
+                }
+
+                &_right {
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+
+                    p {
+                        color: vars.$blueColor;
+                        font-size: 16px;
+                    }
+
+                    button {
+                        @include mixins.whiteButton;
+                        padding: 2px 20px;
+                    }
+                }
+            }
+        }
+    }
 }

@@ -9,22 +9,27 @@ interface IProps {
     secondButtonTitle: string,
     firstButtonCallback: () => void,
     secondButtonCallback: () => void,
-    fontSize?: number
+    fontSize?: number,
+    borders?: boolean
 };
 
-const Toggler: FC<IProps> = ({ theme, isFirstButtonActive, firstButtonTitle, secondButtonTitle, firstButtonCallback, secondButtonCallback, fontSize = 20 }) => {
+const Toggler: FC<IProps> = ({ theme, isFirstButtonActive, firstButtonTitle, secondButtonTitle, firstButtonCallback, secondButtonCallback, fontSize = 20, borders = true }) => {
+    const buttonStyle = {
+        fontSize: `${fontSize}px`,
+        border: borders ? 'inherit' : 'none'
+    };
 
     return (
         <div className={theme === 'dark' ? styles.darkToggler : styles.lightToggler}>
             <button type="button"
-                style={{fontSize: `${fontSize}px`}}
+                style={buttonStyle}
                 onClick={() => firstButtonCallback()}
                 className={isFirstButtonActive ? styles.active : ""}
             >
                 {firstButtonTitle}
             </button>
             <button type="button"
-                style={{fontSize: `${fontSize}px`}}
+                style={buttonStyle}
                 onClick={() => secondButtonCallback()}
                 className={!isFirstButtonActive ? styles.active : ""}
             >

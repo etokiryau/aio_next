@@ -2,7 +2,7 @@
 @use '@/styles/_mixins.module' as mixins;
 
 .dashboard {
-    padding: 0 20px;
+    padding: 0 20px 20px;
 
     &__tiles {
         display: flex;
