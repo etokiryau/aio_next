@@ -5,12 +5,12 @@ import Dashboard from "@/components/screens/account/dashboard/Dashboard";
 const DashboardPage: NextPage = () => {
 
     return <Dashboard />
-}
+};
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const { token } = nookies.get(ctx);
 
-    if (token !== 'null') {
+    if (token) {
         return {
             props: { }
         }

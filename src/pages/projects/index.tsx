@@ -1,6 +1,6 @@
 import { GetServerSideProps, NextPage } from "next";
 import { useEffect } from "react";
-import { fetchData, postData } from "@/utillis/api";
+import { fetchData, postData, deleteData, updateData } from "@/utillis/api";
 
 import { useTypedDispatch } from "@/hooks/useReduxHooks";
 import { setProjects } from "@/components/screens/main/projects/projectsSlice";
@@ -10,7 +10,8 @@ import { IProjectsProps, ISingleProject } from "@/interfaces/projects.interface"
 const ProjectsPage: NextPage<IProjectsProps> = ({ projects }) => {
     const dispatch = useTypedDispatch();
 
-    dispatch(setProjects(projects));
+    // dispatch(setProjects(projects));
+    console.log(projects)
 
     // useEffect(() => {
     //     const data = fetchData('GetProjects')
@@ -20,16 +21,19 @@ const ProjectsPage: NextPage<IProjectsProps> = ({ projects }) => {
     // console.log(data)
 
     // useEffect(() => {
-    //     const data = {
-    //         // area: 1212,
-    //         // cost: 345345,
-    //         // floorNumber: 12,
-    //         // height: 100,
-    //         // name: "eto novyi proekt",
-    //         // roofType: 'bez kryshi'
-    //         name: 'hehe'
-    //     }
-    //     postData('api/Projects/Create', data)
+    //     deleteData('RemoveProject?id=5')
+    //     // const data = fetchData('projects');
+    //     // console.log(data)
+    // }, [])
+
+    // useEffect(() => {
+    //     postData('Create?name=project123&tour.Preview=previewhehe&tour.Scr=test&model.Preview=test&model.Urn=test&roofType=round&houseDimention.A=30&houseDimention.B=25&setup.title=setup1')
+    //     // const data = fetchData('projects');
+    //     // console.log(data)
+    // }, [])
+
+    // useEffect(() => {
+    //     updateData('UpdateProject?id=5&name=etoproject5')
     //     // const data = fetchData('projects');
     //     // console.log(data)
     // }, [])
@@ -125,8 +129,20 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
         }
     ]
 
+    try {
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+        const data = await fetchData('GetProjects');
+        console.log('fetch try', data)
+
+        return {
+            props: { projects: data }
+        }
+    } catch(e) {
+        console.log(e)
+    }
+    
     return {
-        props: { projects: projects }
+        props: { projects: null }
     }
 }
 

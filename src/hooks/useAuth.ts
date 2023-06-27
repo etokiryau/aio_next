@@ -26,8 +26,8 @@ export const useAuth = (): IAuthHook => {
 	};
 
 	const logout = (): void => {
-		dispatch(removeUser());
 		destroyCookie(null, "token");
+		dispatch(removeUser());
 	};
 
 	return { email, name, token, userId, isConfirmed, login, logout };
