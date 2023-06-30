@@ -10,8 +10,8 @@ import { IProjectsProps, ISingleProject } from "@/interfaces/projects.interface"
 const ProjectsPage: NextPage<IProjectsProps> = ({ projects }) => {
     const dispatch = useTypedDispatch();
 
-    // dispatch(setProjects(projects));
-    console.log(projects)
+    dispatch(setProjects(projects));
+    // console.log(projects)
 
     // useEffect(() => {
     //     const data = fetchData('GetProjects')
@@ -129,20 +129,20 @@ export const getServerSideProps: GetServerSideProps<IProjectsProps> = async () =
         }
     ]
 
-    try {
-        process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-        const data = await fetchData('GetProjects');
-        console.log('fetch try', data)
+    // try {
+    //     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+    //     const data = await fetchData('GetProjects');
+    //     console.log('fetch try', data)
 
-        return {
-            props: { projects: data }
-        }
-    } catch(e) {
-        console.log(e)
-    }
+    //     return {
+    //         props: { projects: projects }
+    //     }
+    // } catch(e) {
+    //     console.log(e)
+    // }
     
     return {
-        props: { projects: null }
+        props: { projects: projects }
     }
 }
 
