@@ -11,7 +11,7 @@ const AccountLayout: FC<PropsWithChildren<IMeta>> = ({ children, title }) => {
     const { isActive } = useTypedSelector(selectAccount);
 
     const style = {
-        marginLeft: isActive ? '96px' : '270px',
+        marginLeft: isActive ? '270px' : '96px',
         transition: '.3s ease',
         // background: 'linear-gradient(180deg, #F9F9F9 0%, #E0E0E0 100%)',
         height: '100vh',

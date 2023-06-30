@@ -36,7 +36,7 @@ const Navbar: FC = () => {
     ];
 
     return (
-        <nav className={`${styles.navbar} ${isActive ? styles.active : ''}`}>
+        <nav className={`${styles.navbar} ${isActive ? '' : styles.notActive}`}>
             <div className={styles.navbar__content}>
                 <div className={styles.navbar__header}>
                     <Image src="/largeLogo.svg" alt="logo" width={60} height={29} />
