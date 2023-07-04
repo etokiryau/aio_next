@@ -1,0 +1,41 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.projects {
+    margin: 16px 2.5%;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+
+        &_back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+
+            p {
+                font-weight: 400;
+            }
+        }
+
+        &_add {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+    }
+
+    h2 {
+        font-size: vars.$subHeaderFontSize;
+        text-align: left;
+    }
+
+    &__list {
+        margin-top: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+}

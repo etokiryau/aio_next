@@ -18,7 +18,7 @@ interface IForm {
 
 interface ISendingData extends IForm {
     cost: number
-}
+};
 
 const Services: FC = () => {
     const [areaValue, setAreaValue] = useState('500');
