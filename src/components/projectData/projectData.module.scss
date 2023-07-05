@@ -1,0 +1,178 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.popup {
+    position: fixed;
+    inset: 0;
+    padding: 32px;
+    background-color: rgba($color: vars.$primaryColor, $alpha: .7);
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s ease;
+    z-index: 100000;
+
+    &__content {
+        position: relative;
+        padding: 24px;
+        width: 100%;
+        height: 100%;
+        background-color: vars.$secondaryColor;
+        box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+        border-radius: vars.$primaryBorderRadius;
+
+        &_header {
+            padding-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: vars.$primaryBorder;
+
+            p {
+                font-size: 22px;
+            }
+
+            &_buttons {
+                display: flex;
+                gap: 12px;
+
+                button {
+                    @include mixins.button;
+                    padding: 8px 12px;
+
+                    &:hover {
+                        @include mixins.hoveredButton;
+                    }
+                }
+            }
+        }
+
+        &_main {
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            gap: 5%;
+
+            &_block {
+                flex: 1;
+
+                &_single {
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
+
+                    p {
+                        min-width: max-content;
+                    }
+
+                    input {
+                        padding: 8px 16px;
+                        width: 100%;
+                        border: solid 1px rgba($color: vars.$primaryColor, $alpha: .4);
+                        border-radius: 8px;
+                        outline: none;
+                        transition: .5s ease;
+                        background-color: rgba(255, 255, 255, 0.8);
+            
+                        &:focus  {
+                            background-color: rgba($color: vars.$primaryColor, $alpha: .1);
+                            border: solid 1px rgba($color: vars.$primaryColor, $alpha: .6);
+                        }
+            
+                        &::placeholder {
+                            color: rgba($color: vars.$primaryColor, $alpha: .4);
+                        }
+
+                        &::-webkit-outer-spin-button,
+                        &::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+                    }
+
+                    &:last-child {
+                        margin-top: 12px;
+                    }
+                }
+            }
+        }
+
+        &_renders {
+            margin-top: 24px;
+            user-select: none;
+
+            &_wrapper {
+                margin-top: 12px;
+                display: flex;
+                gap: 20px;
+            }
+
+            &_content {
+                overflow: hidden;
+                padding: 24px 24px 8px;
+                flex: 1;
+                height: 240px;
+                box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+                background-color: vars.$secondaryColor;
+                border-radius: vars.$primaryBorderRadius;
+
+                &_wrapper {
+                    overflow-x: auto;
+                    padding-bottom: 12px;
+                    display: flex;
+                    gap: 20px;
+                    height: 100%;
+
+                    &::-webkit-scrollbar {
+                        height: 4px;
+                        background-color: rgba($color: vars.$primaryColor, $alpha: .6);
+                        border-radius: 8px;
+                    }
+        
+                    &::-webkit-scrollbar-thumb {
+                        border-radius: 4px;
+                        background-color: vars.$primaryColor;
+                    }
+                }
+
+                &_single {
+                    position: relative;
+                    min-width: 320px;
+                    height: 100%;
+
+                    &_delete {
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        cursor: pointer;
+                    }
+
+                    img {
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 8px;
+                    }
+                }
+            }
+
+            &_add {
+                button {
+                    @include mixins.whiteButton;
+                    padding: 8px 12px;
+
+                    &:hover {
+                        @include mixins.hoveredButton;
+                    }
+                }
+
+                input {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+.active {
+    opacity: 1;
+    visibility: visible;
+}
