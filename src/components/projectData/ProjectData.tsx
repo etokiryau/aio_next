@@ -1,10 +1,12 @@
 import { FC, useRef, useState } from "react";
 import Image from "next/image";
 import { useFormik } from "formik";
+
 import { ISingleProject } from "@/interfaces/projects.interface";
+import GarbageIcon from "../ui/_icons/GarbageIcon";
+import AdminViewAdding from "../adminViewAdding/AdminViewAdding";
 
 import styles from "./projectData.module.scss";
-import GarbageIcon from "../ui/_icons/GarbageIcon";
 
 interface IProps {
     state: [boolean, React.Dispatch<React.SetStateAction<boolean>>],
@@ -15,10 +17,12 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
     const [isOpened, setIsOpened] = state;
     const popupRef = useRef<HTMLDivElement>(null);
     const rendersInputRef = useRef<HTMLInputElement>(null);
-    const viewsInputRef = useRef<HTMLInputElement>(null);
     const { previewSrc, name, totalArea, height, houseDimensions, cost, reducedCost, roofType, floorNumber, id } = data;
     const renders = [previewSrc, previewSrc, previewSrc, previewSrc, previewSrc];
     const [rendersState, setRendersState] = useState(renders);
+    const views = [{src: previewSrc, title: 'Facade 1'}, {src: previewSrc, title: 'Facade 2'}, {src: previewSrc, title: 'Facade 3'}, {src: previewSrc, title: 'Facade 4'}, {src: previewSrc, title: 'Facade %'}]
+    const [viewsState, setViewsState] = useState(views);
+    const [isAddingView, setIsAddingView] = useState(false);
 
 	const formik = useFormik({
 		initialValues: {
@@ -34,7 +38,6 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
             roofType: data ? roofType :  '',
             locations: []
 		},
-		// validateOnMount: true,
 		onSubmit: (values: ISingleProject) => {
 			handleSubmit(values);
 		}
@@ -48,9 +51,14 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
         event?.target === popupRef.current && setIsOpened(prev => !prev);
     };
 
-    const handleRenderDelete = (order: number): void => {
-        const newArray = rendersState.filter((_, i) => order !== i);
-        setRendersState(newArray);
+    const handleImageDelete = (type: string, order: number): void => {
+        if (type === 'renders') {
+            const newArray = rendersState.filter((_, i) => order !== i);
+            setRendersState(newArray);
+        } else {
+            const newArray = viewsState.filter((_, i) => order !== i);
+            setViewsState(newArray);
+        }
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -83,13 +91,29 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
     const rendersContent: JSX.Element[] = rendersState.map((item, i) => {
         return (
             <div key={i} className={styles.popup__content_renders_content_single}>
-                <div onClick={() => handleRenderDelete(i)} className={styles.popup__content_renders_content_single_delete}>
+                <div onClick={() => handleImageDelete('renders', i)} className={styles.popup__content_renders_content_single_delete}>
                     <GarbageIcon />
                 </div>
                 <Image src={item} alt="render" width={320} height={620} />
             </div>
         )
     });
+
+    const viewsContent: JSX.Element[] = viewsState.map((item, i) => {
+        return (
+            <div key={i} className={styles.popup__content_views_content_single}>
+                <div onClick={() => handleImageDelete('views', i)} className={styles.popup__content_views_content_single_delete}>
+                    <GarbageIcon />
+                </div>
+                <Image src={item.src} alt="render" width={320} height={620} />
+                <p>{item.title}</p>
+            </div>
+        )
+    });
+
+    const handleAddView = (view: {src: string, title: string}): void => {
+        setViewsState(prev => [...prev, view])
+    };
 
     return (
         <div onClick={togglePopup} ref={popupRef} className={`${styles.popup} ${isOpened ? styles.active : ''}`}>
@@ -111,7 +135,7 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
                                 type="text"
                                 id="name"
                                 name="name"
-                                placeholder="Fill project's name"
+                                placeholder="Fill name"
                             />
                         </div>
                         <div className={styles.popup__content_main_block_single}>
@@ -122,7 +146,7 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
                                 type="number"
                                 id="totalArea"
                                 name="totalArea"
-                                placeholder="Fill project's area"
+                                placeholder="Fill area"
                             />
                         </div>
                     </div>
@@ -135,7 +159,7 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
                                 type="number"
                                 id="height"
                                 name="height"
-                                placeholder="Fill project's height"
+                                placeholder="Fill height"
                             />
                         </div>
                         <div className={styles.popup__content_main_block_single}>
@@ -191,7 +215,7 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
                                 type="number"
                                 id="cost"
                                 name="cost"
-                                placeholder="Fill project's cost"
+                                placeholder="Fill cost"
                             />
                         </div>
                         <div className={styles.popup__content_main_block_single}>
@@ -202,7 +226,7 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
                                 type="number"
                                 id="reducedCost"
                                 name="reducedCost"
-                                placeholder="Fill project's reduced cost"
+                                placeholder="Fill reduced cost"
                             />
                         </div>
                     </div>
@@ -218,6 +242,20 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
                         <div className={styles.popup__content_renders_add}>
                             <input ref={rendersInputRef} onChange={handleFileChange} type="file" id="render" name="render" multiple accept="image/*" />
                             <button onClick={() => rendersInputRef.current?.click()} type="button">Add render</button>
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.popup__content_views}>
+                    <p>Additional views</p>
+                    <div className={styles.popup__content_views_wrapper}>
+                        <div className={styles.popup__content_views_content}>
+                            <div className={styles.popup__content_views_content_wrapper}>
+                                {viewsContent}
+                            </div>
+                        </div>
+                        <div className={styles.popup__content_views_add}>
+                            <button id={styles.button} onClick={() => setIsAddingView(true)} type="button">Add view</button>
+                            <AdminViewAdding state={[isAddingView, setIsAddingView]} onSubmit={handleAddView} />
                         </div>
                     </div>
                 </div>

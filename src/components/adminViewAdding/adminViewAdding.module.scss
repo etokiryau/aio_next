@@ -1,0 +1,125 @@
+@use '@/styles/_variables.module' as vars;
+@use '@/styles/_mixins.module' as mixins;
+
+.viewAdding {
+    @include mixins.flexCenter;
+    position: fixed;
+    inset: 0;
+    padding: 32px;
+    background-color: rgba($color: vars.$primaryColor, $alpha: .7);
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s ease;
+    z-index: 10;
+
+    &__content {
+        position: relative;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
+        width: min(95%, 420px);
+        height: 50%;
+        background-color: vars.$secondaryColor;
+        box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+        border-radius: vars.$primaryBorderRadius;
+
+        &_skeleton {
+            @include mixins.flexCenter;
+            height: 60%;
+            border: solid 1px rgba($color: vars.$primaryColor, $alpha: .4);
+            border-radius: 8px;
+
+            button {
+                @include mixins.whiteButton;
+                padding: 8px 12px;
+
+                &:hover {
+                    @include mixins.hoveredButton;
+                }
+            }
+        }
+
+        &_image {
+            position: relative;
+            height: 60%;
+
+            img {
+                height: 100%;
+                object-fit: cover;
+                border-radius: 8px;
+            }
+
+            &_delete {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+            }
+        }
+
+        #submitButton {
+            @include mixins.button;
+            padding: 8px 12px;
+
+            &:hover {
+                @include mixins.hoveredButton;
+            }
+
+            &:disabled {
+                opacity: .4;
+                cursor: auto;
+
+                &:hover {
+                    transform: none;
+                }
+            }
+        }
+
+        input {
+            padding: 8px 16px;
+            width: 100%;
+            border: solid 1px rgba($color: vars.$primaryColor, $alpha: .4);
+            border-radius: 8px;
+            outline: none;
+            transition: .5s ease;
+            background-color: rgba(255, 255, 255, 0.8);
+
+            &:focus  {
+                background-color: rgba($color: vars.$primaryColor, $alpha: .1);
+                border: solid 1px rgba($color: vars.$primaryColor, $alpha: .6);
+            }
+
+            &::placeholder {
+                color: rgba($color: vars.$primaryColor, $alpha: .4);
+            }
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+
+        &_close {
+            position: absolute;
+            top: -30px;
+            right: 0;
+            padding: 5px;
+            background-color: vars.$secondaryColor;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: .5s ease;
+
+            &:hover {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+
+.active {
+    visibility: visible;
+    opacity: 1;
+}
