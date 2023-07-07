@@ -9,9 +9,9 @@ import styles from "./projectTile.module.scss";
 
 interface IProjectTile {
 	info: {
-		previewSrc: string;
+		preview: string;
 		name: string;
-		totalArea: number;
+		area: number;
 		floorNumber: number;
 		houseDimensions: [number, number];
 		cost: number;
@@ -31,10 +31,10 @@ const ProjectTile: FC<IProjectTile> = ({
 }) => {
 	const {
 		name,
-		totalArea,
+		area,
 		floorNumber,
 		houseDimensions,
-		previewSrc,
+		preview,
 		cost,
 		reducedCost,
 		currency
@@ -42,7 +42,7 @@ const ProjectTile: FC<IProjectTile> = ({
 
 	return (
 		<div className={styles.projectTile}>
-			<Image src={previewSrc} alt="project" width={780} height={300} />
+			<Image src={preview} alt="project" width={780} height={300} />
 
 			{reducedCost === 0 && (
 				<div className={styles.projectTile__freeLabel}>
@@ -66,7 +66,7 @@ const ProjectTile: FC<IProjectTile> = ({
 			>
 				<div className={styles.projectTile__information_up}>
 					<div>
-						<p>total area: {totalArea} m2</p>
+						<p>total area: {area} m2</p>
 						<p>floors: {floorNumber}</p>
 						<p>
 							{" "}

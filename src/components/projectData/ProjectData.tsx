@@ -2,7 +2,7 @@ import { FC, useRef, useState } from "react";
 import Image from "next/image";
 import { useFormik } from "formik";
 
-import { ISingleProject } from "@/interfaces/projects.interface";
+import { IProject } from "@/interfaces/projects.interface";
 import GarbageIcon from "../ui/_icons/GarbageIcon";
 import AdminViewAdding from "../adminViewAdding/AdminViewAdding";
 
@@ -10,40 +10,43 @@ import styles from "./projectData.module.scss";
 
 interface IProps {
     state: [boolean, React.Dispatch<React.SetStateAction<boolean>>],
-    data: ISingleProject
+    data: IProject
 };
 
 const ProjectData: FC<IProps> = ({ state, data }) => {
     const [isOpened, setIsOpened] = state;
     const popupRef = useRef<HTMLDivElement>(null);
     const rendersInputRef = useRef<HTMLInputElement>(null);
-    const { previewSrc, name, totalArea, height, houseDimensions, cost, reducedCost, roofType, floorNumber, id } = data;
-    const renders = [previewSrc, previewSrc, previewSrc, previewSrc, previewSrc];
+    const { preview, name, area, height, houseDimensions, cost, reducedCost, roofType, floorNumber, _id, views, renders, setup, model, tour } = data;
     const [rendersState, setRendersState] = useState(renders);
-    const views = [{src: previewSrc, title: 'Facade 1'}, {src: previewSrc, title: 'Facade 2'}, {src: previewSrc, title: 'Facade 3'}, {src: previewSrc, title: 'Facade 4'}, {src: previewSrc, title: 'Facade %'}]
     const [viewsState, setViewsState] = useState(views);
     const [isAddingView, setIsAddingView] = useState(false);
 
 	const formik = useFormik({
 		initialValues: {
 			name: data ? name : '',
-            id: data ? id : '',
-            previewSrc: data ? previewSrc :  '',
-            totalArea: data ? totalArea : 0,
+            _id: data ? _id : '',
+            preview: data ? preview :  '',
+            area: data ? area : 0,
             height: data ? height : 0,
             houseDimensions: data ? houseDimensions :  [0, 0],
             cost: data ? cost :  0,
             reducedCost: data ? reducedCost :  0,
             floorNumber: data ? floorNumber :  1,
             roofType: data ? roofType :  '',
+            renders: renders.length === 0 ? [] : renders,
+            model: model.preview ? model : {preview: '', urn: ''},
+            tour: tour.preview ? tour : {preview: '', src: ''},
+            setup: setup.length === 0 ? [] : setup,
+            views: views.length === 0 ? [] : views,
             locations: []
 		},
-		onSubmit: (values: ISingleProject) => {
+		onSubmit: (values: IProject) => {
 			handleSubmit(values);
 		}
 	});
 
-    const handleSubmit = (values: ISingleProject) => {
+    const handleSubmit = (values: IProject) => {
 
     };
 
@@ -105,8 +108,11 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
                 <div onClick={() => handleImageDelete('views', i)} className={styles.popup__content_views_content_single_delete}>
                     <GarbageIcon />
                 </div>
+                <div onClick={() => {}} className={styles.popup__content_views_content_single_edit}>
+                    <p>Edit view</p>
+                </div>
                 <Image src={item.src} alt="render" width={320} height={620} />
-                <p>{item.title}</p>
+                <p id={styles.name}>{item.title}</p>
             </div>
         )
     });
@@ -140,12 +146,12 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
                         </div>
                         <div className={styles.popup__content_main_block_single}>
                             <p>Area</p>
-                            <input value={formik.values.totalArea}
+                            <input value={formik.values.area}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 type="number"
-                                id="totalArea"
-                                name="totalArea"
+                                id="area"
+                                name="area"
                                 placeholder="Fill area"
                             />
                         </div>
@@ -168,8 +174,8 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
                                 onChange={handleDimensionsChange}
                                 data-type="first"
                                 type="number"
-                                id="totalArea"
-                                name="totalArea"
+                                id="area"
+                                name="area"
                                 placeholder="Fill first dimension"
                             />
                             <input value={formik.values.houseDimensions[1]}
@@ -232,7 +238,7 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
                     </div>
                 </div>
                 <div className={styles.popup__content_renders}>
-                    <p>Renders</p>
+                    <p id={styles.title}>Renders</p>
                     <div className={styles.popup__content_renders_wrapper}>
                         <div className={styles.popup__content_renders_content}>
                             <div className={styles.popup__content_renders_content_wrapper}>
@@ -246,7 +252,7 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
                     </div>
                 </div>
                 <div className={styles.popup__content_views}>
-                    <p>Additional views</p>
+                    <p id={styles.title}>Additional views</p>
                     <div className={styles.popup__content_views_wrapper}>
                         <div className={styles.popup__content_views_content}>
                             <div className={styles.popup__content_views_content_wrapper}>

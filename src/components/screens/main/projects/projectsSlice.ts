@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/redux/store';
 
-import { ISingleProject } from '@/interfaces/projects.interface';
+import { IProject } from '@/interfaces/projects.interface';
 
 interface IProjectsState {
-    projects: ISingleProject[],
+    projects: IProject[],
     favourites: string[],
     filters: {
         favourites: boolean,
@@ -13,12 +13,12 @@ interface IProjectsState {
         cost: [number, number] | null,
         roofType: string | null
     },
-    sorting: {type: string, direction: 'ascending' | 'descending'} | null,
+    sorting: {type: string, direction: 'ascending' | 'descending'},
     projectForPurchase: string | null
 };
 
 interface ISortingProperties {
-    totalArea: number,
+    area: number,
     cost: number,
     floorNumber: number,
 };
@@ -33,7 +33,7 @@ const initialState: IProjectsState = {
         cost: null,
         roofType: null
     },
-    sorting: null,
+    sorting: {type: 'name', direction: 'ascending'},
     projectForPurchase: null
 };
 
@@ -41,7 +41,7 @@ const projectsSlice = createSlice({
     name: 'projects',
     initialState,
     reducers: {
-        setProjects: (state, action: PayloadAction<ISingleProject[]>) => {
+        setProjects: (state, action: PayloadAction<IProject[]>) => {
             state.projects = action.payload;
         },
         toggleFavourite: (state, action: PayloadAction<string | string[]>) => {
@@ -69,7 +69,7 @@ const projectsSlice = createSlice({
                 roofType: null
             }
         },
-        setSorting: (state, action: PayloadAction<{type: string, direction: 'ascending' | 'descending'} | null>) => {
+        setSorting: (state, action: PayloadAction<{type: string, direction: 'ascending' | 'descending'}>) => {
             state.sorting = action.payload;
         },
         setProjectForPurchase: (state, action: PayloadAction<string | null>) => {
@@ -88,9 +88,9 @@ export const selectFilteredProjects = (state: RootState) => {
     const favouritesList = state.projects.favourites;
 
     return projects.filter((item) => {
-        if (favourites && favouritesList.some(id => id === item.id) !== favourites) return false;
+        if (favourites && favouritesList.some(id => id === item._id) !== favourites) return false;
         if (floorNumber && item.floorNumber !== floorNumber) return false;
-        if (totalArea && (item.totalArea > totalArea[1] || item.totalArea < totalArea[0])) return false;
+        if (totalArea && (item.area > totalArea[1] || item.area < totalArea[0])) return false;
         if (cost && (item.cost > cost[1] || item.cost < cost[0])) return false;
         if (roofType && item.roofType !== roofType) return false;
         return true;

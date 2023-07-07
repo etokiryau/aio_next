@@ -8,9 +8,9 @@ import styles from "./projectListItem.module.scss";
 
 interface IProjectListItem {
 	info: {
-		previewSrc: string;
+		preview: string;
 		name: string;
-		totalArea: number;
+		area: number;
 		floorNumber: number;
 		houseDimensions: [number, number];
 		cost: number;
@@ -30,10 +30,10 @@ const ProjectListItem: FC<IProjectListItem> = ({
 }) => {
 	const {
 		name,
-		totalArea,
+		area,
 		floorNumber,
 		houseDimensions,
-		previewSrc,
+		preview,
 		cost,
 		reducedCost,
 		currency
@@ -44,7 +44,7 @@ const ProjectListItem: FC<IProjectListItem> = ({
 			<Link href={`/projects/${name}`} className={styles.listItem}>
 				<div className={styles.listItem__name}>
 					<Image
-						src={previewSrc}
+						src={preview}
 						alt="project"
 						width={250}
 						height={50}
@@ -57,7 +57,7 @@ const ProjectListItem: FC<IProjectListItem> = ({
 					)}
 				</div>
 				<div className={styles.listItem__indicators}>
-					<p>{totalArea} m2</p>
+					<p>{area} m2</p>
 					<p>
 						{floorNumber} {floorNumber === 1 ? "floor" : "floors"}
 					</p>

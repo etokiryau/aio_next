@@ -45,8 +45,8 @@ const Projects: NextPage = () => {
 	const projectsListContent: JSX.Element[] = sortedProjects.map((item, i) => {
 		const info = {
 			name: item.name,
-			previewSrc: item.previewSrc,
-			totalArea: item.totalArea,
+			preview: item.preview,
+			area: item.area,
 			floorNumber: item.floorNumber,
 			houseDimensions: item.houseDimensions,
 			reducedCost: item.reducedCost,
@@ -59,8 +59,8 @@ const Projects: NextPage = () => {
 				key={i}
 				info={info}
 				handleShare={e => copyLinkToClipboard(e)}
-				handleLike={() => dispatch(toggleFavourite(item.id))}
-				likeFill={isFavourite(item.id)}
+				handleLike={() => dispatch(toggleFavourite(item._id))}
+				likeFill={isFavourite(item._id)}
 			/>
 		);
 	});
@@ -69,8 +69,8 @@ const Projects: NextPage = () => {
 		(item, i) => {
 			const info = {
 				name: item.name,
-				previewSrc: item.previewSrc,
-				totalArea: item.totalArea,
+				preview: item.preview,
+				area: item.area,
 				floorNumber: item.floorNumber,
 				houseDimensions: item.houseDimensions,
 				cost: item.cost,
@@ -83,8 +83,8 @@ const Projects: NextPage = () => {
 					key={i}
 					info={info}
 					handleShare={e => copyLinkToClipboard(e)}
-					handleLike={() => dispatch(toggleFavourite(item.id))}
-					likeFill={isFavourite(item.id) ? true : false}
+					handleLike={() => dispatch(toggleFavourite(item._id))}
+					likeFill={isFavourite(item._id) ? true : false}
 				/>
 			);
 		}

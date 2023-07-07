@@ -1,4 +1,4 @@
-import { FC, useState, useRef, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import Image from "next/image";
 
 import BackRotationIcon from "../ui/_icons/BackRotationIcon";
@@ -10,31 +10,31 @@ import ZoomOutIcon from "../ui/_icons/ZoomOutIcon";
 import SearchIcon from "../ui/_icons/SearchIcon";
 
 import styles from "./setupNavigator.module.scss";
+
+interface IProps {
+    data: {title: string, rooms: {src: string, name: string}[]}[]
+};
 interface IRoomsStyle {
     transform: string,
     top: string,
     left: string
 };
 
-const SetupNavigator: FC = () => {
+type TypeRooms = {name: string, src: string}[];
+
+const SetupNavigator: FC<IProps> = ({ data }) => {
     const [rotation, setRotation] = useState<number>(0);
     const [scale, setScale] = useState<number>(1);
     const [position, setPosition] = useState<{x: number, y: number}>({ x: 100, y: 20 });
     const zoomRange = {min: 0.5, max: 5.5, step: 0.1};
     const [term, setTerm] = useState<string>('');
-    const [currentRoom, setCurrentRoom] = useState<number>(0);
+    const [currentRoom, setCurrentRoom] = useState<number | null>(null);
     const [currentFloor, setCurrentFloor] = useState<number>(0);
 
     const style: IRoomsStyle = {
         top: `${position.y}px`,
         left: `${position.x}px`,
         transform: `rotate(${rotation}deg) scale(${scale})`
-    };
-
-    const floorsMapping: {[key: number]: string} = {
-        0: '1st floor',
-        1: '2nd floor',
-        2: '3rd floor'
     };
 
     const changeRotation = (degree: number): void => {
@@ -54,7 +54,7 @@ const SetupNavigator: FC = () => {
     };
 
     const changeCurrentRoom = (order: number): void => {
-        setCurrentRoom(order)
+        setCurrentRoom(prev => prev ===  order ? null : order);
     };
 
     const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>): void => {
@@ -123,23 +123,33 @@ const SetupNavigator: FC = () => {
     //     }
     // };
 
-    const roomsData = ['1. Room name', '1. Room name', '1. Room name','1. Room name' ,'1. Room name' ,'1. Room name', '1. Room name', '1. Room name', '1. Room name', '1. Room name']
-
-    const searchRooms = (items: string[], term: string): string[] => {
+    const searchRooms = (items: TypeRooms, term: string): TypeRooms => {
         if (term.length === 0) {
             return items;
         }
 
         return items.filter(item => {
-            return item.toLowerCase().indexOf(term.toLowerCase()) > -1;
+            return item.name.toLowerCase().indexOf(term.toLowerCase()) > -1;
         })
     };
 
-    const filteredRooms: string[] = searchRooms(roomsData, term);
+    const changeFloor = (order: number): void => {
+        setCurrentFloor(order);
+        setCurrentRoom(null);
+        setTerm('');
+    };
+
+    const filteredRooms: TypeRooms = searchRooms(data[currentFloor].rooms, term);
+
+    const floorsList: JSX.Element[] = data.map((item, i) => {
+        return (
+            <p key={i} onClick={() => changeFloor(i)} className={currentFloor === i ? styles.activeFloor : ''}>{item.title}</p>
+        )
+    });
 
     return (
         <>
-            <div className={styles.setup__floor}>{floorsMapping[currentFloor]}</div>
+            <div className={styles.setup__floor}>{data[currentFloor].title}</div>
             <div className={styles.setup}>
                 <div className={styles.setup__layout}>
                     <div className={styles.setup__layout_scale}>
@@ -172,9 +182,7 @@ const SetupNavigator: FC = () => {
                 <div className={styles.setup__navigation}>
                     <p>Choose floor:</p>
                     <div className={styles.setup__navigation_floors}>
-                        <p onClick={() => setCurrentFloor(0)} className={currentFloor === 0 ? styles.activeFloor : ''}>1st floor</p>
-                        <p onClick={() => setCurrentFloor(1)} className={currentFloor === 1 ? styles.activeFloor : ''}>2nd floor</p>
-                        <p onClick={() => setCurrentFloor(2)} className={currentFloor === 2 ? styles.activeFloor : ''}>3rd floor</p>
+                        {floorsList}
                     </div>
                     <div className={styles.setup__navigation_input}>
                         <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="Search number or room" />
@@ -186,7 +194,7 @@ const SetupNavigator: FC = () => {
                                         key={i}
                                         onClick={() => changeCurrentRoom(i)}
                                         className={currentRoom === i ? styles.active : ''}
-                                    >{item}</p>
+                                    >{item.name}</p>
                         })}
                     </div>
                 </div>

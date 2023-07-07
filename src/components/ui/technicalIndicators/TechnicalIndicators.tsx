@@ -3,17 +3,17 @@ import { FC } from "react";
 import styles from "./technicalIndicators.module.scss";
 
 interface IIndicatorsProps {
-    totalArea: number,
+    area: number,
     height: number,
     houseDimensions: [number, number]
 };
 
-const TechnicalIndicators: FC<IIndicatorsProps> = ({ totalArea, height, houseDimensions }) => {
+const TechnicalIndicators: FC<IIndicatorsProps> = ({ area, height, houseDimensions }) => {
 
     return (
         <div className={styles.indicators}>
             <div className={styles.indicators__single}>
-                <p className={styles.indicators__single_value}>{totalArea} m</p>
+                <p className={styles.indicators__single_value}>{area} m</p>
                 <div className={styles.indicators__single_line} />
                 <p className={styles.indicators__single_value_property}>Total area</p>
             </div>

@@ -1,24 +1,24 @@
 import { FC, useState } from "react";
 import { useRouter } from "next/router";
-import { ISingleProject } from "@/interfaces/projects.interface";
 
+import { IProject } from "@/interfaces/projects.interface";
 import ProjectAdministation from "@/components/projectAdminstration/ProjectAdministration";
 import ArrowLarge from "@/components/ui/_icons/ArrowLargeIcon";
 import ZoomInIcon from "@/components/ui/_icons/ZoomInIcon";
+import ProjectData from "@/components/projectData/ProjectData";
 
 import styles from "./projectsAdmin.module.scss";
-import ProjectData from "@/components/projectData/ProjectData";
 
 const ProjectsAdmin: FC = () => {
     const [isOpened, setIsOpened] = useState(false);
     const router = useRouter();
 
-    const projects: ISingleProject[] = [
+    const projects: IProject[] = [
         {
-            id: '1',
-            previewSrc: '/projectPreview.jpg',
+            _id: '1',
+            preview: '/projectPreview.jpg',
             name: 'Project A',
-            totalArea: 178,
+            area: 178,
             height: 5.2,
             houseDimensions: [10, 16],
             cost: 100,
@@ -26,13 +26,17 @@ const ProjectsAdmin: FC = () => {
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 3,
             roofType: 'Flat',
-            // landDimensions: [30, 50]
+            renders: ['/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg'],
+            model: {preview: '/projectPreview.jpg', urn: 'asdas'},
+            tour: {preview: '/projectPreview.jpg', src: 'asd'},
+            setup: [{title: '1st floor', rooms: [{name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}]}, {title: '2nd floor', rooms: [{name: '2 Bedroom', src: 'vsd'}, {name: '2 Bedroom', src: 'vsd'}, {name: '2 Bedroom', src: 'vsd'}]}],
+            views: [{title: 'Facade 1', src: '/projectPreview.jpg'}, {title: 'Facade 187', src: '/projectPreview.jpg'}, {title: 'Facade 143', src: '/projectPreview.jpg'}, {title: 'Facade 13', src: '/projectPreview.jpg'}, {title: 'Facade 14', src: '/projectPreview.jpg'}, {title: 'Facade 134', src: '/projectPreview.jpg'}, {title: 'Facade 145', src: '/projectPreview.jpg'}]
         },
         {
-            id: '2',
-            previewSrc: '/project23.jpg',
+            _id: '2',
+            preview: '/project23.jpg',
             name: 'Project B',
-            totalArea: 278,
+            area: 278,
             height: 5.2,
             houseDimensions: [21, 15],
             cost: 499,
@@ -40,13 +44,17 @@ const ProjectsAdmin: FC = () => {
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 2,
             roofType: 'Mixed',
-            // landDimensions: [60, 50]
+            renders: ['/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg'],
+            model: {preview: '/projectPreview.jpg', urn: 'asdas'},
+            tour: {preview: '/projectPreview.jpg', src: 'asd'},
+            setup: [{title: '1st floor', rooms: [{name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}]}, {title: '2nd floor', rooms: [{name: '2 Bedroom', src: 'vsd'}, {name: '2 Bedroom', src: 'vsd'}, {name: '2 Bedroom', src: 'vsd'}]}],
+            views: [{title: 'Facade 1', src: '/projectPreview.jpg'}, {title: 'Facade 187', src: '/projectPreview.jpg'}, {title: 'Facade 143', src: '/projectPreview.jpg'}, {title: 'Facade 13', src: '/projectPreview.jpg'}, {title: 'Facade 14', src: '/projectPreview.jpg'}, {title: 'Facade 134', src: '/projectPreview.jpg'}, {title: 'Facade 145', src: '/projectPreview.jpg'}]
         },
         {
-            id: '3',
-            previewSrc: '/projectPreview.jpg',
+            _id: '3',
+            preview: '/projectPreview.jpg',
             name: 'Project C',
-            totalArea: 378,
+            area: 378,
             height: 5.2,
             houseDimensions: [32, 36],
             cost: 499,
@@ -54,13 +62,17 @@ const ProjectsAdmin: FC = () => {
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 2,
             roofType: 'Flat',
-            // landDimensions: [50, 64]
+            renders: ['/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg'],
+            model: {preview: '/projectPreview.jpg', urn: 'asdas'},
+            tour: {preview: '/projectPreview.jpg', src: 'asd'},
+            setup: [{title: '1st floor', rooms: [{name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}]}, {title: '2nd floor', rooms: [{name: '2 Bedroom', src: 'vsd'}, {name: '2 Bedroom', src: 'vsd'}, {name: '2 Bedroom', src: 'vsd'}]}],
+            views: [{title: 'Facade 1', src: '/projectPreview.jpg'}, {title: 'Facade 187', src: '/projectPreview.jpg'}, {title: 'Facade 143', src: '/projectPreview.jpg'}, {title: 'Facade 13', src: '/projectPreview.jpg'}, {title: 'Facade 14', src: '/projectPreview.jpg'}, {title: 'Facade 134', src: '/projectPreview.jpg'}, {title: 'Facade 145', src: '/projectPreview.jpg'}]// landDimensions: [50, 64]
         },
         {
-            id: '4',
-            previewSrc: '/projectPreview.jpg',
+            _id: '4',
+            preview: '/projectPreview.jpg',
             name: 'Project D',
-            totalArea: 178,
+            area: 178,
             height: 5.2,
             houseDimensions: [15, 26],
             cost: 699,
@@ -68,13 +80,17 @@ const ProjectsAdmin: FC = () => {
             locations: ['Portugal', 'France', 'Spain'],
             floorNumber: 3,
             roofType: 'Flat',
-            // landDimensions: [30, 40]
+            renders: ['/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg'],
+            model: {preview: '/projectPreview.jpg', urn: 'asdas'},
+            tour: {preview: '/projectPreview.jpg', src: 'asd'},
+            setup: [{title: '1st floor', rooms: [{name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}]}, {title: '2nd floor', rooms: [{name: '2 Bedroom', src: 'vsd'}, {name: '2 Bedroom', src: 'vsd'}, {name: '2 Bedroom', src: 'vsd'}]}],
+            views: [{title: 'Facade 1', src: '/projectPreview.jpg'}, {title: 'Facade 187', src: '/projectPreview.jpg'}, {title: 'Facade 143', src: '/projectPreview.jpg'}, {title: 'Facade 13', src: '/projectPreview.jpg'}, {title: 'Facade 14', src: '/projectPreview.jpg'}, {title: 'Facade 134', src: '/projectPreview.jpg'}, {title: 'Facade 145', src: '/projectPreview.jpg'}]
         },
         {
-            id: '5',
-            previewSrc: '/project23.jpg',
+            _id: '5',
+            preview: '/project23.jpg',
             name: 'Project E',
-            totalArea: 118,
+            area: 118,
             height: 5.2,
             houseDimensions: [10, 16],
             cost: 399,
@@ -82,13 +98,17 @@ const ProjectsAdmin: FC = () => {
             locations: ['Portugal', 'Spain'],
             floorNumber: 1,
             roofType: 'Pitched',
-            // landDimensions: [30, 50]
+            renders: ['/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg'],
+            model: {preview: '/projectPreview.jpg', urn: 'asdas'},
+            tour: {preview: '/projectPreview.jpg', src: 'asd'},
+            setup: [{title: '1st floor', rooms: [{name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}]}, {title: '2nd floor', rooms: [{name: '2 Bedroom', src: 'vsd'}, {name: '2 Bedroom', src: 'vsd'}, {name: '2 Bedroom', src: 'vsd'}]}],
+            views: [{title: 'Facade 1', src: '/projectPreview.jpg'}, {title: 'Facade 187', src: '/projectPreview.jpg'}, {title: 'Facade 143', src: '/projectPreview.jpg'}, {title: 'Facade 13', src: '/projectPreview.jpg'}, {title: 'Facade 14', src: '/projectPreview.jpg'}, {title: 'Facade 134', src: '/projectPreview.jpg'}, {title: 'Facade 145', src: '/projectPreview.jpg'}]
         },
         {
-            id: '6',
-            previewSrc: '/projectPreview.jpg',
+            _id: '6',
+            preview: '/projectPreview.jpg',
             name: 'Project F',
-            totalArea: 578,
+            area: 578,
             height: 5.2,
             houseDimensions: [12, 19],
             cost: 199,
@@ -96,15 +116,25 @@ const ProjectsAdmin: FC = () => {
             locations: ['Portugal', 'France'],
             floorNumber: 1,
             roofType: 'Mixed',
-            // landDimensions: [30, 50]
+            renders: ['/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg', '/projectPreview.jpg'],
+            model: {preview: '/projectPreview.jpg', urn: 'asdas'},
+            tour: {preview: '/projectPreview.jpg', src: 'asd'},
+            setup: [{title: '1st floor', rooms: [{name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}, {name: '1 Bedroom', src: 'vsd'}]}, {title: '2nd floor', rooms: [{name: '2 Bedroom', src: 'vsd'}, {name: '2 Bedroom', src: 'vsd'}, {name: '2 Bedroom', src: 'vsd'}]}],
+            views: [{title: 'Facade 1', src: '/projectPreview.jpg'}, {title: 'Facade 187', src: '/projectPreview.jpg'}, {title: 'Facade 143', src: '/projectPreview.jpg'}, {title: 'Facade 13', src: '/projectPreview.jpg'}, {title: 'Facade 14', src: '/projectPreview.jpg'}, {title: 'Facade 134', src: '/projectPreview.jpg'}, {title: 'Facade 145', src: '/projectPreview.jpg'}]
         }
-    ];
+    ]
+    const [projectsState, setProjectsState] = useState(projects);
 
-    const projectsContent: JSX.Element[] = projects.map((item, i) => {
+    const deleteProjects = (order: number): void => {
+        const newArray = projectsState.filter((_, i) => order !== i)
+        setProjectsState(newArray);
+    };
+
+    const projectsContent: JSX.Element[] = projectsState.map((item, i) => {
         return <ProjectAdministation 
                     key={i} 
                     data={item} 
-                    onDelete={() => {}} 
+                    onDelete={() => deleteProjects(i)} 
                 />
     });
 
@@ -120,7 +150,26 @@ const ProjectsAdmin: FC = () => {
                     <p>Add new project</p>
                 </div>
             </div>
-            <ProjectData state={[isOpened, setIsOpened]} data={{previewSrc: '', name: '', totalArea: 0, height: 0, houseDimensions: [0, 0], cost: 0, reducedCost: 0, roofType: '', floorNumber: 0, id: '', locations: []}} />
+            <ProjectData state={[isOpened, setIsOpened]} 
+                data={{
+                    preview: '', 
+                    name: '', 
+                    area: 0, 
+                    height: 0, 
+                    houseDimensions: [0, 0], 
+                    cost: 0, 
+                    reducedCost: 0, 
+                    roofType: '', 
+                    floorNumber: 0,
+                    _id: '',
+                    renders: [],
+                    model: {preview: '', urn: ''},
+                    tour: {preview: '', src: ''},
+                    setup: [],
+                    views: [],
+                    locations: []
+                }}
+            />
             <div className={styles.projects__list}>
                 <h2>Projects list</h2>
                 {projectsContent}

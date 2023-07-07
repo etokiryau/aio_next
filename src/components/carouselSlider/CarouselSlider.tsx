@@ -7,7 +7,7 @@ import ArrowSmall from "../ui/_icons/ArrowSmallIcon";
 import CrossIcon from "../ui/_icons/CrossIcon";
 
 interface ISliderProps {
-	slides?: string[];
+	slides: string[] | {title: string, src: string}[];
 	size: "large" | "small";
 }
 interface ISlideStyle {
@@ -17,7 +17,7 @@ interface ISlideStyle {
 	visibility?: "visible" | "hidden";
 }
 
-const CarouselSlider: FC<ISliderProps> = ({ size }) => {
+const CarouselSlider: FC<ISliderProps> = ({ size, slides }) => {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
 	const [currentPopupSlide, setCurrentPopupSlide] = useState<number>(0);
 	const [direction, setDirection] = useState<"+" | "-">("+");
@@ -59,21 +59,10 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 			setDeltaX(deltaX);
 			if (deltaX > 30) changeSlide("previous");
 			if (deltaX < -30) changeSlide("next");
-			// if (Math.abs(deltaX) < 5) setPopup(true);
 		}
 	};
 
-	const slidesData = [
-		"/projectPreview.jpg",
-		"/project23.jpg",
-		"/project43.jpg",
-		"/project61.jpg",
-		"/project91.jpg",
-		"/project61.jpg"
-		// "/project91.jpg"
-	];
-
-	const slideNumber = slidesData.length;
+	const slideNumber = slides.length;
 
 	const setLargePosition = (
 		order: number,
@@ -186,7 +175,7 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 		event?.target === popupRef.current && setPopup(false);
 	};
 
-	const slides = slidesData.map((item, i) => {
+	const slidesContent = slides.map((item, i) => {
 		const slideStyle =
 			size === "large"
 				? setLargePosition(i, currentSlide)
@@ -203,13 +192,17 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 				} 
 					${currentSlide === i ? styles.active : styles.inActive}`}
 			>
-				<Image src={item} width={900} height={280} alt="render" />
-				{size === "small" && <p>North facade</p>}
+				{typeof item === "string" ? (
+					<Image src={item} width={900} height={280} alt="render" />
+				) : (
+					<Image src={item.src} width={900} height={280} alt="render" />
+				)}
+				{size === "small" && <p>{typeof item === "string" ? item : item.title}</p>}
 			</div>
 		);
 	});
 
-	const popupSlides = slidesData.map((item, i) => {
+	const popupSlides = slides.map((item, i) => {
 		return (
 			<div
 				key={i}
@@ -217,7 +210,11 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 					currentPopupSlide === i ? styles.activePopupSlide : ""
 				} ${styles.popup__content_slide}`}
 			>
-				<Image src={item} width={900} height={280} alt="render" />
+				{typeof item === "string" ? (
+					<Image src={item} width={900} height={280} alt="render" />
+				) : (
+					<Image src={item.src} width={900} height={280} alt="render" />
+				)}
 			</div>
 		);
 	});
@@ -234,7 +231,7 @@ const CarouselSlider: FC<ISliderProps> = ({ size }) => {
 					height: size === "large" ? "calc(100vh - 280px)" : "290px"
 				}}
 			>
-				{slides}
+				{slidesContent}
 				<div
 					className={`${styles.slider__rightChange} ${
 						size === "small" ? styles.shiftedButton : ""

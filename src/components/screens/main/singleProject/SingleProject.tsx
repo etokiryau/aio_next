@@ -24,7 +24,7 @@ import CarouselSlider from "@/components/carouselSlider/CarouselSlider";
 import styles from "./singleProject.module.scss";
 
 const SingleProject: FC<IProjectPageProps> = ({ project }) => {
-	const { id, name, cost, reducedCost, totalArea, height, houseDimensions } =
+	const { _id, name, cost, reducedCost, area, height, houseDimensions, renders, views, model, tour, setup } =
 		project;
 	const router = useRouter();
 	const dispatch = useTypedDispatch();
@@ -60,8 +60,8 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 					</div>
 
 					<div className={styles.project__sticky_right}>
-						<div onClick={() => dispatch(toggleFavourite(id))}>
-							<LikeIcon isActive={isFavourite(id)} />
+						<div onClick={() => dispatch(toggleFavourite(_id))}>
+							<LikeIcon isActive={isFavourite(_id)} />
 						</div>
 						<div
 							data-link={`/projects/${name}`}
@@ -105,13 +105,13 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 				</section>
 
 				<section className={styles.project__renders}>
-					<CarouselSlider size="large" />
+					<CarouselSlider slides={renders} size="large" />
 				</section>
 
 				<section className={styles.project__indicators}>
 					<h2>Main technical indicators</h2>
 					<TechnicalIndicators
-						totalArea={totalArea}
+						area={area}
 						height={height}
 						houseDimensions={houseDimensions}
 					/>
@@ -123,15 +123,15 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 						<div className={styles.project__models_single}>
 							<ModelTile
 								type="model"
-								preview="/project23.jpg"
-								src="dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dHN3aWdsenZ5dWJtbTZwaG04d2Ria2IzZHhqbmZrcnYtcHJvamVjdF9hL3Byb2plY3RfYV9mcmVlLm53ZA"
+								preview={model.preview}
+								src={model.urn}
 							/>
 						</div>
 						<div className={styles.project__models_single}>
 							<ModelTile
 								type="tour"
-								preview="/projectPreview.jpg"
-								src=""
+								preview={tour.preview}
+								src={tour.src}
 							/>
 						</div>
 					</div>
@@ -139,12 +139,12 @@ const SingleProject: FC<IProjectPageProps> = ({ project }) => {
 
 				<section className={styles.project__setup}>
 					<h2>Set-up of the house</h2>
-					<SetupNavigator />
+					<SetupNavigator data={setup} />
 				</section>
 
 				<section className={styles.project__views}>
 					<h2>Additional views</h2>
-					<CarouselSlider size="small" />
+					<CarouselSlider slides={views} size="small" />
 				</section>
 
 				<section className={styles.project__structure}>

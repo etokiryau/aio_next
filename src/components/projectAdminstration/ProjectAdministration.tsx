@@ -1,21 +1,21 @@
 import { FC, useState, useEffect } from "react";
 import Image from "next/image";
  
-import { ISingleProject } from "@/interfaces/projects.interface";
+import { IProject } from "@/interfaces/projects.interface";
 import GarbageIcon from "../ui/_icons/GarbageIcon";
 import ProjectData from "../projectData/ProjectData";
 
 import styles from "./projectAdminstration.module.scss";
 
 interface IProps {
-    data: ISingleProject,
+    data: IProject,
     onDelete: () => void
 };
 
 const ProjectAdministation: FC<IProps> = ({ data, onDelete }) => {
     const [isOpened, setIsOpened] = useState(false);
     const [isPublished, setIspublished] = useState(true)
-    const { previewSrc, name } = data;
+    const { preview, name } = data;
 
     const handleCheckboxChange = (): void => {
         setIspublished(prev => !prev);
@@ -34,7 +34,7 @@ const ProjectAdministation: FC<IProps> = ({ data, onDelete }) => {
         <div className={styles.project}>
             <div onClick={() => setIsOpened(true)} className={styles.project__preview}>
                 <div className={styles.project__preview_left}>
-                    <Image src={previewSrc} alt="render" width={114} height={60} />
+                    <Image src={preview} alt="render" width={114} height={60} />
                     <h4>{name}</h4>
                 </div>
                 <div className={styles.project__preview_right}>
