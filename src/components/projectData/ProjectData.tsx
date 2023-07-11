@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { IProject } from "@/interfaces/projects.interface";
 import GarbageIcon from "../ui/_icons/GarbageIcon";
 import AdminViewAdding from "../adminViewAdding/AdminViewAdding";
+import AdminViewEdition from "../ui/adminViewEdition/AdminViewEdition";
 
 import styles from "./projectData.module.scss";
 
@@ -91,6 +92,13 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
             : formik.setFieldValue('houseDimensions', [formik.values.houseDimensions[0], e.target.value])
     };
 
+    const handleEditView = (view: {src: string, title: string}, order?: number) => {
+        if (order) {
+            const newArray = [...viewsState.slice(0, order), view, ...viewsState.slice(order + 1)];
+            setViewsState(newArray)
+        }
+    };
+
     const rendersContent: JSX.Element[] = rendersState.map((item, i) => {
         return (
             <div key={i} className={styles.popup__content_renders_content_single}>
@@ -104,16 +112,14 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
 
     const viewsContent: JSX.Element[] = viewsState.map((item, i) => {
         return (
-            <div key={i} className={styles.popup__content_views_content_single}>
-                <div onClick={() => handleImageDelete('views', i)} className={styles.popup__content_views_content_single_delete}>
-                    <GarbageIcon />
-                </div>
-                <div onClick={() => {}} className={styles.popup__content_views_content_single_edit}>
-                    <p>Edit view</p>
-                </div>
-                <Image src={item.src} alt="render" width={320} height={620} />
-                <p id={styles.name}>{item.title}</p>
-            </div>
+            <AdminViewEdition 
+                key={i}
+                order={i}
+                src={item.src} 
+                title={item.title} 
+                handleDelete={() => handleImageDelete('views', i)} 
+                onSubmit={handleEditView}
+            />
         )
     });
 
@@ -261,7 +267,12 @@ const ProjectData: FC<IProps> = ({ state, data }) => {
                         </div>
                         <div className={styles.popup__content_views_add}>
                             <button id={styles.button} onClick={() => setIsAddingView(true)} type="button">Add view</button>
-                            <AdminViewAdding state={[isAddingView, setIsAddingView]} onSubmit={handleAddView} />
+                            <AdminViewAdding
+                                image=""
+                                title=""
+                                state={[isAddingView, setIsAddingView]} 
+                                onSubmit={handleAddView}
+                            />
                         </div>
                     </div>
                 </div>

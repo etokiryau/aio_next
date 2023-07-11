@@ -39,10 +39,6 @@ const MainLayout: FC<PropsWithChildren<IProps>> = ({ children, title, descriptio
         if (cookieNotification === 'notified') {
             return;
         } else {
-            setCookie(null, 'cookieNotification', 'notified', {
-                maxAge: 7 * 24 * 60 * 60,
-                path: "/"
-            });
             setTimeout(() => {
                 dispatch(toggleCookiePopup(true));
             }, 2000)
@@ -54,7 +50,12 @@ const MainLayout: FC<PropsWithChildren<IProps>> = ({ children, title, descriptio
             <Header />
             <main style={{margin: '105px auto 100px', width: 'min(100%, 1440px)'}}>
                 {children}
-                <CookiePopup />
+                <CookiePopup callback={() => {
+                    setCookie(null, 'cookieNotification', 'notified', {
+                        maxAge: 7 * 24 * 60 * 60,
+                        path: "/"
+                    });
+                }} />
             </main>
             {footer && <Footer />}
         </Meta>

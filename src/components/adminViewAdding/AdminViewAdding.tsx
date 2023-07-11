@@ -7,15 +7,18 @@ import GarbageIcon from "../ui/_icons/GarbageIcon";
 import styles from "./adminViewAdding.module.scss";
 
 interface IProps {
-    onSubmit: (view: {src: string, title: string}) => void,
-    state: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+    order?: number,
+    onSubmit: (view: {src: string, title: string}, order?: number) => void,
+    state: [boolean, React.Dispatch<React.SetStateAction<boolean>>],
+    image: string,
+    title: string
 };
 
-const AdminViewAdding: FC<IProps> = ({ onSubmit, state }) => {
+const AdminViewAdding: FC<IProps> = ({ onSubmit, state, image: initialImage, title, order }) => {
     const popupRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
-    const [image, setImage] = useState('');
-    const [viewName, setViewName] = useState('');
+    const [image, setImage] = useState(initialImage);
+    const [viewName, setViewName] = useState(title);
     const [isOpened, setIsOpened] = state;
 
     const togglePopup = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -38,10 +41,15 @@ const AdminViewAdding: FC<IProps> = ({ onSubmit, state }) => {
     };
 
     const handleSubmit = (): void => {
-        onSubmit({src: image, title: viewName});
-        setImage('');
-        setViewName('')
-        setIsOpened(false);
+        if (order) {
+            onSubmit({title: viewName, src: image}, order);
+            setIsOpened(false);
+        } else {
+            onSubmit({title: viewName, src: image});
+            setImage('');
+            setViewName('')
+            setIsOpened(false);
+        }
     };
 
     return (

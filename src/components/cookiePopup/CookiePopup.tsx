@@ -5,7 +5,11 @@ import { selectUserPreferences, toggleCookiePopup } from "@/components/userPrefe
 
 import styles from "./cookiePopup.module.scss";
 
-const CookiePopup: FC = () => {
+interface IProps {
+    callback: () => void
+};
+
+const CookiePopup: FC<IProps> = ({ callback }) => {
     const { cookiePopup } = useTypedSelector(selectUserPreferences);
     const dispatch = useTypedDispatch();
 
@@ -13,7 +17,13 @@ const CookiePopup: FC = () => {
         <div className={`${styles.cookie} ${cookiePopup ? styles.active : ''}`}>
             <h3>We use some essential cookies to make this website work and ensure secure browsing</h3>
             <p>By staying with us you agree to the use of <Link href="/policy">cookies</Link></p>
-            <button onClick={() => dispatch(toggleCookiePopup(false))} type="button">OK</button>
+            <button 
+                onClick={() => {
+                    callback();
+                    dispatch(toggleCookiePopup(false));
+                }} 
+                type="button"
+            >OK</button>
         </div>
     )
 }
