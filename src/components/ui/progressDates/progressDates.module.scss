@@ -11,8 +11,37 @@
             font-size: 16px;
         }
 
-        p {
-            font-weight: 400;
+        &_note {
+            position: relative;
+
+            p {
+                font-weight: 400;
+                cursor:default;
+            }
+
+            &_popup {
+                position: absolute;
+                top: 20px;
+                right: 15px;
+                padding: 10px 5px;
+                width: 145px;
+                background-color: vars.$secondaryColor;
+                border-radius: 8px 0px 8px 8px;
+                box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+                backdrop-filter: blur(4px);
+                font-size: 12px;
+                visibility: hidden;
+                opacity: 0;
+                transition: .3s ease;
+                z-index: 10;
+            }
+
+            &:hover {
+                .dates__header_note_popup {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
         }
     }
 
@@ -42,10 +71,18 @@
                 margin-top: 4px;
                 font-size: 14px;
             }
+
+            &:last-child {
+                align-items: flex-end;
+                text-align: right;
+            }
         }
 
         &_chart {
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
             flex: 1;
 
             svg {
@@ -68,7 +105,7 @@
             span {
                 position: absolute;
                 top: 37%;
-                left: 45px;
+                left: 50%;
                 transform: translate(-50%, -50%);
                 font-size: 24px;
                 font-weight: 500;

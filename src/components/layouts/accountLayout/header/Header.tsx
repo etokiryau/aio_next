@@ -5,6 +5,7 @@ import BellIcon from "@/components/ui/_icons/BellIcon";
 import StatusIcon from "@/components/ui/_icons/StatusIcon";
 import CommentIcon from "@/components/ui/_icons/CommentIcon";
 import WarningTriangleIcon from "@/components/ui/_icons/WarningTriangleIcon";
+import WarningIcon from "@/components/ui/_icons/WarningIcon";
 
 import styles from "./header.module.scss";
 
@@ -69,7 +70,17 @@ const Header: FC = () => {
 
     return (
         <div className={styles.header}>
-            <h2>Project A</h2>
+            <div className={styles.header__info}>
+                <h2>Project A</h2>
+                <div className={styles.header__info_note}>
+                    <WarningIcon />
+                    <div className={styles.header__info_note_statistics}>
+                        <p>Total area: Value</p>
+                        <p>Living area: Value</p>
+                        <p>Height: Value</p>
+                    </div>
+                </div>
+            </div>
             <div className={styles.header__buttons}>
                 <button className={styles.header__buttons_contractors} type="button">
                     <ContractorIcon />

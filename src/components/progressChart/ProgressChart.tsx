@@ -32,10 +32,6 @@ interface IVerticalLinePluginOptions {
     xPosition: number;
 };
 
-
-interface MyTooltipItem<TType extends keyof ChartTypeRegistry = keyof ChartTypeRegistry>
-    extends TooltipItem<TType> {}
-
 class VerticalLinePlugin implements Plugin {
     id = 'verticalLinePlugin';
 
@@ -198,7 +194,12 @@ const ProgressChart: FC = () => {
         <div className={styles.progress}>
             <div className={styles.progress__header}> 
                 <h3>Target / Actual number of works</h3>
-                <p>?</p>
+                <div className={styles.progress__header_note}>
+                    <p>?</p>
+                    <div className={styles.progress__header_note_popup}>
+                        This is an explanation of a parameter shown on the diagram
+                    </div>
+                </div>
             </div>
             <div className={styles.progress__content}>
                 <div ref={containerRef} className={styles.progress__content_wrapperExternal}>

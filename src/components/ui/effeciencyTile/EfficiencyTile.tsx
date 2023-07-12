@@ -1,13 +1,16 @@
 import { FC } from "react";
 
-import styles from "./efficiencyTile.module.scss";
 import WarningIcon from "../_icons/WarningIcon";
+
+import styles from "./efficiencyTile.module.scss";
 
 interface IProps {
     value: number
 };
 
 const EfficiencyTile: FC<IProps> = ({ value }) => {
+    const startAngle: number = -140;
+    const angle: number = value / 100 * 280;
 
     return (
         <div className={styles.efficiency}>
@@ -25,9 +28,14 @@ const EfficiencyTile: FC<IProps> = ({ value }) => {
                         <circle cx="50%" cy="50%" fx="50%" fy="50%" r="27.5" strokeWidth="10" />
                     </svg>
                     <span>{value}</span>
-                    <div style={{transform: 'translate(-50%, -100%) rotate(30deg)'}} id={styles.needle} />
+                    <div style={{transform: `translate(-50%, -100%) rotate(${startAngle + angle}deg)`}} id={styles.needle} />
                 </div>
-                <WarningIcon hasFilling={true} />
+                <div className={styles.efficiency__up_note}>
+                    <WarningIcon hasFilling={true} />
+                    <div className={styles.efficiency__up_note_popup}>
+                        Here is a description of this indicator
+                    </div>
+                </div>
             </div>
             <p>Employees efficiency level</p>
         </div>

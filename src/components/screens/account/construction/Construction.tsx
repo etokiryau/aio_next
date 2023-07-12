@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 
 import AccountLayout from "@/components/layouts/accountLayout/AccountLayout";
+import DiagramGantt from "@/components/diagramGantt/DiagramGantt";
 
 import styles from "./construction.module.scss";
 
@@ -34,10 +35,10 @@ const Construction: FC = () => {
                 const newCalculatedPosition: number = calculateNewPosition(position, delta);
                 let newPosition: number;
 
-                if (newCalculatedPosition > 80) {
-                    newPosition = 80
-                } else if (newCalculatedPosition < 20) {
-                    newPosition = 20;
+                if (newCalculatedPosition > 70) {
+                    newPosition = 70
+                } else if (newCalculatedPosition < 30) {
+                    newPosition = 30;
                 } else {
                     newPosition = calculateNewPosition(position, delta);
                 }
@@ -56,9 +57,9 @@ const Construction: FC = () => {
     return (
         <AccountLayout title="Construction">
             <div className={styles.construction}>
-                <section style={{height: `calc(${mainDividerPosition}vh - 60px)`}} className={styles.construction__main}>
-                    <div style={{width: `${dividerPosition}%`}} className={styles.construction__main_graph}>
-
+                <section style={{height: `calc(${mainDividerPosition}vh - 70px)`}} className={styles.construction__main}>
+                    <div style={{width: `calc(${dividerPosition}% - 10px)`}} className={styles.construction__main_graph}>
+                        <DiagramGantt />
                     </div>
 
                     <div 
@@ -71,8 +72,28 @@ const Construction: FC = () => {
                         </div>
                     </div>
 
-                    <div style={{width: `${100 - dividerPosition}%`}} className={styles.construction__main_viewer}>
-
+                    <div style={{width: `calc(${100 - dividerPosition}% - 10px)`}} className={styles.construction__main_viewer}>
+                        <div className={styles.construction__main_viewer_statuses}>
+                            <div className={styles.construction__main_viewer_statuses_wrapper}>
+                                <div className={styles.construction__main_viewer_statuses_single}>
+                                    <span />
+                                    <p>Started</p>
+                                </div>
+                                <div className={styles.construction__main_viewer_statuses_single}>
+                                    <span />
+                                    <p>In progress</p>
+                                </div>
+                                <div className={styles.construction__main_viewer_statuses_single}>
+                                    <span />
+                                    <p>Accepted</p>
+                                </div>
+                                <div className={styles.construction__main_viewer_statuses_single}>
+                                    <span />
+                                    <p>Declined</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.construction__main_viewer_container} />
                     </div>
                 </section>
 
@@ -82,7 +103,7 @@ const Construction: FC = () => {
                     </div>
                 </section>
 
-                <section style={{height: `calc(${100 - mainDividerPosition}vh - 60px)`}} className={styles.construction__card}>
+                <section style={{height: `calc(${100 - mainDividerPosition}vh - 70px)`}} className={styles.construction__card}>
 
                 </section>
             </div>

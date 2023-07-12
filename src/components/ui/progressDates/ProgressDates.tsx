@@ -9,7 +9,12 @@ const ProgressDates: FC = () => {
         <div className={styles.dates}>
             <div className={styles.dates__header}> 
                 <h3>Construction progress</h3>
-                <p>?</p>
+                <div className={styles.dates__header_note}>
+                    <p>?</p>
+                    <div className={styles.dates__header_note_popup}>
+                        This is an explanation of a parameter shown on the diagram
+                    </div>
+                </div>
             </div>
             <div className={styles.dates__content}>
                 <div className={styles.dates__content_info}>
